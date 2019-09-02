@@ -33,7 +33,7 @@ function createWindow () {
 // This method will be called when Electron has finished / initialization and is ready to create browser windows.
 app.on('ready', createWindow)
 
-/* ======================STOPPED HERE===========================
+// ======================STOPPED HERE===========================
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
   // On macOS it is common for applications and their menu bar
@@ -53,4 +53,3 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
-*/
