@@ -1,8 +1,12 @@
 
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, Menu} = require('electron')
 
 let win
+let secondWin
 
+app.on('ready', createWindow)
+
+//create first window
 function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({
@@ -12,13 +16,9 @@ function createWindow () {
       nodeIntegration: true
     }
   })
-  
-  /* initiealize window */
 
   // and load the index.html of the app.
   win.loadFile('index.html')
-  
-  //win.webContents.openDevTools() //open dev tools automatically
   
   //when the window is closed...
   win.on('closed', () => { 
@@ -27,13 +27,26 @@ function createWindow () {
     // when you should delete the corresponding element.
 	  win = null
   })
+  
+  //builds the menu and sets it in the window
+  const mainMenu = Menu.buildFromTemplate(mainMenuTemplate)
+  Menu.setApplicationMenu(mainMenu)
 }
 
+function addWindow(){
+  // Create the browser window.
+  secondwin = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true
+    }
+  })
 
-// This method will be called when Electron has finished / initialization and is ready to create browser windows.
-app.on('ready', createWindow)
+  // and load the index.html of the app.
+  secondwin.loadFile('index.html')
+}
 
-// ======================STOPPED HERE===========================
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
   // On macOS it is common for applications and their menu bar
@@ -51,5 +64,34 @@ app.on('activate', () => {
   }
 })
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+
+/*top menu stuff*/
+
+//create menu template (used in line 28)
+const mainMenuTemplate = [
+	{
+		label: "File",
+		
+		//submenu is an array, each item is around {}
+		submenu:[
+			{
+				label: 'Do Something',
+				click(){
+					print("Hello There")
+				}
+			},
+			
+			{
+				label: 'wanna see more?',
+				click(){addWindow()}
+			},
+			
+			{
+				label: 'Quit',
+				//command keys
+				accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
+				click(){app.quit()}
+			}
+		]
+	}
+]
