@@ -1,6 +1,5 @@
-
-const { app, BrowserWindow, Menu} = require('electron')
-
+const electron = require('electron')
+const { app, BrowserWindow, Menu} = electron
 let win
 let secondWin
 
@@ -16,6 +15,8 @@ function createWindow () {
       nodeIntegration: true
     }
   })
+
+
 
   // and load the index.html of the app.
   win.loadFile('index.html')
@@ -44,7 +45,11 @@ function addWindow(){
   })
 
   // and load the index.html of the app.
-  secondwin.loadFile('index.html')
+    secondwin.loadFile('index.html')
+
+    addWindow.on("closed", function () {
+        addWindow = null
+    })
 }
 
 // Quit when all windows are closed.
@@ -75,13 +80,6 @@ const mainMenuTemplate = [
 		//submenu is an array, each item is around {}
 		submenu:[
 			{
-				label: 'Do Something',
-				click(){
-					print("Hello There")
-				}
-			},
-			
-			{
 				label: 'wanna see more?',
 				click(){addWindow()}
 			},
@@ -92,6 +90,11 @@ const mainMenuTemplate = [
 				accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
 				click(){app.quit()}
 			}
-		]
+        ]
 	}
 ]
+
+//if on mac, add extra blank item to the menu (to fix issue where "file" says "electron")
+if (process.platform == 'darwin'){
+    mainMenuTemplate.unshift({})
+}
