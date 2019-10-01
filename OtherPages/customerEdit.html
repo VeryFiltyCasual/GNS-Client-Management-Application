@@ -9,7 +9,9 @@
 <body>
 	<form>
 		<fieldset class="BasicInfo">
-			<legend>Customer Basic Information</legend>
+			<legend>Customer Basic Information
+			<button class="ShowHide"><img ></button>
+			</legend>
 			
 			<section class="CustName">
 				<h1>Name</h1>
@@ -35,8 +37,10 @@
 			<button type="submit">Submit</button>
 		</fieldset>
 		
-		<fieldset class="Stage2">
-			<legend></legend>
+		<fieldset class="ProjectDetails">
+			<legend>Project Details
+			<button class="ShowHide"><img ></button>
+			</legend>
 			
 			<section class="Contractor">
 				<h1>Contractor/Ref Info</h1>
@@ -46,8 +50,7 @@
 			</section>
 			
 			<section class="Project">
-				<h1>Project</h1>
-				<label for=""><label><input type="text">
+				<h1>Project: <input type="text"></h1>				
 				<label for="txtCabinet">Cabinet:</label><input type="" name="txtCabinet">
 				<label for="txtAppliances">Appliances:</label><input type="" name="txtAppliances">
 				<label for="txtFloor">Floor:</label><input type="" name="txtFloor">
@@ -58,7 +61,7 @@
 				<h1>Materials Selected (Slab/Tiles)</h1>
 				<label for="txtKit">Kit:</label><input type="text" name="txtKit">
 				<label for="txtOther">Van/Other:</label><input type="text" name="txtOther">
-				<label for="numAmount">REM/SLAB#:<label><input type="num" name="numAmount">
+				<label for="numAmount">REM/SLAB#:</label><input type="num" name="numAmount">
 			</section>
 			
 			<section class="Profile">
@@ -82,12 +85,76 @@
 			
 			<section class="Kitchen">
 				<h1>Kitchen</h1>
-				<label for="txtSink"><input type="text" name="txtSink">
+				<label for="txtSink">Sink:</label><input type="text" name="txtSink">
 				<label for="txtGrids">Grids</label><input type="text" name="txtGrids">
-				<label for="txtStrainer"><input type="text" name="txtStrainer">
-				
+				<label for="txtStrainer">Strainer:</label><input type="text" name="txtStrainer">
+				<label for="numFaucet">Faucet#:</label><input type="numer" name="numFaucet">
+				<label for="chkCutboard">CutBoard:</label><input type="checkbox">
+				<!--check-->
+				<label for="Package">Package</label><input type="">
+				<!--check-->
+				<label for="Disp">Display</label><input type="">
 			</section>
 			
+			<section>
+			</section>
+			
+			<button type="submit">Submit</button>
+		</fieldset>
+		
+		<fieldset class="InstalDetails">
+			<legend>Installation Details
+			<button class="ShowHide"><img ></button>
+			</legend>
+			
+			<section class="Vanity">
+				<h1>Vanity, Cut</h1>
+				<!--check-->
+				<label for="selSink">Sink:</label><select name="selSink">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				</select>
+				<label for="txtSinkType">Sink Type:</label><input type="text" name="txtSinkType">
+				<label for="numSinkQty">Qty:</label><input type="number" name="numSinkQty">
+				
+				<label for="numFaucet">Faucet#:</label><input type="number" name="numFaucet">
+				<label for="numFaucQty">Qty:</label><input type="number" name="numFaucQty">
+				
+				<!--check-->
+				<label for="txtDrain">Drain:</label><input type="text" name="txtDrain">
+				<label for="numFaucQty">Qty:</label><input type="number" name="numFaucQty">
+				
+				
+			
+			<button type="submit">Submit</button>
+				
+				
+		</fieldset>
+		
+		<fieldset class="Estimate">
+			<legend>Estimate
+			<button class="ShowHide"><img ></button>
+			</legend>
+			
+			<button type="submit">Submit</button>
+		</fieldset>
+		
+		<fieldset class="Schedule">
+			<legend>Availability
+			<button class="ShowHide"><img ></button>
+			</legend>
+			
+			<button type="submit">Submit</button>
+		</fieldset>
+		
+		<fieldset class="FinalNotes">
+			<legend>Final Notes
+			<button class="ShowHide"><img ></button>
+			</legend>
+			
+			<button type="submit">Submit</button>
 		</fieldset>
 	</form>
 </body>
