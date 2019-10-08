@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale-1.0">
+		<title>Global Natural Stones</title>
+			
+		<link rel="stylesheet" href="../Stylesheets/Reset.css" type="text/css">
+		<link rel="stylesheet" href="../Stylesheets/MainStyles.css" type="text/css"/>
+	</head>
+	  
+	<body>
+		<script src="MainHeader.js"></script>
+		<script>display("Clients");</script>
+		
+		<!--side navigation-->
+		<aside>		
+			<button>
+				<img />
+				<p>Add Client</p>
+			</button>
+			
+			<nav id="ClientCategories">						
+				<div class="SmallCategories">				
+					<div class="cursor"></div>
+					
+					<a href="#" class="SmallCatButtons Basic">Basic</a>
+					<a href="#" class="SmallCatButtons LoremIpsum">Lorem Ipsum</a>
+					<a href="#" class="SmallCatButtons Completed">Completed</a>
+				</div>
+				
+				<a href="#" class="AllClients">All Clients</a>
+			</nav>				
+		</aside>
+		
+		<!--list of clients -->
+		<main>
+			<ul>
+				<!--each li is a client-->
+				<li>
+					<section class="ListHead">
+						<h4>Joe</h4>
+						<h4>Johnson</h4>
+						
+						<div class="CHeadTopLinks">
+							<div class="CHeadTopHidden">
+								<button>More</button>
+								<a href="#">Show All</a>
+							</div>
+							
+							<a href="#">Show less</a>
+						</div>
+					</section>
+					
+					<section class="ClientInfo">
+						<nav class="SmallCategories">
+							<a href="#" class="SmallCatButtons Basic">Basic</a>
+							<a href="#" class="SmallCatButtons LoremIpsum">Lorem Ipsum</a>
+						</nav>
+						
+						<div class="ClientData">
+							<h5>Phone:</h5><textarea class="CPhone">(478) 999-9999</textarea>
+							<h5>Email:</h5><textarea class="CEmail">JimmyJohJohnson@email.com</textarea>
+							
+							<h5>Address:</h5><textarea class="CAddress">123 Rainbow Road</textarea>
+							<h5>City:</h5><textarea class="CCity">Dayton</textarea>
+							<h5>State:</h5><textarea class="CState">OH</textarea>
+							<h5>Zip:</h5><textarea>12345</textarea>
+							
+							<h5>Projects:</h5><textarea>Cabinet, Appliances, Floor</textarea>
+						</div>
+						
+						<button class="ClientNextPhase">Move client to next phase</button>
+						
+					</section>
+				</li>
+			</ul>
+		</main>
+	</body>
+</html>

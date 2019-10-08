@@ -1,0 +1,43 @@
+body{
+	font-family: open-sans, sans-serif;
+	font-size: 18px;
+	height: 100%;
+}
+
+header{
+	background-color: rgb(199,235,250);
+	padding: 14px;
+}
+.head{
+	position: relative;
+}
+
+.head h1{
+	font-weight: 775;
+	font-size: 1.8em;
+	bottom: 0;
+	position: absolute;
+}
+
+.head nav{
+	display: block;
+	clear: right;
+}
+
+.head nav a{
+	display: inline-block;
+
+}
+
+/* main */
+main{
+	padding: 40px 26px;
+}
+form{
+	line-height: 1.5em;
+}
+form h2{
+	font-size: 1.2em;
+	margin-bottom: .3em;
+	text-decoration: underline;
+}
