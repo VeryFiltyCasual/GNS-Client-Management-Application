@@ -1,13 +1,40 @@
 body{
 	font-family: open-sans, sans-serif;
 	font-size: 18px;
-	height: 100%;
+	clear: both;
+	background-color: rgb(243,243,243);
 }
 
-header{
+button{
+	background-color: rgb(240,240,240);
+	border: 1px solid rgb(180,180,180);
+}
+
+.invisible{
+	visibility: hidden;
+	height: 0px;
+}
+
+a{
+	color: blue;
+}
+a:click{
+	color: purple;
+}
+
+/*********
+	HEADER
+*********/
+header, article .AddRemove{
 	background-color: rgb(199,235,250);
 	padding: 14px;
 }
+header::after{
+	content: "";
+	display: table;
+	clear: both;
+}
+
 .head{
 	position: relative;
 }
@@ -15,23 +42,141 @@ header{
 .head h1{
 	font-weight: 775;
 	font-size: 1.8em;
+	float: left;
+}
+
+/*nav*/
+.head nav{
+	float: right;
+}
+.head nav ul{
+	position: relative;
+	right: 0;
+}
+.head nav ul li{
+	display: inline-block;
+	border: 1px solid rgba(0,0,0,0);
+	padding: 6px;
+	transition: all .3s
+}
+.head nav ul li:hover{
+	background: rgba(255,255,255,.14);
+	text-decoration: underline;
+	border: 1px solid rgba(0,0,0,.4);
+}
+.head nav a{
+	text-decoration: none;
+	color: black;
+	font-size: .83em;
+	text-align: center;
+}
+.head nav img{
+	height: auto;
+	width: 70px;
+}
+
+/**********
+	ASIDE client page   
+**********/
+aside{
+	float: left;
+	background-color: rgb(199,235,250);	
+	height: 100%;
+	max-width: 290px;
+	min-width: 250px;
+}
+
+/* "add client" button */
+aside form button{
+	background: none;
+	border: none;
+	margin: 25px;
+	padding: 4px;
+	border: 1px solid rgba(0,0,0,0);
+	transition: all .43s;
+}
+aside form button:hover{
+	border: 1px solid rgba(0,0,0,.4);
+	background-color: rgba(255,255,255,.14);
+}
+aside form button img{
+	float: left;
+}
+aside form img{
+	font-weight: 900;
+	font-size: 1.3em;
+	background-color:  rgb(212,212,212);
+	box-shadow: 1px 5px 7px 0px #8c8f91;
+	width: 1.2em;
+	height: 1.2em;
+	margin-right: .7em;
+	vertical-align: middle;
+}
+
+/*side navigation*/
+.SmallCategories a, .AllClients{
+		display: list-item;
+	list-style: none;
+	text-decoration: none;
+	color: black;
+	background-color: rgb(212,212,212);
+	padding: 1em;
+	font-size: 1.3em;
+	text-align: center;
+}
+.SmallCategories a{
+	width: 7em;
+}
+
+#ClientCategories .SmallCategories a{
+	margin: 0 25px 2em 25px;
+	box-shadow: 1px 5px 7px 0px #8c8f91;
+}
+#ClientCategories .AllClients{
+	box-shadow: 2px -2px 10px 0px #8c8f91;
+	position: relative;
 	bottom: 0;
+}
+.cursor{
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 14px 0 14px 25px;
+	border-color: transparent transparent transparent white;
+	float: left;
+	margin-right: 10px;
+}
+
+/***************
+	ARTICLE accounts page
+***************/
+
+article{
+	white-space: nowrap;
+	width: 100%;
 	position: absolute;
 }
-
-.head nav{
-	display: block;
-	clear: right;
+article *{
+	display: inline;
 }
 
-.head nav a{
-	display: inline-block;
-
+article .AddRemove{
+	width: 800px;
 }
 
-/* main */
+article nav.SortBy{
+	position: relative;
+	left: 20%;
+	margin-top: 20px;
+}
+
+/*********
+	main 
+*********/
 main{
 	padding: 40px 26px;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 form{
 	line-height: 1.5em;
@@ -40,4 +185,105 @@ form h2{
 	font-size: 1.2em;
 	margin-bottom: .3em;
 	text-decoration: underline;
+}
+
+main ul li{
+	height: auto;
+	margin-bottom: 3%;
+	display: block;
+	clear: both;
+}
+
+/*the head*/
+.ListHead{
+	white-space: nowrap;
+	background-color: rgb(212,212,212);
+	padding: 12px;
+	border: 1px solid white;
+	margin: auto;
+	box-shadow: 2px 3px 3px #9c9c9c;
+	margin-bottom: 1px;
+	border: 1px solid rgb(180,180,180);
+}
+.ListHead *{
+	display: inline;
+	vertical-align: baseline;
+
+}
+/*
+.ListHead h4{
+	padding: 5px 25px;
+	background-color: white;
+	border: 1px solid black;
+	box-sizing: border-box;
+}
+*/
+
+.ListHead h4{
+	background-color: white;
+	padding: 3px 40px;
+	color: rgb(120,120,120);
+	border: 2px solid rgb(120,120,120);
+
+}
+
+.ListHead .CHeadTopLinks{
+	float: right;
+}
+
+/*all the info*/
+.ClientInfo{
+	background-color: rgb(212,212,212);
+	font-size: 12px;
+	overflow: auto;
+	width: calc(100% - 10em);
+	margin: auto;
+	position: relative;
+	box-shadow: 2px 3px 3px #9c9c9c;
+	border: 1px solid rgb(180,180,180);
+}
+
+
+.ClientInfo .SmallCategories{
+	float: left;
+	display: list-item;
+	list-style: none;
+	border-right: 1px solid rgb(180,180,180);
+}
+
+.ClientInfo .SmallCategories a{
+	margin: 1em;
+	background-color: rgb(180,180,180);
+	padding: .7em;
+	border: 1px solid rgb(160,160,160);
+}
+
+.ClientData{
+	float: left;
+	width: calc(100% - 20.5em);
+	padding: 2em;
+
+}
+
+.ClientData *{
+	display: inline-block;
+}
+.ClientData p{
+	margin-right: 2em;
+	background-color: white;
+	border: 1px solid black;
+	padding: 4px;
+	padding: 3px 12px;
+}
+.ClientData .Info{
+	padding: 4px;
+}
+.ClientData h5{
+	margin-right: 8px;
+}
+
+.ClientNextPhase{
+	position: absolute;
+	bottom: 1em;
+	right: 1em;
 }
