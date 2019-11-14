@@ -4,13 +4,16 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale-1.0">
 	<title>Global Natural Stones</title>
+	
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 </head>
 
 <body>
 	<form>
 		<fieldset class="BasicInfo">
 			<legend>Customer Basic Information
-			<button class="ShowHide"><img ></button>
+			<div class="ShowHide" style="background-color: black; width: 30px; height: 30px;"></div>
 			</legend>
 			
 			<section class="CustName">
@@ -157,5 +160,20 @@
 			<button type="submit">Submit</button>
 		</fieldset>
 	</form>
+	
+	<script>
+		$(document).ready( function() {
+			
+			//displays the client information when clicking on an li
+			$("ShowHide").click(function() {			
+				var thisSection = $(this).parent().parent();
+				
+				
+				//opens the clicked client info
+				$(thisSection).find("section").hide(400);
+			});
+		
+		});
+	</script>
 </body>
 </html>

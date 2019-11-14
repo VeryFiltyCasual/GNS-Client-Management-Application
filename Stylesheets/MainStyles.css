@@ -22,6 +22,38 @@ a:click{
 	color: purple;
 }
 
+/*******
+	LOGIN
+**********/
+#login {
+	background-color: rgb(212,212,212);
+	text-align: center;
+	width: 30%;
+	padding: 5%;
+	float: left;
+}
+#login input{
+	margin-left: 6px;
+}
+
+.image{
+	float: left;
+	width: 60%;
+	text-align: center;
+	vertical-align: center;
+}
+
+.image img{
+	width: 60%;
+	margin: 5%;
+}
+
+
+h2{
+	text-decoration: none;
+}
+
+
 /*********
 	HEADER
 *********/
@@ -199,11 +231,16 @@ main ul li{
 	white-space: nowrap;
 	background-color: rgb(212,212,212);
 	padding: 12px;
-	border: 1px solid white;
-	margin: auto;
 	box-shadow: 2px 3px 3px #9c9c9c;
 	margin-bottom: 1px;
-	border: 1px solid rgb(180,180,180);
+	border: 2px solid rgb(180,180,180);
+	
+	transition: all .5s;
+}
+.ListHead:hover{
+	border: 2px solid white;
+	box-shadow: 2px 3px 0px #9c9c9c;
+	background-color: rgba(212,212,212, .82);
 }
 .ListHead *{
 	display: inline;
@@ -229,6 +266,7 @@ main ul li{
 
 .ListHead .CHeadTopLinks{
 	float: right;
+	display: none;
 }
 
 /*all the info*/
@@ -241,6 +279,8 @@ main ul li{
 	position: relative;
 	box-shadow: 2px 3px 3px #9c9c9c;
 	border: 1px solid rgb(180,180,180);
+	
+	display: none;
 }
 
 
@@ -262,6 +302,7 @@ main ul li{
 	float: left;
 	width: calc(100% - 20.5em);
 	padding: 2em;
+
 
 }
 

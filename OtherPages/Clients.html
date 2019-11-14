@@ -54,7 +54,46 @@
 						<h4>Joe</h4>
 						<h4>Johnson</h4>
 						
-						<div class="CHeadTopLinks invisible">
+						<div class="CHeadTopLinks ">
+							<div>
+								<button class="btnMoreInfo">More</button>
+								<a href="#">Show All</a>
+							</div>
+						</div>
+					</section>
+					
+					<section class="ClientInfo">
+						<nav class="SmallCategories">
+							<a href="#" class="SmallCatButtons Basic">Basic</a>
+							<a href="#" class="SmallCatButtons gotTemplate">Templates</a>
+							<a href="#" class="SmallCatButtons outInvoice">Invoice</a>
+							<a href="#" class="SmallCatButtons scheduleInstal">Scheduled Installation</a>
+						</nav>
+						
+						<div class="ClientData">
+							<span class="Info"><h5>Phone:</h5><p class="CPhone">(478) 999-9999</p></span>
+							<span class="Info"><h5>Email:</h5><p class="CEmail">JimmyJohJohnson@email.com</p></span>
+							
+							<span class="Info"><h5>Address:</h5><p class="CAddress">123 Rainbow Road</p></span>
+							<span class="Info"><h5>City:</h5><p class="CCity">Dayton</p></span>
+							<h5>State:</h5><p class="CState">OH</p></span>
+							<span class="Info"><h5>Zip:</h5><p>12345</p></span>
+							
+							<span class="Info"><h5>Projects:</h5><p>Cabinet, Appliances, Floor</p></span>
+						</div>
+						
+						<button class="ClientNextPhase">Move client to next phase</button>
+						
+					</section>
+				</li>
+				
+				<!-- the test clients 
+				<li class="Client">
+					<section class="ListHead">
+						<h4>Joe</h4>
+						<h4>Johnson</h4>
+						
+						<div class="CHeadTopLinks">
 							<div>
 								<button>More</button>
 								<a href="#">Show All</a>
@@ -62,7 +101,7 @@
 						</div>
 					</section>
 					
-					<section class="ClientInfo invisible">
+					<section class="ClientInfo">
 						<nav class="SmallCategories">
 							<a href="#" class="SmallCatButtons Basic">Basic</a>
 							<a href="#" class="SmallCatButtons gotTemplate">Templates</a>
@@ -92,7 +131,7 @@
 						<h4>Joe</h4>
 						<h4>Johnson</h4>
 						
-						<div class="CHeadTopLinks invisible">
+						<div class="CHeadTopLinks ">
 							<div>
 								<button>More</button>
 								<a href="#">Show All</a>
@@ -100,7 +139,7 @@
 						</div>
 					</section>
 					
-					<section class="ClientInfo invisible">
+					<section class="ClientInfo">
 						<nav class="SmallCategories">
 							<a href="#" class="SmallCatButtons Basic">Basic</a>
 							<a href="#" class="SmallCatButtons gotTemplate">Templates</a>
@@ -125,31 +164,76 @@
 					</section>
 				</li>
 				
+				<li class="Client">
+					<section class="ListHead">
+						<h4>Joe</h4>
+						<h4>Johnson</h4>
+						
+						<div class="CHeadTopLinks ">
+							<div>
+								<button>More</button>
+								<a href="#">Show All</a>
+							</div>
+						</div>
+					</section>
+					
+					<section class="ClientInfo">
+						<nav class="SmallCategories">
+							<a href="#" class="SmallCatButtons Basic">Basic</a>
+							<a href="#" class="SmallCatButtons gotTemplate">Templates</a>
+							<a href="#" class="SmallCatButtons outInvoice">Invoice</a>
+							<a href="#" class="SmallCatButtons scheduleInstal">Scheduled Installation</a>
+						</nav>
+						
+						<div class="ClientData">
+							<span class="Info"><h5>Phone:</h5><p class="CPhone">(478) 999-9999</p></span>
+							<span class="Info"><h5>Email:</h5><p class="CEmail">JimmyJohJohnson@email.com</p></span>
+							
+							<span class="Info"><h5>Address:</h5><p class="CAddress">123 Rainbow Road</p></span>
+							<span class="Info"><h5>City:</h5><p class="CCity">Dayton</p></span>
+							<h5>State:</h5><p class="CState">OH</p></span>
+							<span class="Info"><h5>Zip:</h5><p>12345</p></span>
+							
+							<span class="Info"><h5>Projects:</h5><p>Cabinet, Appliances, Floor</p></span>
+						</div>
+						
+						<button class="ClientNextPhase">Move client to next phase</button>
+						
+					</section>
+				</li>
+				-->
+				
 			</ul>
 		</main>
 		
 		<script>
+		const { ipcRenderer } = require('electron');
+		
+		document.querySelector(".btnMoreInfo").addEventListener("click", function() {
+			ipcRenderer.send("display-client");
+		});
+		</script>
+		
+		<script>
+		
 		$(document).ready( function() {
 			
 			//displays the client information when clicking on an li
-			$(".Client").click(function() {
-				//closes all other clint info's
-				$('.Client').not(this).find(".ClientInfo").each(function(){
-					$(this).addClass('invisible');
-				});
-				$('.Client').not(this).find(".CHeadTopLinks").each(function(){
-					$(this).addClass('invisible');
-				});
+			$(".ListHead").click(function() {			
+				var thisClient = $(this).parent();
+				
+				//closes all other clint info's				
+				$('.Client').not(thisClient).find(".ClientInfo").hide(400);
+				$('.Client').not(thisClient).find(".CHeadTopLinks").hide(400);
 				
 				//opens the clicked client info
-				$(this).find(".ClientInfo").toggleClass("invisible");
-				$(this).find(".CHeadTopLinks").toggleClass("invisible");
+				$(thisClient).find(".ClientInfo").animate({height: "toggle"});
+				$(thisClient).find(".CHeadTopLinks").toggle(400);
 			});
-		
 		
 		});
 		/*
-		static var LISTHTML = '<li>				<section class="ListHead">					<h4>Joe</h4>					<h4>Johnson</h4>								<div class="CHeadTopLinks">						<div class="CHeadTopHidden invisible">							<button>More</button>							<a href="#">Show All</a>						</div>			<a class="ToggleHidden" href="#">Show less</a>				</div>			</section>				<section class="ClientInfo invisible">				<nav class="SmallCategories">			<a href="#" class="SmallCatButtons Basic">Basic</a>							<a href="#" class="SmallCatButtons gotTemplate">Templates</a>						<a href="#" class="SmallCatButtons outInvoice">Invoice</a>						<a href="#" class="SmallCatButtons scheduleInstal">Scheduled Installation</a>					</nav>					<div class="ClientData">			<span class="Info"><h5>Phone:</h5><p class="CPhone">(478) 999-9999</p></span>				<span class="Info"><h5>Email:</h5><p class="CEmail">JimmyJohJohnson@email.com</p></span>		<span class="Info"><h5>Address:</h5><p class="CAddress">123 Rainbow Road</p></span>				<span class="Info"><h5>City:</h5><p class="CCity">Dayton</p></span>				<h5>State:</h5><p class="CState">OH</p></span>				<span class="Info"><h5>Zip:</h5><p>12345</p></span>						<span class="Info"><h5>Projects:</h5><p>Cabinet, Appliances, Floor</p></span>				</div>	<button class="ClientNextPhase">Move client to next phase</button></section></li>'
+		static var LISTHTML = '<li>				<section class="ListHead">					<h4>Joe</h4>					<h4>Johnson</h4>								<div class="CHeadTopLinks">						<div class="CHeadTopHidden ">							<button>More</button>							<a href="#">Show All</a>						</div>			<a class="ToggleHidden" href="#">Show less</a>				</div>			</section>				<section class="ClientInfo ">				<nav class="SmallCategories">			<a href="#" class="SmallCatButtons Basic">Basic</a>							<a href="#" class="SmallCatButtons gotTemplate">Templates</a>						<a href="#" class="SmallCatButtons outInvoice">Invoice</a>						<a href="#" class="SmallCatButtons scheduleInstal">Scheduled Installation</a>					</nav>					<div class="ClientData">			<span class="Info"><h5>Phone:</h5><p class="CPhone">(478) 999-9999</p></span>				<span class="Info"><h5>Email:</h5><p class="CEmail">JimmyJohJohnson@email.com</p></span>		<span class="Info"><h5>Address:</h5><p class="CAddress">123 Rainbow Road</p></span>				<span class="Info"><h5>City:</h5><p class="CCity">Dayton</p></span>				<h5>State:</h5><p class="CState">OH</p></span>				<span class="Info"><h5>Zip:</h5><p>12345</p></span>						<span class="Info"><h5>Projects:</h5><p>Cabinet, Appliances, Floor</p></span>				</div>	<button class="ClientNextPhase">Move client to next phase</button></section></li>'
 		
 		/*client info that goes in client class
 		class clssBasicInfo{

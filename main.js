@@ -1,14 +1,14 @@
 const electron = require('electron')
 const { app, BrowserWindow, Menu} = electron
-let win
-let secondWin
+const { ipcMain } = electron;
+let win = { main: null, extra: null }; 
 
-app.on('ready', createWindow)
+app.on('ready', createWindow);
 
 //create first window
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({
+  win.main = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -19,14 +19,15 @@ function createWindow () {
 
 
   // and load the index.html of the app.
-  win.loadFile('index.html')
+  win.main.loadFile('index.html')
+  
   
   //when the window is closed...
-  win.on('closed', () => { 
+  win.main.on('closed', () => { 
    // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
-	  win = null
+	  win.main = null
   })
   
   //builds the menu and sets it in the window
@@ -34,9 +35,13 @@ function createWindow () {
   Menu.setApplicationMenu(mainMenu)
 }
 
-function addWindow(){
+ipcMain.on('display-client', (event, arg) => {
+  extraWindow();
+})
+
+function extraWindow(fileName){
   // Create the browser window.
-  secondwin = new BrowserWindow({
+  win.extra = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
@@ -45,10 +50,10 @@ function addWindow(){
   })
 
   // and load the index.html of the app.
-    secondwin.loadFile('index.html')
+    win.extra.loadFile('OtherPages/customerEdit.html')
 
-    addWindow.on("closed", function () {
-        addWindow = null
+    win.extra.on("closed", function () {
+        win.extra = null
     })
 }
 
@@ -81,7 +86,12 @@ const mainMenuTemplate = [
 		submenu:[
 			{
 				label: 'wanna see more?',
-				click(){addWindow()}
+				click(){extraWindow()}
+			},
+			
+			{
+				label: "Dev",
+				click() { win.main.webContents.openDevTools() }
 			},
 			
 			{
@@ -90,6 +100,7 @@ const mainMenuTemplate = [
 				accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
 				click(){app.quit()}
 			}
+			
         ]
 	}
 ]
