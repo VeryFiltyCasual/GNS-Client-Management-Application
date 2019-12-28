@@ -12,8 +12,10 @@
 <body>
 	<form>
 		<fieldset class="BasicInfo">
-			<legend>Customer Basic Information
-			<div class="ShowHide" style="background-color: black; width: 30px; height: 30px;"></div>
+			<legend>
+				Customer Basic Information
+				<div class="ShowHide" style="background-color: black; width: 30px; height: 30px;">
+				</div>
 			</legend>
 			
 			<section class="CustName">
@@ -42,7 +44,7 @@
 		
 		<fieldset class="ProjectDetails">
 			<legend>Project Details
-			<button class="ShowHide"><img ></button>
+			<button class="ShowHide">Yote</button>
 			</legend>
 			
 			<section class="Contractor">
@@ -165,12 +167,11 @@
 		$(document).ready( function() {
 			
 			//displays the client information when clicking on an li
-			$("ShowHide").click(function() {			
+			$(".ShowHide").click(function() {			
 				var thisSection = $(this).parent().parent();
 				
-				
 				//opens the clicked client info
-				$(thisSection).find("section").hide(400);
+				$(thisSection).find("section").toggle(400);
 			});
 		
 		});

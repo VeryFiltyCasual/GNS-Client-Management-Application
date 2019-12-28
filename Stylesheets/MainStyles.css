@@ -57,7 +57,7 @@ h2{
 /*********
 	HEADER
 *********/
-header, article .AddRemove{
+header{
 	background-color: rgb(199,235,250);
 	padding: 14px;
 }
@@ -184,22 +184,24 @@ aside form img{
 ***************/
 
 article{
-	white-space: nowrap;
 	width: 100%;
-	position: absolute;
-}
-article *{
-	display: inline;
+	height: 40px;
 }
 
 article .AddRemove{
-	width: 800px;
+	width: 30%;
+	background-color: rgb(199,235,250);
+	float: left;
+	padding: 10px;
+}
+article .AddRemove button{	
+	
 }
 
 article nav.SortBy{
-	position: relative;
-	left: 20%;
-	margin-top: 20px;
+	float: left;
+	width: calc(70% - 20px);
+	margin: auto;
 }
 
 /*********
@@ -247,14 +249,6 @@ main ul li{
 	vertical-align: baseline;
 
 }
-/*
-.ListHead h4{
-	padding: 5px 25px;
-	background-color: white;
-	border: 1px solid black;
-	box-sizing: border-box;
-}
-*/
 
 .ListHead h4{
 	background-color: white;
