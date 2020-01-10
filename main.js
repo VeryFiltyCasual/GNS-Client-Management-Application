@@ -35,8 +35,9 @@ function createWindow () {
   Menu.setApplicationMenu(mainMenu)
 }
 
+//when webpage sends 'display-client' to here...
 ipcMain.on('display-client', (event, arg) => {
-  extraWindow();
+  extraWindow(arg); //run extraWindow (display a webpage)
 })
 
 function extraWindow(fileName){
@@ -50,7 +51,7 @@ function extraWindow(fileName){
   })
 
   // and load the index.html of the app.
-    win.extra.loadFile('OtherPages/customerEdit.html')
+    win.extra.loadFile(fileName)
 
     win.extra.on("closed", function () {
         win.extra = null
