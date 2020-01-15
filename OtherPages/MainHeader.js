@@ -1,5 +1,4 @@
 function display(name){
-	document.write('<!--top navigation and title-->');
 	document.write('<header>');
 	document.write('	<div class="head"> ');
 	document.write('		<h1>' + name + '</h1>');

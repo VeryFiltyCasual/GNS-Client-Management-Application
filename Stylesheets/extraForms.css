@@ -1,0 +1,56 @@
+body{
+	background-color: #dfe4e8;
+	font-size: 16px;
+	padding: 15px;
+}
+
+legend{
+	
+	font-size: 2.4em;
+	background-color: #fff;
+	border: 2px solid rgb(180,180,180);
+}
+
+
+.neat-button{
+	text-decoration: none;
+	color: black;
+	background-color: rgb(212,212,212);
+	border: 1px solid rgb(180,180,180);
+}
+
+.ShowHide{
+	display: block;
+	background-color: gray;
+	padding: 5px 10px;
+	height: 25px;
+	width: 20px;
+	
+	float: right;
+	margin: 5px 3px 0 7px;
+}
+
+.ShowHide img{
+	background-color: gray;
+	height: 15px;
+	width: 18px;
+	margin-top: 5px;
+	display: block;
+}
+
+fieldset{
+	margin-top: 24px;
+	background-color: #fff;
+	border: 2px solid rgb(180,180,180);
+}
+
+fieldset section:first-of-type{
+	border-top: none;
+}
+
+fieldset section{
+	margin-bottom: 2em;
+	border-top: 2px solid rgb(180,180,180);
+	width: auto;
+}
+

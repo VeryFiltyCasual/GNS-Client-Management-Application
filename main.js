@@ -1,22 +1,40 @@
 const electron = require('electron')
-const { app, BrowserWindow, Menu} = electron
+const { app, BrowserWindow, Menu, dialog} = electron
 const { ipcMain } = electron;
 let win = { main: null, extra: null }; 
 
+/****************
+*****Windows*****
+*****************/
+
+//******loading*******
+
 app.on('ready', createWindow);
+
+//when webpage sends 'display-client' to here...
+ipcMain.on('display-client-edit', (event, id) => {
+  prepareExtraWin();
+  runCustEdit(id); //run custEdit (display a webpage)
+})
+
+ipcMain.on('display-client-info', (event, id) => {
+  prepareExtraWin();
+  runCustInfo(id); //run custEdit (display a webpage)
+})
+
+
+//*********Window Functions *****
 
 //create first window
 function createWindow () {
   // Create the browser window.
   win.main = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1200,
+    height: 800,
     webPreferences: {
       nodeIntegration: true
     }
   })
-
-
 
   // and load the index.html of the app.
   win.main.loadFile('index.html')
@@ -28,6 +46,7 @@ function createWindow () {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
 	  win.main = null
+	  win.extra = null
   })
   
   //builds the menu and sets it in the window
@@ -35,28 +54,42 @@ function createWindow () {
   Menu.setApplicationMenu(mainMenu)
 }
 
-//when webpage sends 'display-client' to here...
-ipcMain.on('display-client', (event, arg) => {
-  extraWindow(arg); //run extraWindow (display a webpage)
-})
-
-function extraWindow(fileName){
+//prepares extra, smaller window
+function prepareExtraWin(){
   // Create the browser window.
   win.extra = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
       nodeIntegration: true
-    }
+    },
   })
-
-  // and load the index.html of the app.
-    win.extra.loadFile(fileName)
-
+	
     win.extra.on("closed", function () {
-        win.extra = null
+		
+		//dialog.showMessageBox(null, dialogOptions_ExitEdit, (response, checkboxChecked) => {
+		//	if (response == 1)
+				win.extra = null;
+			
+		//});
+        
     })
 }
+
+
+function runCustEdit(id){
+	// and load the index.html of the app.
+    win.extra.loadURL(`file://${__dirname}/OtherPages/customerEdit.html?id=${id}`);
+	
+}
+
+function runCustInfo(id){
+	// and load the index.html of the app.
+    win.extra.loadFile("OtherPages/customerInfo.html?id=" + id)
+}
+
+
+//********General Win Management*********
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
@@ -76,7 +109,11 @@ app.on('activate', () => {
 })
 
 
-/*top menu stuff*/
+/******************
+******Options*****
+*******************/
+
+//*********Menu**********
 
 //create menu template (used in line 28)
 const mainMenuTemplate = [
@@ -92,7 +129,11 @@ const mainMenuTemplate = [
 			
 			{
 				label: "Dev",
-				click() { win.main.webContents.openDevTools() }
+				click() { 
+					win.main.webContents.openDevTools(),
+					win.extra.webContents.openDevTools()
+				}
+				
 			},
 			
 			{
@@ -110,3 +151,17 @@ const mainMenuTemplate = [
 if (process.platform == 'darwin'){
     mainMenuTemplate.unshift({})
 }
+
+
+//*********Dialog box*********
+const dialogOptions_ExitEdit = {
+    type: 'question',
+    buttons: ['Cancel', 'Close'],
+    defaultId: 0,
+    title: 'Question',
+    message: 'Do you want to close the page?',
+    detail: 'Changes will not be made unless you hit submit.',
+   
+   /*checkboxLabel: 'Remember my answer',
+    checkboxChecked: false,*/
+};

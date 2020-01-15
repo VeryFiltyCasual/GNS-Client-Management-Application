@@ -7,6 +7,9 @@
 	
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+	
+	
+	<link rel="stylesheet" href="../Stylesheets/extraForms.css" type="text/css"/>
 </head>
 
 <body>
@@ -14,7 +17,8 @@
 		<fieldset class="BasicInfo">
 			<legend>
 				Customer Basic Information
-				<div class="ShowHide" style="background-color: black; width: 30px; height: 30px;">
+				<div class="ShowHide neat-button">
+					<img alt="Arrow button, show hides client information sections" src="../Assets/Arrow.png" />
 				</div>
 			</legend>
 			
@@ -44,7 +48,9 @@
 		
 		<fieldset class="ProjectDetails">
 			<legend>Project Details
-			<button class="ShowHide">Yote</button>
+				<div class="ShowHide neat-button">
+					<img alt="Arrow button, show hides client information sections" src="../Assets/Arrow.png" />
+				</div>
 			</legend>
 			
 			<section class="Contractor">
@@ -109,7 +115,9 @@
 		
 		<fieldset class="InstalDetails">
 			<legend>Installation Details
-			<button class="ShowHide"><img ></button>
+				<div class="ShowHide neat-button">
+					<img alt="Arrow button, show hides client information sections" src="../Assets/Arrow.png" />
+				</div>
 			</legend>
 			
 			<section class="Vanity">
@@ -140,7 +148,9 @@
 		
 		<fieldset class="Estimate">
 			<legend>Estimate
-			<button class="ShowHide"><img ></button>
+				<div class="ShowHide neat-button">
+					<img alt="Arrow button, show hides client information sections" src="../Assets/Arrow.png" />
+				</div>
 			</legend>
 			
 			<button type="submit">Submit</button>
@@ -148,7 +158,9 @@
 		
 		<fieldset class="Schedule">
 			<legend>Availability
-			<button class="ShowHide"><img ></button>
+				<div class="ShowHide neat-button">
+					<img alt="Arrow button, show hides client information sections" src="../Assets/Arrow.png" />
+				</div>
 			</legend>
 			
 			<button type="submit">Submit</button>
@@ -156,7 +168,9 @@
 		
 		<fieldset class="FinalNotes">
 			<legend>Final Notes
-			<button class="ShowHide"><img ></button>
+				<div class="ShowHide neat-button">
+					<img alt="Arrow button, show hides client information sections" src="../Assets/Arrow.png" />
+				</div>
 			</legend>
 			
 			<button type="submit">Submit</button>
@@ -172,9 +186,25 @@
 				
 				//opens the clicked client info
 				$(thisSection).find("section").toggle(400);
+				$(thisSection).find("button[type='submit']").toggle(400)
+				
+				//flip img
+				if ($(this).find("img").css("transform") == "none")
+					$(this).find("img").css("transform", "rotate(180deg)");
+				else
+					$(this).find("img").css("transform", "")
 			});
-		
+			
+			
+			
 		});
+	</script>
+	
+	<script>
+		var id = $__GET('id');
+		
+		console.log(id);
+		document.write("<p>ID: " + id);
 	</script>
 </body>
 </html>

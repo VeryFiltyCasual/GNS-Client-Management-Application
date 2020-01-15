@@ -3,6 +3,7 @@ body{
 	font-size: 18px;
 	clear: both;
 	background-color: rgb(243,243,243);
+
 }
 
 button{
@@ -75,8 +76,9 @@ header::after{
 
 .head h1{
 	font-weight: 775;
-	font-size: 1.8em;
+	font-size: 3em;
 	float: left;
+
 }
 
 /*nav*/

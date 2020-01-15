@@ -137,6 +137,7 @@
 							<button class="SmallCatButtons gotTemplate">Templates</button>
 							<button class="SmallCatButtons outInvoice">Invoice</button>
 							<button class="SmallCatButtons scheduleInstal">Scheduled Installation</button>
+							<button class="SmallCatButtons Comments">Comments</button>
 						</nav>
 						
 						<div class="ClientData">
@@ -167,10 +168,15 @@
 		//when the show info button clicked
 		document.querySelector(".btnShowInfo").addEventListener("click", function() {
 			//send the 'display-client' command to the main js (will display new page with client info)
-			ipcRenderer.send("display-client", "OtherPages/customerEdit.html");
+			//needs id
+			ipcRenderer.send("display-client-Info", 1);
 		});
 		
-		
+		document.querySelector(".btnEditInfo").addEventListener("click", function() {
+			//send the 'display-client-edit' command to the main js (will display new page with client	info)
+			//needs id
+			ipcRenderer.send("display-client-edit", 1);
+		});
 		</script>
 		
 		<script name="ExpandClientInfoClick">
@@ -303,6 +309,12 @@
 						console.log("client install is displayed");
 						
 						$("<p>Installation stuff</p>").hide().appendTo(ThisClientData).fadeIn(CDATA_FADESPEED);
+					}
+					else if ($(this).attr("class") == strAClass + "Comments"){
+						//display install stuff
+						console.log("client comments are displayed");
+						
+						$("<p>Comments</p>").hide().appendTo(ThisClientData).fadeIn(CDATA_FADESPEED);
 					}
 					else {
 						//display basic (if none other found)
