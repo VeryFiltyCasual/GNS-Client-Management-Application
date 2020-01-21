@@ -22,6 +22,10 @@ ipcMain.on('display-client-info', (event, id) => {
   runCustInfo(id); //run custEdit (display a webpage)
 })
 
+/*
+ipcMain.handle("getID", async (event, arg) => {
+	return 420;
+});*/
 
 //*********Window Functions *****
 
@@ -46,6 +50,8 @@ function createWindow () {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
 	  win.main = null
+	  
+	  win.extra.close();
 	  win.extra = null
   })
   
@@ -153,15 +159,3 @@ if (process.platform == 'darwin'){
 }
 
 
-//*********Dialog box*********
-const dialogOptions_ExitEdit = {
-    type: 'question',
-    buttons: ['Cancel', 'Close'],
-    defaultId: 0,
-    title: 'Question',
-    message: 'Do you want to close the page?',
-    detail: 'Changes will not be made unless you hit submit.',
-   
-   /*checkboxLabel: 'Remember my answer',
-    checkboxChecked: false,*/
-};

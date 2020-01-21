@@ -7,78 +7,36 @@
 			
 		<link rel="stylesheet" href="../Stylesheets/Reset.css" type="text/css">
 		<link rel="stylesheet" href="../Stylesheets/MainStyles.css" type="text/css"/>
+		<link rel="stylesheet" href="../JQUI/jquery-ui.css"/>
+    
+		
 		
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 		
-		<script name="TestData">
-			//get all the clients
-			var AllClients = [
-				{
-					"ClID" : 0,
-					"Fname" : "Joe",
-					"Lname" : "Johnson",
-					"Stage" : 1,
-					
-					"Basic" : {
-						"Phone" : "14789999999",
-						"Email" : "JimmyJohJohnson@email",
-						"Address1" : {
-							"Street" : "123 Rainbow Road",
-							"City" : "Dayton",
-							"State" : "Ohio",
-							"Zip" : "12345"
-						},
-						"Projects" : [
-							"Cabinets", "Appliances", "Floor"
-						]
-					},
-						
-					"Templates" : {
-					},
-					
-					"Invoice" : {
-					},
-					
-					"Installation" : {
-					}
-				},
-				
-				{
-					"ClID" : 1,
-					"Fname" : "Jeremy",
-					"Lname" : "Oosterban",
-					"Stage" : 1,
-					
-					"Basic" : {
-						"Phone" : "14789999999",
-						"Email" : "MichiganFan@email",
-						"Address1" : {
-							"Street" : "123 Ooster Bouevarde",
-							"City" : "Dayton",
-							"State" : "Ohio",
-							"Zip" : "12345"
-						},
-						"Projects" : [
-							"Cabinets", "Floor"
-						]
-					},
-						
-					"Templates" : {
-					},
-					
-					"Invoice" : {
-					},
-					
-					"Installation" : {
-					}
-				}
-			];
-		</script>
-	
+		
+		<script name="TestData" src="Scripts/TestDatabase.js"></script>	
 		<script name="ConstVars">
 			const CDATA_FADESPEED = 120;
 		</script>
+		
+		<script type="text/javascript" src="../JQUI/external/jquery/jquery.js"></script>
+		<script type="text/javascript" src="../JQUI/jquery-ui.js"></script>
+		<script name="JQ button">
+			//
+			$(document).ready(function(){
+				$(".SortBy").find("button").button();				
+			});
+		</script>
+		
+		<style>
+			#CliSortBy button{
+				height: 1.8em;
+				width: auto;
+				font-size: 1em;
+				padding: .4em
+			}
+		</style>
 	</head>
 	  
 	<body>
@@ -114,10 +72,96 @@
 		
 		<!--list of clients -->
 		<main>
+			<nav class="SortBy" id="CliSortBy">
+				<h2>Sort By:</h2>
+				
+				<button class="SortName">Name</button>
+				<button class="SortLastName">Last Name</button>
+				<button class="SortNewest">Newest</button>
+				<button class="SortOldest">Oldest</button>
+			</nav>	
+		
 			<ul id="ClientList">
-				<!--each li is a client-->
+				<!--each li is a client-->				
 				
-				
+				<li class="Client">
+					<section class="ListHead">
+						<h4>Joe</h4>
+						<h4>Johnson</h4>
+						
+						<div class="CHeadTopLinks ">
+							<div>
+								<button class="btnShowInfo">Show All</button>
+								<button class="btnEditInfo">Edit</a>
+							</div>
+						</div>
+					</section>
+					
+					<section class="ClientInfo">
+						<nav class="SmallCategories">
+							<button class="SmallCatButtons Basic">Basic</button>
+							<button class="SmallCatButtons gotTemplate">Templates</button>
+							<button class="SmallCatButtons outInvoice">Invoice</button>
+							<button class="SmallCatButtons scheduleInstal">Scheduled Installation</button>
+							<button class="SmallCatButtons Comments">Comments</button>
+						</nav>
+						
+						<div class="ClientData">
+							<span class="Info"><h5>Phone:</h5><p class="CPhone">(478) 999-9999</p></span>
+							<span class="Info"><h5>Email:</h5><p class="CEmail">JimmyJohJohnson@email.com</p></span>
+							
+							<span class="Info"><h5>Address:</h5><p class="CAddress">123 Rainbow Road</p></span>
+							<span class="Info"><h5>City:</h5><p class="CCity">Dayton</p></span>
+							<span class="Info"><h5>State:</h5><p class="CState">OH</p></span>
+							<span class="Info"><h5>Zip:</h5><p>12345</p></span>
+							
+							<span class="Info"><h5>Projects:</h5><p>Cabinet, Appliances, Floor</p></span>
+						</div>
+						
+						<button class="ClientNextPhase">Move client to next phase</button>
+						
+					</section>
+				</li>
+
+				<li class="Client">
+					<section class="ListHead">
+						<h4>Joe</h4>
+						<h4>Johnson</h4>
+						
+						<div class="CHeadTopLinks ">
+							<div>
+								<button class="btnShowInfo">Show All</button>
+								<button class="btnEditInfo">Edit</a>
+							</div>
+						</div>
+					</section>
+					
+					<section class="ClientInfo">
+						<nav class="SmallCategories">
+							<button class="SmallCatButtons Basic">Basic</button>
+							<button class="SmallCatButtons gotTemplate">Templates</button>
+							<button class="SmallCatButtons outInvoice">Invoice</button>
+							<button class="SmallCatButtons scheduleInstal">Scheduled Installation</button>
+							<button class="SmallCatButtons Comments">Comments</button>
+						</nav>
+						
+						<div class="ClientData">
+							<span class="Info"><h5>Phone:</h5><p class="CPhone">(478) 999-9999</p></span>
+							<span class="Info"><h5>Email:</h5><p class="CEmail">JimmyJohJohnson@email.com</p></span>
+							
+							<span class="Info"><h5>Address:</h5><p class="CAddress">123 Rainbow Road</p></span>
+							<span class="Info"><h5>City:</h5><p class="CCity">Dayton</p></span>
+							<span class="Info"><h5>State:</h5><p class="CState">OH</p></span>
+							<span class="Info"><h5>Zip:</h5><p>12345</p></span>
+							
+							<span class="Info"><h5>Projects:</h5><p>Cabinet, Appliances, Floor</p></span>
+						</div>
+						
+						<button class="ClientNextPhase">Move client to next phase</button>
+						
+					</section>
+				</li>
+
 				<li class="Client">
 					<section class="ListHead">
 						<h4>Joe</h4>
@@ -161,6 +205,9 @@
 			</ul>
 		</main>
 		
+		
+
+		
 		<script name="MakeNewWindow-ClientMoreInfo">
 		
 		const { ipcRenderer } = require('electron');
@@ -178,9 +225,21 @@
 			ipcRenderer.send("display-client-edit", 1);
 		});
 		</script>
+		<script name="OverlayWhenClick">
+			$(document).ready(function(){
+				var $overlay = $('<div class="ui-widget-overlay"></div>').hide().appendTo('body');
+
+				$('.btnEditInfo').click(function(){;
+					$('.ui-widget-overlay').fadeIn();
+				});
+				$('.btnShowInfo').click(function(){;
+					$('.ui-widget-overlay').fadeIn();
+				});
+			});
+		</script>
 		
-		<script name="ExpandClientInfoClick">
 		
+		<script name="ExpandClientInfoClick">		
 		$(document).ready( function() {
 			
 			//displays the client information when clicking on an li
@@ -199,35 +258,14 @@
 		});
 		</script>
 		
+		<script name="SortDisplayFunctions" src="Scripts/SortDisplayFunctions.js"></script>
+		
 		<script name="DisplayClients">
-			/* ANDREW NEEDS CODE IN PopulateMain FUNCTION */
+			sortByID(AllClients);
+			populateMain(1, AllClients);
 			let currentStageForm = 1;
 			
-			
-			//populate basic form
-			function populateMain(currentStage){
-				console.log("Loading clients from stage " + currentStage);
-				var Client;
-				
-				//remove clients in the form already
-				/* ADD FOLLOWING ONCE ANDREW'S CODE IS IMPLEMENTED */
-				/*$("main").children().fadeOut(
-					120, 
-					function() {$(this).remove();}
-				
-				);*/
-			
-				for (Client of AllClients){
-					if (Client.Stage == currentStage){
-					/* SHOULD BE REPLACED WITH ANDREW'S CODE */
-						console.log(Client.Fname + " is printed.");
-					}
-				}
-			}			
-			populateMain(1);
-			
-			
-			//jquery, give all butons stage attr and handle clicking
+			//jquery
 			$(document).ready(function(){
 				//cursor DOM object for buttons
 				let cursor = $("<div id='CursorForBtn'>&nbsp;</div>");
@@ -263,17 +301,42 @@
 					$("#CursorForBtn").remove();
 					
 					//populate main with the stage value of the button
-					populateMain(
-						$(this).attr("stage")
-					);
+					currentStageForm = $(this).attr("stage");
+					populateMain(currentStageForm, AllClients);
 					
 					$(cursor).insertBefore(this);
 				});
+				
+				
+				//sorts clients 
+				$(".SortName").click(function(){
+					sortByFirstName(AllClients);
+					
+					populateMain(currentStageForm, AllClients);
+				});
+				
+				$(".SortLastName").click(function(){
+					sortByLastName(AllClients);
+					
+					populateMain(currentStageForm, AllClients);
+				});
+				
+				$(".SortNewest").click(function(){
+					sortByNewest(AllClients);
+					
+					populateMain(currentStageForm, AllClients);
+				});
+				
+				$(".SortOldest").click(function(){
+					sortByOldest(AllClients);
+					
+					populateMain(currentStageForm, AllClients);
+				});
 			});
 			
-			
-
 		</script>
+		
+		
 		
 		<script name="NavigateClients">
 			$(document).ready(function(){
@@ -326,5 +389,6 @@
 				
 			});
 		</script>
+		
 	</body>
 </html>
