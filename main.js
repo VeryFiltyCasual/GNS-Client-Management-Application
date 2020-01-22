@@ -3,6 +3,8 @@ const { app, BrowserWindow, Menu, dialog} = electron
 const { ipcMain } = electron;
 let win = { main: null, extra: null }; 
 
+let cliId_ExtraPage;
+
 /****************
 *****Windows*****
 *****************/
@@ -15,17 +17,19 @@ app.on('ready', createWindow);
 ipcMain.on('display-client-edit', (event, id) => {
   prepareExtraWin();
   runCustEdit(id); //run custEdit (display a webpage)
+  cliId_ExtraPage = id;
 })
 
 ipcMain.on('display-client-info', (event, id) => {
   prepareExtraWin();
-  runCustInfo(id); //run custEdit (display a webpage)
+  runCustInfo(); //run custEdit (display a webpage)
+  cliId_ExtraPage = id;
 })
 
-/*
-ipcMain.handle("getID", async (event, arg) => {
-	return 420;
-});*/
+ipcMain.on('getID', (event, arg) => {
+ 
+  event.returnValue = cliId_ExtraPage;
+})
 
 //*********Window Functions *****
 
@@ -49,10 +53,7 @@ function createWindow () {
    // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
-	  win.main = null
-	  
-	  win.extra.close();
-	  win.extra = null
+	  win.main = null;
   })
   
   //builds the menu and sets it in the window
@@ -85,13 +86,13 @@ function prepareExtraWin(){
 
 function runCustEdit(id){
 	// and load the index.html of the app.
-    win.extra.loadURL(`file://${__dirname}/OtherPages/customerEdit.html?id=${id}`);
+    win.extra.loadURL(`file://${__dirname}/OtherPages/customerEdit.html`);
 	
 }
 
-function runCustInfo(id){
+function runCustInfo(){
 	// and load the index.html of the app.
-    win.extra.loadFile("OtherPages/customerInfo.html?id=" + id)
+    win.extra.loadFile(`file://${__dirname}/OtherPages/customerInfo.html`)
 }
 
 

@@ -14,7 +14,7 @@
 		const { ipcRenderer } = require('electron');
 		let cli;
 		
-		cli = ipcRenderer.invoke("getID");
+		cli = ipcRenderer.sendSync("getID");
 		
 		console.log(cli);
 	</script>

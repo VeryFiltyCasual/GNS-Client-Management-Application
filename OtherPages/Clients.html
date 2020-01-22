@@ -211,31 +211,22 @@
 		<script name="MakeNewWindow-ClientMoreInfo">
 		
 		const { ipcRenderer } = require('electron');
+		var $overlay = $('<div class="ui-widget-overlay"></div>').hide().appendTo('body'); //overlay
 		
 		//when the show info button clicked
 		document.querySelector(".btnShowInfo").addEventListener("click", function() {
 			//send the 'display-client' command to the main js (will display new page with client info)
 			//needs id
-			ipcRenderer.send("display-client-Info", 1);
+			ipcRenderer.send("display-client-Info");
+			$('.ui-widget-overlay').fadeIn();
 		});
 		
 		document.querySelector(".btnEditInfo").addEventListener("click", function() {
 			//send the 'display-client-edit' command to the main js (will display new page with client	info)
 			//needs id
-			ipcRenderer.send("display-client-edit", 1);
+			ipcRenderer.send("display-client-edit");
+			$('.ui-widget-overlay').fadeIn();
 		});
-		</script>
-		<script name="OverlayWhenClick">
-			$(document).ready(function(){
-				var $overlay = $('<div class="ui-widget-overlay"></div>').hide().appendTo('body');
-
-				$('.btnEditInfo').click(function(){;
-					$('.ui-widget-overlay').fadeIn();
-				});
-				$('.btnShowInfo').click(function(){;
-					$('.ui-widget-overlay').fadeIn();
-				});
-			});
 		</script>
 		
 		
