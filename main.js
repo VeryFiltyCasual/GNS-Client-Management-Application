@@ -70,6 +70,7 @@ function prepareExtraWin(){
     webPreferences: {
       nodeIntegration: true
     },
+	parent: win.main
   })
 	
     win.extra.on("closed", function () {
@@ -80,6 +81,7 @@ function prepareExtraWin(){
 			
 		//});
         
+		win.main.webContents.send("ExtraWinClosed");
     })
 }
 
