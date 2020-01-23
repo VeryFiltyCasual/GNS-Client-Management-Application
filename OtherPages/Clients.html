@@ -92,7 +92,7 @@
 					
 					<div class="SmallCategories">
 						<h2>View clients by...</h2>											
-						<button class="SmallCatButtons Basic neat-button">Basic</button>
+						<button class="SmallCatButtons Basic neat-button"  id="CursorForBtn">Basic</button>
 						<button class="SmallCatButtons outTemplate neat-button">Waiting for Template</button>
 						<button class="SmallCatButtons gotTemplate neat-button">Received Templates</button>
 						<button class="SmallCatButtons prepareInvoice neat-button">Prepare Invoice</button>
@@ -116,8 +116,11 @@
 			<main>
 				<ul id="ClientList">
 					<!--each li is a client-->
-					<h1 id="sectionTitle">Basic</h1>
-					
+					<div class="sectionHeading">
+						<h1 id="sectionTitle">Basic</h1>
+						<p>Sorted by: Newest to Oldest<i></i></p>
+					</div>
+					<hr>
 					<li class="Client">
 						<section class="ListHead">
 							<h4>Joe Johnson</h4>
@@ -132,7 +135,7 @@
 						
 						<section class="ClientInfo">
 							<nav class="SmallCategories">
-								<button id="CursorForBtn" class="SmallCatButtons Basic">Basic</button>
+								<button class="SmallCatButtons Basic">Basic</button>
 								<button class="SmallCatButtons gotTemplate">Templates</button>
 								<button class="SmallCatButtons outInvoice">Invoice</button>
 								<button class="SmallCatButtons scheduleInstal">Scheduled Installation</button>
@@ -262,6 +265,7 @@
 				$("aside .SmallCatButtons").click(function(){
 					$("#CursorForBtn").removeAttr("id");
 					$(this).attr("id", "CursorForBtn");
+					$("#sectionTitle").text($(this).text());
 					//populate main with the stage value of the button
 					populateMain(
 						$(this).attr("stage")

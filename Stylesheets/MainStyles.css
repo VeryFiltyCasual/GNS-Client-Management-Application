@@ -12,6 +12,7 @@ body{
 }
 .big-container {
 	flex-grow: 1;
+	overflow: hidden;
 }
 button{
 	background-color: rgb(240,240,240);
@@ -244,6 +245,7 @@ main{
 	overflow-x: hidden;
 	overflow-y: auto;
 	height: 100%;
+	border: 2px solid #636e72;
 }
 
 main ul li{
@@ -254,9 +256,22 @@ main ul li{
 }
 
 /*the head*/
+.sectionHeading {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+}
 #sectionTitle {
-	font-size: 48px;
+	font-size: 30px;
 	font-weight: 500;
+}
+i {
+	border: solid black;
+	border-width: 0 2px 2px 0;
+	display: inline-block;
+	padding: 3px;
+	margin: 4px;
+	transform: rotate(45deg);
 }
 .ListHead{
 	white-space: nowrap;
