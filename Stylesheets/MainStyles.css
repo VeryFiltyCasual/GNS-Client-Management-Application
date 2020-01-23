@@ -1,14 +1,21 @@
+html, body {
+	height: 100%;
+}
 body{
 	font-family: open-sans, sans-serif;
 	font-size: 18px;
 	clear: both;
 	background-color: rgb(243,243,243);
-
+	cursor: default;
+	display: flex;
+	flex-direction: column;
 }
-
+.big-container {
+	flex-grow: 1;
+}
 button{
 	background-color: rgb(240,240,240);
-	border: 1px solid rgb(180,180,180);
+	border: none;
 }
 
 a{
@@ -20,9 +27,9 @@ a:click{
 
 .neat-button{
 	text-decoration: none;
-	color: black;
-	background-color: rgb(212,212,212);
-
+	color: #dfdfdf;
+	background-color: transparent;
+	border-radius: 4px;
 }
 
 /*******
@@ -61,8 +68,9 @@ h2{
 	HEADER
 *********/
 header{
-	background-color: rgb(199,235,250);
+	background-color: #3d577a;
 	padding: 14px;
+	color: white;
 }
 header::after{
 	content: "";
@@ -72,13 +80,15 @@ header::after{
 
 .head{
 	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .head h1{
 	font-weight: 775;
 	font-size: 3em;
 	float: left;
-
 }
 
 /*nav*/
@@ -102,7 +112,7 @@ header::after{
 }
 .head nav a{
 	text-decoration: none;
-	color: black;
+	color: white;
 	font-size: .83em;
 	text-align: center;
 }
@@ -116,24 +126,31 @@ header::after{
 **********/
 aside{
 	float: left;
-	background-color: rgb(199,235,250);	
 	height: 100%;
+	background: #2c3e50;
 	max-width: 290px;
 	min-width: 250px;
+	color: #dfdfdf;
 }
-
 /* "add client" button */
+form{
+	line-height: 1.5em;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
 #AddClient{
-	background: none;
+	background: #32c754;
+	margin: 10px;
+	padding: 10px;
 	border: none;
-	margin: 25px;
-	padding: 4px 4px 5px 4px;
-	border: 1px solid rgba(0,0,0,0);
-	transition: all .43s;
+	color: #ffffff;
+	font-weight: 600;
+	border-radius: 2px;
 }
 #AddClient:hover{
-	border: 1px solid rgba(0,0,0,.4);
-	background-color: rgba(255,255,255,.14);
+	cursor: pointer;
+	background: linear-gradient(180deg, #32c754, #26a143 90%);
 }
 
 #AddClient span{
@@ -142,30 +159,49 @@ aside{
 }
 
 /*side navigation*/
+.SmallCategories {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+}
 .SmallCategories button, .AllClients{
 	display: list-item;
 	list-style: none;	
-	font-size: 1.3em;
-	text-align: center;
-	padding: 1em;
-}
-
-.SmallCategories button{
-	width: 9em;
-}
-
-
-#ClientCategories .SmallCategories button{
-	margin: 0 25px 2em 45px;
-	box-shadow: 1px 5px 7px 0px #8c8f91;
-}
-#ClientCategories .AllClients{
-	box-shadow: 2px -2px 10px 0px #8c8f91;
-	position: relative;
-	bottom: 0;
+	font-size: 1em;
+	text-align: left;
+	padding: 0.3em;
 	width: 100%;
 }
 
+
+.SmallCategories button:hover{
+	cursor: pointer;
+	background-color: rgba(255,255,255,.10);
+}
+#ClientCategories {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+#ClientCategories h2 {
+	font-weight: 600;
+	margin: 1em 0.3em;
+	color: #e1e1e1;
+}
+
+#ClientCategories .AllClients{
+	position: relative;
+	margin-top: 1em;
+	bottom: 0;
+	width: 100%;
+}
+#CursorForBtn {
+	background-color: #8f2831;
+	color: #ffffff;
+	font-weight: 500;
+}
 /*
 .cursor{
 	width: 0;
@@ -193,9 +229,6 @@ article .AddRemove{
 	float: left;
 	padding: 10px;
 }
-article .AddRemove button{	
-	
-}
 
 article nav.SortBy{
 	float: left;
@@ -210,14 +243,7 @@ main{
 	padding: 40px 26px;
 	overflow-x: hidden;
 	overflow-y: auto;
-}
-form{
-	line-height: 1.5em;
-}
-form h2{
-	font-size: 1.2em;
-	margin-bottom: .3em;
-	text-decoration: underline;
+	height: 100%;
 }
 
 main ul li{
@@ -228,20 +254,23 @@ main ul li{
 }
 
 /*the head*/
+#sectionTitle {
+	font-size: 48px;
+	font-weight: 500;
+}
 .ListHead{
 	white-space: nowrap;
-	background-color: rgb(212,212,212);
+	background-color: #ffffff;
 	padding: 12px;
-	box-shadow: 2px 3px 3px #9c9c9c;
+	border-top: 4px solid #8f2831;
+	box-shadow: 1px 1px 2px #636e72;
 	margin-bottom: 1px;
-	border: 2px solid rgb(180,180,180);
-	
-	transition: all .5s;
+	border-radius: 0px 0px 4px 4px;
+	transition: 0.2s;
 }
 .ListHead:hover{
-	border: 2px solid white;
-	box-shadow: 2px 3px 0px #9c9c9c;
-	background-color: rgba(212,212,212, .82);
+	cursor: pointer;
+	transform: scale(1.01);
 }
 .ListHead *{
 	display: inline;
@@ -251,12 +280,16 @@ main ul li{
 
 .ListHead h4{
 	background-color: white;
-	padding: 3px 40px;
-	color: rgb(120,120,120);
-	border: 2px solid rgb(120,120,120);
-
+	font-weight: 500;
+	font-size: 1.2em;
+	padding: 2px;
+	color: #000000;
 }
-
+.ListHead > p {
+	font-size: 0.85em;
+	font-weight: 500;
+	color: #5f5f5f;
+}
 .ListHead .CHeadTopLinks{
 	float: right;
 	display: none;

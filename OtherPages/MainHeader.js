@@ -5,7 +5,7 @@ function display(name){
 
 	document.write('		<nav><ul>');
 	document.write('			<li>');
-	document.write('				<img src="" id="profilePic"/>');
+	document.write('				<img src="" id="profilePic" style="border-radius: 100%"/>');
 	document.write('			</li>');
 	document.write('			<li><a href="Accounts.html" class="HeadButton Accounts">');
 	document.write('				<img src="../Assets/IconAccount.png"/>');
