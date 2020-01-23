@@ -284,7 +284,8 @@
 			
 				$(".ClientInfo .SmallCategories button").click(function(){
 					let ThisClientInfo = $(this).parent().parent();
-					
+					$("#selected").removeAttr("id");
+					$(this).attr("id", "selected");
 					//remove the things already there
 					$(ThisClientInfo).find(".ClientData").children().fadeOut(
 						CDATA_FADESPEED, 

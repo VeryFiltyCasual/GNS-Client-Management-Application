@@ -18,7 +18,9 @@ button{
 	background-color: rgb(240,240,240);
 	border: none;
 }
-
+button:focus {
+	outline: none;
+}
 a{
 	color: blue;
 }
@@ -312,7 +314,7 @@ i {
 
 /*all the info*/
 .ClientInfo{
-	background-color: rgb(212,212,212);
+	background-color: #ffffff;
 	font-size: 12px;
 	overflow: auto;
 	width: calc(100% - 10em);
@@ -320,23 +322,32 @@ i {
 	position: relative;
 	box-shadow: 2px 3px 3px #9c9c9c;
 	border: 1px solid rgb(180,180,180);
-	
 	display: none;
+	border-radius: 0px 0px 4px 4px;
 }
 
 
 .ClientInfo .SmallCategories{
 	float: left;
-	border-right: 1px solid rgb(180,180,180);
 }
 
-.ClientInfo .SmallCategories button{
-	margin: 1em;
-	background-color: rgb(180,180,180);
+.ClientInfo .SmallCategories button {
 	padding: .7em;
-	border: 1px solid rgb(160,160,160);
+	background-color: #e1e1e1;
+	border-bottom: 1px solid rgb(160,160,160);
+	border-right: 1px solid rgb(180,180,180);
+	transition: 0.2s;
 }
-
+.ClientInfo .SmallCategories button:last-child {
+	border-bottom: none;
+}
+.ClientInfo .SmallCategories button:hover {
+	background-color: #f1f1f1;
+}
+#selected {
+	background-color: #ffffff;
+	border-right: none;
+}
 .ClientData{
 	float: left;
 	width: calc(100% - 20.5em);
