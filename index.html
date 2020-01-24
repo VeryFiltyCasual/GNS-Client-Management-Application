@@ -1,24 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="login.js"></script>
-    <link rel="stylesheet" href="Stylesheets/Reset.css" type="text/css">
-    <link rel="stylesheet" href="Stylesheets/MainStyles.css" type="text/css"/>
-    <link rel="stylesheet" href="Stylesheets/signIn.css" type="text/css">
-
-    <link rel="stylesheet" id="redux-google-fonts-wpc_options-css" href="http://fonts.googleapis.com/css?family=Open+Sans%3A300%2C400%2C600%2C700%2C800%2C300italic%2C400italic%2C600italic%2C700italic%2C800italic%7CLato%3A100%2C300%2C400%2C700%2C900%2C100italic%2C300italic%2C400italic%2C700italic%2C900italic%7CAguafina+Script%3A400&amp;ver=5.3.2" type="text/css" media="all">
-    
-    <title>Sign in</title>
-</head>
-<body>
-    <main>
-        <img src="globalStoneslogo.png" alt="Global Natural Stones" id="logo">
-        <h1>Welcome!</h1>
-        <p>Please sign in with google to access the clients</p>
-        <img src="Assets/google_sign_in.png" alt="Sign in with Google" id='signin'>
-    </main>
-</body>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale-1.0">
+		<title>Global Natural Stones</title>
+			
+		<link rel="stylesheet" href="Stylesheets/Reset.css" type="text/css">
+		<link rel="stylesheet" href="Stylesheets/MainStyles.css" type="text/css"/>
+		
+	</head>
+	  
+	<body>
+		<header class="head">
+			<h1>Client Catalogue</h1>
+		</header>
+		
+		<main>
+			<form id="login" action="" method="POST">
+				<h2>Please Login:</h2>
+				
+				<label for="txtUsername">Username:</label><input type="text" name="txtUsername" id="txtUsername" /><br>
+				<label for="txtPassword">Password:</label><input type="password" name="txtPassword" id="txtPassword" /><br>
+				
+				<button type="submit">Login</button>
+			</form>
+			
+			<div class="image"><img src="globalStoneslogo.png"/></div>
+			
+			<a href="OtherPages/Clients.html">Dev Link</a>
+		</main>
+	</body>
 </html>
