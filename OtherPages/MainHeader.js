@@ -1,13 +1,9 @@
-
 function display(name){
 	document.write('<header>');
 	document.write('	<div class="head"> ');
 	document.write('		<h1>' + name + '</h1>');
 
 	document.write('		<nav><ul>');
-	document.write('			<li>');
-	document.write('				<img src="" id="profilePic" style="border-radius: 100%"/>');
-	document.write('			</li>');
 	document.write('			<li><a href="Accounts.html" class="HeadButton Accounts">');
 	document.write('				<img src="../Assets/IconAccount.png"/>');
 	document.write('				<h2>Accounts</h2>');
