@@ -1,10 +1,9 @@
-
 ﻿<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Global Natural Stones</title>
+		<title>Global Natural Stones</title>
 			
 		<link rel="stylesheet" href="../Stylesheets/Reset.css" type="text/css">
 		<link rel="stylesheet" href="../Stylesheets/MainStyles.css" type="text/css"/>
@@ -24,7 +23,7 @@
 		<script name="JQ button">
 			//
 			$(document).ready(function(){
-				//$(".SortBy").find("button").button();				
+				$(".SortBy").find("button").button();				
 			});
 		</script>
 		
@@ -37,86 +36,53 @@
 			}
 		</style>
 	</head>
-
+	  
 	<body>
 		<script src="MainHeader.js"></script>
 		<script>display("Clients");</script>
 		
-		<div class="big-container">
-			<!--side navigation-->
-			<aside>				
-				<nav id="ClientCategories">			
-					
-					<div class="SmallCategories">
-						<h2>View clients by...</h2>											
-						<button class="SmallCatButtons Basic neat-button"  id="CursorForBtn">Basic</button>
-						<button class="SmallCatButtons outTemplate neat-button">Waiting for Template</button>
-						<button class="SmallCatButtons gotTemplate neat-button">Received Templates</button>
-						<button class="SmallCatButtons prepareInvoice neat-button">Prepare Invoice</button>
-						<button class="SmallCatButtons outInvoice neat-button">Send Invoice</button>
-						<button class="SmallCatButtons gotConfirmation neat-button">Received confirmation of customer</button>
-						<button class="SmallCatButtons scheduleInstal neat-button">Schedule Installation</button>
-						<button class="SmallCatButtons gotPayment neat-button">Received Payment</button>
-						<button class="SmallCatButtons Completed neat-button">Completed</button>
-						<button class="SmallCatButtons AllClients neat-button">All Clients</button>
-					</div>
-					
-					
-
-					<form>
-						<button id="AddClient">+ Add Client</button>
-					</form>
-				</nav>				
-			</aside>
+		<!--side navigation-->
+		<aside>	
+			<form>
+				<button id="AddClient">				
+					<span class="neat-button">+</span> Add Client
+				</button>
+			</form>
 			
-			<!--list of clients -->
-			<main>
-				<ul id="ClientList">
-					<!--each li is a client-->
-					<div class="sectionHeading">
-						<h1 id="sectionTitle">Basic</h1>
-						<p>Sorted by: Newest to Oldest<i></i></p>
-					</div>
-					<hr>
-					<li class="Client">
-						<section class="ListHead">
-							<h4>Joe Johnson</h4>
-							<p>Joined 22 January, 2020</p>
-							<div class="CHeadTopLinks ">
-								<div>
-									<button class="btnShowInfo">Show All</button>
-									<button class="btnEditInfo">Edit</a>
-								</div>
-							</div>
-						</section>
-						
-						<section class="ClientInfo">
-							<nav class="SmallCategories">
-								<button class="SmallCatButtons Basic">Basic</button>
-								<button class="SmallCatButtons gotTemplate">Templates</button>
-								<button class="SmallCatButtons outInvoice">Invoice</button>
-								<button class="SmallCatButtons scheduleInstal">Scheduled Installation</button>
-								<button class="SmallCatButtons Comments">Comments</button>
-							</nav>
-							
-							<div class="ClientData">
-								<span class="Info"><h5>Phone:</h5><p class="CPhone">(478) 999-9999</p></span>
-								<span class="Info"><h5>Email:</h5><p class="CEmail">JimmyJohJohnson@email.com</p></span>
-								
-								<span class="Info"><h5>Address:</h5><p class="CAddress">123 Rainbow Road</p></span>
-								<span class="Info"><h5>City:</h5><p class="CCity">Dayton</p></span>
-								<span class="Info"><h5>State:</h5><p class="CState">OH</p></span>
-								<span class="Info"><h5>Zip:</h5><p>12345</p></span>
-								
-								<span class="Info"><h5>Projects:</h5><p>Cabinet, Appliances, Floor</p></span>
-							</div>
-							
-							<button class="ClientNextPhase">Move client to next phase</button>
-							
-						</section>
-					</li>
-					
-          <li class="Client">
+			<nav id="ClientCategories">	
+				<div class="cursor">&nbsp;</div>		
+				
+				<div class="SmallCategories">												
+					<button class="SmallCatButtons Basic neat-button">Basic</button>
+					<button class="SmallCatButtons outTemplate neat-button">Waiting for Template</button>
+					<button class="SmallCatButtons gotTemplate neat-button">Received Templates</button>
+					<button class="SmallCatButtons prepareInvoice neat-button">Prepare Invoice</button>
+					<button class="SmallCatButtons outInvoice neat-button">Send Invoice</button>
+					<button class="SmallCatButtons gotConfirmation neat-button">Received confirmation of customer</button>
+					<button class="SmallCatButtons scheduleInstal neat-button">Schedule Installation</button>
+					<button class="SmallCatButtons gotPayment neat-button">Received Payment</button>
+					<button class="SmallCatButtons Completed neat-button">Completed</button>
+				</div>
+				
+				<button class="AllClients neat-button">All Clients</button>
+			</nav>				
+		</aside>
+		
+		<!--list of clients -->
+		<main>
+			<nav class="SortBy" id="CliSortBy">
+				<h2>Sort By:</h2>
+				
+				<button class="SortName">Name</button>
+				<button class="SortLastName">Last Name</button>
+				<button class="SortNewest">Newest</button>
+				<button class="SortOldest">Oldest</button>
+			</nav>	
+		
+			<ul id="ClientList">
+				<!--each li is a client-->				
+				
+				<li class="Client">
 					<section class="ListHead">
 						<h4>Joe</h4>
 						<h4>Johnson</h4>
@@ -154,31 +120,119 @@
 						
 					</section>
 				</li>
+
+				<li class="Client">
+					<section class="ListHead">
+						<h4>Joe</h4>
+						<h4>Johnson</h4>
+						
+						<div class="CHeadTopLinks ">
+							<div>
+								<button class="btnShowInfo">Show All</button>
+								<button class="btnEditInfo">Edit</a>
+							</div>
+						</div>
+					</section>
 					
-				</ul>
-			</main>
-    </div>
-     
+					<section class="ClientInfo">
+						<nav class="SmallCategories">
+							<button class="SmallCatButtons Basic">Basic</button>
+							<button class="SmallCatButtons gotTemplate">Templates</button>
+							<button class="SmallCatButtons outInvoice">Invoice</button>
+							<button class="SmallCatButtons scheduleInstal">Scheduled Installation</button>
+							<button class="SmallCatButtons Comments">Comments</button>
+						</nav>
+						
+						<div class="ClientData">
+							<span class="Info"><h5>Phone:</h5><p class="CPhone">(478) 999-9999</p></span>
+							<span class="Info"><h5>Email:</h5><p class="CEmail">JimmyJohJohnson@email.com</p></span>
+							
+							<span class="Info"><h5>Address:</h5><p class="CAddress">123 Rainbow Road</p></span>
+							<span class="Info"><h5>City:</h5><p class="CCity">Dayton</p></span>
+							<span class="Info"><h5>State:</h5><p class="CState">OH</p></span>
+							<span class="Info"><h5>Zip:</h5><p>12345</p></span>
+							
+							<span class="Info"><h5>Projects:</h5><p>Cabinet, Appliances, Floor</p></span>
+						</div>
+						
+						<button class="ClientNextPhase">Move client to next phase</button>
+						
+					</section>
+				</li>
+
+				<li class="Client">
+					<section class="ListHead">
+						<h4>Joe</h4>
+						<h4>Johnson</h4>
+						
+						<div class="CHeadTopLinks ">
+							<div>
+								<button class="btnShowInfo">Show All</button>
+								<button class="btnEditInfo">Edit</a>
+							</div>
+						</div>
+					</section>
+					
+					<section class="ClientInfo">
+						<nav class="SmallCategories">
+							<button class="SmallCatButtons Basic">Basic</button>
+							<button class="SmallCatButtons gotTemplate">Templates</button>
+							<button class="SmallCatButtons outInvoice">Invoice</button>
+							<button class="SmallCatButtons scheduleInstal">Scheduled Installation</button>
+							<button class="SmallCatButtons Comments">Comments</button>
+						</nav>
+						
+						<div class="ClientData">
+							<span class="Info"><h5>Phone:</h5><p class="CPhone">(478) 999-9999</p></span>
+							<span class="Info"><h5>Email:</h5><p class="CEmail">JimmyJohJohnson@email.com</p></span>
+							
+							<span class="Info"><h5>Address:</h5><p class="CAddress">123 Rainbow Road</p></span>
+							<span class="Info"><h5>City:</h5><p class="CCity">Dayton</p></span>
+							<span class="Info"><h5>State:</h5><p class="CState">OH</p></span>
+							<span class="Info"><h5>Zip:</h5><p>12345</p></span>
+							
+							<span class="Info"><h5>Projects:</h5><p>Cabinet, Appliances, Floor</p></span>
+						</div>
+						
+						<button class="ClientNextPhase">Move client to next phase</button>
+						
+					</section>
+				</li>
+				
+				
+			</ul>
+		</main>
+		
+		
+
+		
 		<script name="MakeNewWindow-ClientMoreInfo">
 		
 		const { ipcRenderer } = require('electron');
+		var $overlay = $('<div class="ui-widget-overlay"></div>').hide().appendTo('body'); //overlay
 		
 		//when the show info button clicked
 		document.querySelector(".btnShowInfo").addEventListener("click", function() {
 			//send the 'display-client' command to the main js (will display new page with client info)
 			//needs id
-			ipcRenderer.send("display-client-Info", 1);
+			ipcRenderer.send("display-client-Info");
+			$('.ui-widget-overlay').fadeIn();
 		});
 		
 		document.querySelector(".btnEditInfo").addEventListener("click", function() {
 			//send the 'display-client-edit' command to the main js (will display new page with client	info)
 			//needs id
-			ipcRenderer.send("display-client-edit", 1);
+			ipcRenderer.send("display-client-edit");
+			$('.ui-widget-overlay').fadeIn();
 		});
+		
+		ipcRenderer.on("ExtraWinClosed", () =>{
+			$('.ui-widget-overlay').fadeOut();
+		})
 		</script>
 		
-		<script name="ExpandClientInfoClick">
 		
+		<script name="ExpandClientInfoClick">		
 		$(document).ready( function() {
 			
 			//displays the client information when clicking on an li
@@ -197,37 +251,15 @@
 		});
 		</script>
 		
+		<script name="SortDisplayFunctions" src="Scripts/SortDisplayFunctions.js"></script>
+		
 		<script name="DisplayClients">
-			/* ANDREW NEEDS CODE IN PopulateMain FUNCTION */
+			sortByID(AllClients);
+			populateMain(1, AllClients);
 			let currentStageForm = 1;
 			
-			
-			//populate basic form
-			function populateMain(currentStage){
-				console.log("Loading clients from stage " + currentStage);
-				var Client;
-				
-				//remove clients in the form already
-				/* ADD FOLLOWING ONCE ANDREW'S CODE IS IMPLEMENTED */
-				/*$("main").children().fadeOut(
-					120, 
-					function() {$(this).remove();}
-				
-				);*/
-			
-				for (Client of AllClients){
-					if (Client.Stage == currentStage){
-					/* SHOULD BE REPLACED WITH ANDREW'S CODE */
-						console.log(Client.Fname + " is printed.");
-					}
-				}
-			}			
-			populateMain(1);
-			
-			
-			//jquery, give all butons stage attr and handle clicking
+			//jquery
 			$(document).ready(function(){
-				/*
 				//cursor DOM object for buttons
 				let cursor = $("<div id='CursorForBtn'>&nbsp;</div>");
 				//make cursor a triangle using css
@@ -238,19 +270,19 @@
 					"border-width": "14px 0 14px 25px",
 					"border-color": "transparent transparent transparent rgb(243,243,243)",
 					"float": "left",
-					"margin-right": "15px"
+					"margin-right": "15px"*/
 					
 					"width": 0,
 					"height": 0,
 					"border-top": "20px solid transparent",
-					"border-left": "30px solid #8f2831",
+					"border-left": "30px solid #00bcd4",
 					"border-bottom": "20px solid transparent",
 					
 					"position": "absolute",
 					"left": 0
 				});
 				$(cursor).insertBefore("#ClientCategories button.Basic");
-				*/
+				
 				//fill buttons with stage info
 				let btnNum = 1;
 				$(".SmallCatButtons").each(function(){
@@ -258,30 +290,53 @@
 				});
 				
 				//when the button is clicked, fill the main and insert cursor
-				$("aside .SmallCatButtons").click(function(){
-					$("#CursorForBtn").removeAttr("id");
-					$(this).attr("id", "CursorForBtn");
-					$("#sectionTitle").text($(this).text());
+				$("#ClientCategories .SmallCatButtons").click(function(){
+					$("#CursorForBtn").remove();
+					
 					//populate main with the stage value of the button
-					populateMain(
-						$(this).attr("stage")
-					);
+					currentStageForm = $(this).attr("stage");
+					populateMain(currentStageForm, AllClients);
 					
+					$(cursor).insertBefore(this);
+				});
+				
+				
+				//sorts clients 
+				$(".SortName").click(function(){
+					sortByFirstName(AllClients);
 					
+					populateMain(currentStageForm, AllClients);
+				});
+				
+				$(".SortLastName").click(function(){
+					sortByLastName(AllClients);
+					
+					populateMain(currentStageForm, AllClients);
+				});
+				
+				$(".SortNewest").click(function(){
+					sortByNewest(AllClients);
+					
+					populateMain(currentStageForm, AllClients);
+				});
+				
+				$(".SortOldest").click(function(){
+					sortByOldest(AllClients);
+					
+					populateMain(currentStageForm, AllClients);
 				});
 			});
 			
-			
-
 		</script>
+		
+		
 		
 		<script name="NavigateClients">
 			$(document).ready(function(){
 			
 				$(".ClientInfo .SmallCategories button").click(function(){
 					let ThisClientInfo = $(this).parent().parent();
-					$("#selected").removeAttr("id");
-					$(this).attr("id", "selected");
+					
 					//remove the things already there
 					$(ThisClientInfo).find(".ClientData").children().fadeOut(
 						CDATA_FADESPEED, 
@@ -327,5 +382,6 @@
 				
 			});
 		</script>
+		
 	</body>
 </html>
