@@ -8,19 +8,38 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 	
-	
 	<link rel="stylesheet" href="../Stylesheets/extraForms.css" type="text/css"/>
+	<link rel="stylesheet" href="../JQUI/jquery-ui.css"/>
+	
+	<script type="text/javascript" src="../JQUI/external/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../JQUI/jquery-ui.js"></script>
+	
+	<script name="Get CliID">
+		const { ipcRenderer } = require('electron');
+		let cli;
+		
+		cli = ipcRenderer.sendSync("getID");
+		
+		console.log(cli);
+	</script>
+	
+	<style>		
+		.ui-button{
+			//border: 2px solid rgb(180,180,180);
+			margin: 0;
+			width: 275px;
+			//border-bottom: 0px;
+		}
+		
+	</style>
 </head>
 
 <body>
-	<form>
+
+
+	<form id="formMain">
+		<h3>Customer Basic Information</h3><br>
 		<fieldset class="BasicInfo">
-			<legend>
-				Customer Basic Information
-				<div class="ShowHide neat-button">
-					<img alt="Arrow button, show hides client information sections" src="../Assets/Arrow.png" />
-				</div>
-			</legend>
 			
 			<section class="CustName">
 				<h1>Name</h1>
@@ -43,15 +62,11 @@
 				<input type="combo" name="txtState">	
 			</section>
 
-			<button type="submit">Submit</button>
+			<button type="submit">Save Section</button>
 		</fieldset>
 		
+		<h3>Project Details</h3><br>
 		<fieldset class="ProjectDetails">
-			<legend>Project Details
-				<div class="ShowHide neat-button">
-					<img alt="Arrow button, show hides client information sections" src="../Assets/Arrow.png" />
-				</div>
-			</legend>
 			
 			<section class="Contractor">
 				<h1>Contractor/Ref Info</h1>
@@ -107,18 +122,12 @@
 				<label for="Disp">Display</label><input type="">
 			</section>
 			
-			<section>
-			</section>
 			
-			<button type="submit">Submit</button>
+			<button type="submit">Save Section</button>
 		</fieldset>
 		
+		<h3>Installation Details</h3><br>
 		<fieldset class="InstalDetails">
-			<legend>Installation Details
-				<div class="ShowHide neat-button">
-					<img alt="Arrow button, show hides client information sections" src="../Assets/Arrow.png" />
-				</div>
-			</legend>
 			
 			<section class="Vanity">
 				<h1>Vanity, Cut</h1>
@@ -138,73 +147,36 @@
 				<!--check-->
 				<label for="txtDrain">Drain:</label><input type="text" name="txtDrain">
 				<label for="numFaucQty">Qty:</label><input type="number" name="numFaucQty">
-				
+			</section>
 				
 			
-			<button type="submit">Submit</button>
+			<button type="submit">Save Section</button>
 				
 				
 		</fieldset>
 		
+		<h3>Estimate</h3><br>
 		<fieldset class="Estimate">
-			<legend>Estimate
-				<div class="ShowHide neat-button">
-					<img alt="Arrow button, show hides client information sections" src="../Assets/Arrow.png" />
-				</div>
-			</legend>
 			
-			<button type="submit">Submit</button>
+			<button type="submit">Save Section</button>
 		</fieldset>
 		
+		<h3>Schedule</h3><br>
 		<fieldset class="Schedule">
-			<legend>Availability
-				<div class="ShowHide neat-button">
-					<img alt="Arrow button, show hides client information sections" src="../Assets/Arrow.png" />
-				</div>
-			</legend>
 			
-			<button type="submit">Submit</button>
+			<button type="submit">Save Section</button>
 		</fieldset>
 		
-		<fieldset class="FinalNotes">
-			<legend>Final Notes
-				<div class="ShowHide neat-button">
-					<img alt="Arrow button, show hides client information sections" src="../Assets/Arrow.png" />
-				</div>
-			</legend>
+		<h3>Comments</h3><br>
+		<fieldset class="Comments">
 			
-			<button type="submit">Submit</button>
+			<button type="submit">Save Section</button>
 		</fieldset>
+		
+		<button id="saveAll">Save All</button>
 	</form>
 	
-	<script>
-		$(document).ready( function() {
-			
-			//displays the client information when clicking on an li
-			$(".ShowHide").click(function() {			
-				var thisSection = $(this).parent().parent();
-				
-				//opens the clicked client info
-				$(thisSection).find("section").toggle(400);
-				$(thisSection).find("button[type='submit']").toggle(400)
-				
-				//flip img
-				if ($(this).find("img").css("transform") == "none")
-					$(this).find("img").css("transform", "rotate(180deg)");
-				else
-					$(this).find("img").css("transform", "")
-			});
-			
-			
-			
-		});
-	</script>
+	<script src="Scripts/ShowHide-Cli.js" name="ShowHide-CliEdit"></script>
 	
-	<script>
-		var id = $__GET('id');
-		
-		console.log(id);
-		document.write("<p>ID: " + id);
-	</script>
 </body>
 </html>

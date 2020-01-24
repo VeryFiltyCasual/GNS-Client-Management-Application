@@ -1,0 +1,46 @@
+Copyright jQuery Foundation and other contributors, https://jquery.org/
+
+This software consists of voluntary contributions made by many
+individuals. For exact contribution history, see the revision history
+available at https://github.com/jquery/jquery-ui
+
+The following license applies to all parts of this software except as
+documented below:
+
+1.12.1
+https://jqueryui.com/download/#!zThemeParams=5d00000100ef05000000000000003d8888d844329a8dfe02723de3e57038d8ec13a161d76571a09af7787da656eac4095c5afca3a0ab4367fa730baa774447d99c84d5502b0f594216aaf9c6428b24713522f8698f2cfe75c26e829ac091f323bbc25e4d6459fa614af1fa202e1fa68f7e3dc9c5e64012c6bd1a3f50fdb240db85c999611a3ad94563562933b0307c2e00fc222c7a42144426bedfb3d9e625f95724901043008cc41930045cefb64f47129e3d2c296b882dad15754f728c0de8966f888f0a18d61684a80f7f6893dac3d9dcf351236a1b18a883e889a95d97746e983811ba81fabfe212a3c6fd4af6d95527fae9728686f6edc621ce44f94f0ca1a80debf4a77d4ebf0de9f53ccd5876582607771f67ae22eedfbeb8cec5df31760c80db38cfc1df2476e427561fd63b48cdbd935b2e962d5d2c59f783bea19347d1b746e92699309c25795dffd0dba3b6078541e5ba850ec9676cd336468d7530444e2dd72702bfe3f6e626d9fec6a54509b52f5571974c5294847db3aa54ec750bef4d1aa06f397d144f01db0d3a688665ca0ddc64f9e3cfc5e4bc830808c64143fc9e84e81d499c8214e94721f069c1cb80519178a07e169090be421d21f8aedc3e6cc93275ca2c284a2e9ac720cba6a192322ecf9bd5dd3416cb05d757b5390643458dcf559e64329cee035d4c807124354e61676b69ffc12b1ab3
+
+====
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+====
+
+Copyright and related rights for sample code are waived via CC0. Sample
+code is defined as all source code contained within the demos directory.
+
+CC0: http://creativecommons.org/publicdomain/zero/1.0/
+
+====
+
+All files located in the node_modules and external directories are
+externally maintained libraries used by this software which have their
+own licenses; we recommend you read them, as their terms may differ from
+the terms above.

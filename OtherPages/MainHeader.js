@@ -1,3 +1,4 @@
+
 function display(name){
 	document.write('<header>');
 	document.write('	<div class="head"> ');

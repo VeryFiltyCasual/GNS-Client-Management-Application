@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale-1.0">
+	<title>Global Natural Stones</title>
+	
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+	
+	<link rel="stylesheet" href="../Stylesheets/extraForms.css" type="text/css"/>
+	<link rel="stylesheet" href="../JQUI/jquery-ui.css"/>
+	
+	<script type="text/javascript" src="../JQUI/external/jquery/jquery.js"></script>
+	<script type="text/javascript" src="../JQUI/jquery-ui.js"></script>
+	
+	<script name="Get CliID">
+		const { ipcRenderer } = require('electron');
+		let cli;
+		
+		cli = ipcRenderer.sendSync("getID");
+		
+		console.log(cli);
+	</script>
+	
+	<style>		
+		.ui-button{
+			//border: 2px solid rgb(180,180,180);
+			margin: 0;
+			width: 275px;
+			//border-bottom: 0px;
+		}
+		
+	</style>
+</head>
+
+<body>
+
+
+	<h3>Customer Basic Information</h3><br>
+	<fieldset class="BasicInfo">
+		
+		<section class="CustName">
+			<h1>Name</h1>
+			<label for="txtName">Name:</label><input type="text" name="txtName" value="test First">
+			<label for="txtMiddle">Middle Name:</label><input type="text" name="txtMiddle" value="test Middle">
+			<label for="txtLast">Last Name:</label><input type="text" name="txtName" value="test Last">
+			
+			<label name="txtTest" value="Benjerman" />
+		</section>
+		
+		<section class="CustContact">
+			<h1>Contact</h1>
+			<label for="numPhoneNum">Phone Number:</label><input type="number" name="numPhoneNum" value="420">
+			<label for="txtEmail">Email:</label><input type="text" name="txtEmail" value="TheBoi@google.com">
+		</section>
+		
+		<section class="CustAddress">
+			<h1>Address</h1>
+			<label for="txtAddressStreet">Street:</label><input type="text" name="txtAddressStreet" value="test Addr">
+			<label for="txtCity">City:</label><input name="txtCity" type="text" value="Dayton">
+			<label for="txtState">State:</label>
+			<input type="combo" name="txtState">	
+		</section>
+
+	</fieldset>
+	
+	<h3>Project Details</h3><br>
+	<fieldset class="ProjectDetails">
+		
+		<section class="Contractor">
+			<h1>Contractor/Ref Info</h1>
+			<label for="txtName">Name:</label><input type="text" name="txtName" value="Freddie Mercury">
+			<label for="numPhoneNum">Phone Number:</label><input type="number" name="numPhoneNum" value="420">
+			<label for="txtEmail">Email:</label><input type="text" name="txtEmail" value="TheBoi@google.com">
+		</section>
+		
+		<section class="Project">
+			<h1>Project: <input type="text"></h1>				
+			<label for="txtCabinet">Cabinet:</label><input type="" name="txtCabinet">
+			<label for="txtAppliances">Appliances:</label><input type="" name="txtAppliances">
+			<label for="txtFloor">Floor:</label><input type="" name="txtFloor">
+			<label for="txtOther">Other:</label><input type="" name="txtOther">
+		</section>
+		
+		<section class="Materials">
+			<h1>Materials Selected (Slab/Tiles)</h1>
+			<label for="txtKit">Kit:</label><input type="text" name="txtKit">
+			<label for="txtOther">Van/Other:</label><input type="text" name="txtOther">
+			<label for="numAmount">REM/SLAB#:</label><input type="num" name="numAmount">
+		</section>
+		
+		<section class="Profile">
+			<h1>Profile & Other Selections</h1>
+			<label for="chkTile">Tile B/S:</label><input type="checkbox" name="chkTile">
+			<label for="chkSlabMarked">Slab/Rem Marked:</label><input type="checkbox" name="chkSlabMarked">
+			<label for="chkStandard">Standard</label><input type="checkbox" name="chkStandard">
+			
+			<label for="chkPrem txtPrem">Prem.</label><input type="text" name="txtPrem"><input type="checkbox" name="chkPrem">
+			<label for="chkRadius numRadius">Radius</label><input type="number" name="numRadius"><input type="checkbox" name="chkRadius">
+			
+			<label for="chkBackSplash">Back Splash:</label><input type="checkbox">
+			<label for="chkBarSplash">Bar Splash:</label><input type="checkbox">
+			
+			<div class="overhangs">
+				<h2>Overhang (Per Customer)</h2>
+				<label for="txtBar">Bar</label><input type="text" name="txtBar">
+				<label for="txtIsland">Island</label><input type="text" name="txtIsland">
+			</div>
+		</section>
+		
+		<section class="Kitchen">
+			<h1>Kitchen</h1>
+			<label for="txtSink">Sink:</label><input type="text" name="txtSink">
+			<label for="txtGrids">Grids</label><input type="text" name="txtGrids">
+			<label for="txtStrainer">Strainer:</label><input type="text" name="txtStrainer">
+			<label for="numFaucet">Faucet#:</label><input type="numer" name="numFaucet">
+			<label for="chkCutboard">CutBoard:</label><input type="checkbox">
+			<!--check-->
+			<label for="Package">Package</label><input type="">
+			<!--check-->
+			<label for="Disp">Display</label><input type="">
+		</section>
+		
+
+	</fieldset>
+	
+	<h3>Installation Details</h3><br>
+	<fieldset class="InstalDetails">
+		
+		<section class="Vanity">
+			<h1>Vanity, Cut</h1>
+			<!--check-->
+			<label for="selSink">Sink:</label><select name="selSink">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+			</select>
+			<label for="txtSinkType">Sink Type:</label><input type="text" name="txtSinkType">
+			<label for="numSinkQty">Qty:</label><input type="number" name="numSinkQty">
+			
+			<label for="numFaucet">Faucet#:</label><input type="number" name="numFaucet">
+			<label for="numFaucQty">Qty:</label><input type="number" name="numFaucQty">
+			
+			<!--check-->
+			<label for="txtDrain">Drain:</label><input type="text" name="txtDrain">
+			<label for="numFaucQty">Qty:</label><input type="number" name="numFaucQty">
+		</section>
+			
+			
+	</fieldset>
+	
+	<h3>Estimate</h3><br>
+	<fieldset class="Estimate">
+		
+	</fieldset>
+	
+	<h3>Schedule</h3><br>
+	<fieldset class="Schedule">
+		
+	</fieldset>
+	
+	<h3>Comments</h3><br>
+	<fieldset class="Comments">
+		
+	</fieldset>
+	
+
+	
+	<script src="Scripts/ShowHide-Cli.js" name="ShowHide-CliEdit"></script>
+	
+</body>
+</html>

@@ -1,3 +1,4 @@
+
 const electron = require('electron');
 const Authenticator = require('./auth/authenticator');
 const WebSocket = require('ws');
@@ -7,6 +8,8 @@ let userAuth = new Authenticator(process.env.CLIENT_ID, process.env.CLIENT_SEC, 
 const { app, BrowserWindow, Menu, dialog} = electron;
 const { ipcMain } = electron;
 let win = { main: null, extra: null }; 
+
+let cliId_ExtraPage = 0;
 /****************
 *****Windows*****
 *****************/
@@ -22,16 +25,24 @@ app.on('ready', async () => {
 ipcMain.on('display-client-edit', (event, id) => {
   prepareExtraWin();
   runCustEdit(id); //run custEdit (display a webpage)
+  cliId_ExtraPage = id;
 })
 
 ipcMain.on('display-client-info', (event, id) => {
   prepareExtraWin();
-  runCustInfo(id); //run custEdit (display a webpage)
+  runCustInfo(); //run custEdit (display a webpage)
+  cliId_ExtraPage = id;
+})
+
+ipcMain.on('getID', (event, arg) => {
+ 
+  event.returnValue = cliId_ExtraPage;
 })
 //When the webpage sends the user auth code
 ipcMain.on('google', (event, code) => {
   userAuth.getAccessTokens(code);
 });
+
 
 //*********Window Functions *****
 
@@ -101,21 +112,22 @@ function prepareExtraWin(){
 				win.extra = null;
 			
 		//});
-        
+        win.main.webContents.send("ExtraWinClosed");
     })
 }
 
 
 function runCustEdit(id){
 	// and load the index.html of the app.
-  win.extra.loadURL(`file://${__dirname}/OtherPages/customerEdit.html?id=${id}`);
+  win.extra.loadURL(`file://${__dirname}/OtherPages/customerEdit.html`);
 	
 }
 
 function runCustInfo(id){
 	// and load the index.html of the app.
-  win.extra.loadFile("OtherPages/customerInfo.html?id=" + id);
+  win.extra.loadFile(`file://${__dirname}/OtherPages/customerView.html`);
 }
+
 
 //Creates the client view
 function createClientViewer({user, tokens}) {
