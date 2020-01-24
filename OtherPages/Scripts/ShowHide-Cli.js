@@ -1,11 +1,11 @@
 $(document).ready( function() {
 
-	$("h3").button({
+	$("h1").button({
 		icon: "ui-icon-triangle-1-n"
 	});
 	
 	//displays the client information when clicking on an li
-	$("h3").click(function() {			
+	$("h1").click(function() {			
 		var thisSection = $(this).next().next().slideToggle(400);
 		
 		//flip icon

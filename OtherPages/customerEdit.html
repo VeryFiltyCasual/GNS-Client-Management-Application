@@ -38,60 +38,70 @@
 
 
 	<form id="formMain">
-		<h3>Customer Basic Information</h3><br>
+		<h1>Customer Basic Information</h1><br>
 		<fieldset class="BasicInfo">
 			
-			<section class="CustName">
-				<h1>Name</h1>
-				<label for="txtName">Name:</label><input type="text" name="txtName" value="test First">
-				<label for="txtMiddle">Middle Name:</label><input type="text" name="txtMiddle" value="test Middle">
-				<label for="txtLast">Last Name:</label><input type="text" name="txtName" value="test Last">
+			<section>
+				<h2>Name</h2>
+				<label for="txtName">Name:</label><input type="text" name="txtName" id="txtName" title="Edit the client's first name" value="test First">
+				<label for="txtMiddle">Middle Name:</label><input type="text" name="txtMiddle" id="txtMiddle" title="Edit the client's middle name" value="test Middle">
+				<label for="txtLast">Last Name:</label><input type="text" name="txtLastName" id="txtLastName" title="Edit the client's last name" value="test Last">
 			</section>
 			
-			<section class="CustContact">
-				<h1>Contact</h1>
-				<label for="numPhoneNum">Phone Number:</label><input type="number" name="numPhoneNum" value="420">
-				<label for="txtEmail">Email:</label><input type="text" name="txtEmail" value="TheBoi@google.com">
+			<section>
+				<h2>Contact</h2>
+				<label for="numPhoneNum">Phone Number:</label><input type="number" name="numPhoneNum" title="Edit the client's phone number" id="numPhoneNum" value="420">
+				<label for="txtEmail">Email:</label><input type="text" name="txtEmail" id="txtEmail" title="Edit the client's email" value="TheBoi@google.com">
 			</section>
 			
-			<section class="CustAddress">
-				<h1>Address</h1>
-				<label for="txtAddressStreet">Street:</label><input type="text" name="txtAddressStreet" value="test Addr">
-				<label for="txtCity">City:</label><input name="txtCity" type="text" value="Dayton">
+			<section>
+				<h2>Address</h2>
+				<label for="txtAddressStreet">Street:</label><input type="text" name="txtAddressStreet" id="txtAddressStreet" title="street address (street name and house number)" value="test Addr">
+				<label for="txtCity">City:</label>
+					<select name="txtCity" id="txtCity" title="Edit the city" >
+						<option value="Day" selected>Dayton</option>
+						<option value="Cin">Cincinnati</option>
+					</select>
+					
 				<label for="txtState">State:</label>
 				<input type="combo" name="txtState">	
+			</section>
+			
+			<section>
+				<h2>Project Info</h2>
+				
 			</section>
 
 			<button type="submit">Save Section</button>
 		</fieldset>
 		
-		<h3>Project Details</h3><br>
+		<h1>Project Details</h1><br>
 		<fieldset class="ProjectDetails">
 			
-			<section class="Contractor">
-				<h1>Contractor/Ref Info</h1>
-				<label for="txtName">Name:</label><input type="text" name="txtName" value="Freddie Mercury">
-				<label for="numPhoneNum">Phone Number:</label><input type="number" name="numPhoneNum" value="420">
-				<label for="txtEmail">Email:</label><input type="text" name="txtEmail" value="TheBoi@google.com">
+			<section>
+				<h2>Contractor/Ref Info</h2>
+				<label for="txtName">Name:</label> <input type="text" name="txtName" id="txtName" value="Freddie Mercury">
+				<label for="numPhoneNum">Phone Number:</label> <input type="number" name="numPhoneNum" id="numPhoneNum" value="420">
+				<label for="txtEmail">Email:</label> <input type="text" name="txtEmail" id="txtEmail" value="TheBoi@google.com">
 			</section>
 			
-			<section class="Project">
-				<h1>Project: <input type="text"></h1>				
+			<section>
+				<h2>Project: <input type="text"></h2>				
 				<label for="txtCabinet">Cabinet:</label><input type="" name="txtCabinet">
 				<label for="txtAppliances">Appliances:</label><input type="" name="txtAppliances">
 				<label for="txtFloor">Floor:</label><input type="" name="txtFloor">
 				<label for="txtOther">Other:</label><input type="" name="txtOther">
 			</section>
 			
-			<section class="Materials">
-				<h1>Materials Selected (Slab/Tiles)</h1>
+			<section>
+				<h2>Materials Selected (Slab/Tiles)</h2>
 				<label for="txtKit">Kit:</label><input type="text" name="txtKit">
 				<label for="txtOther">Van/Other:</label><input type="text" name="txtOther">
 				<label for="numAmount">REM/SLAB#:</label><input type="num" name="numAmount">
 			</section>
 			
-			<section class="Profile">
-				<h1>Profile & Other Selections</h1>
+			<section>
+				<h2>Profile & Other Selections</h2>
 				<label for="chkTile">Tile B/S:</label><input type="checkbox" name="chkTile">
 				<label for="chkSlabMarked">Slab/Rem Marked:</label><input type="checkbox" name="chkSlabMarked">
 				<label for="chkStandard">Standard</label><input type="checkbox" name="chkStandard">
@@ -103,14 +113,14 @@
 				<label for="chkBarSplash">Bar Splash:</label><input type="checkbox">
 				
 				<div class="overhangs">
-					<h2>Overhang (Per Customer)</h2>
+					<h3>Overhang (Per Customer)</h3>
 					<label for="txtBar">Bar</label><input type="text" name="txtBar">
 					<label for="txtIsland">Island</label><input type="text" name="txtIsland">
 				</div>
 			</section>
 			
-			<section class="Kitchen">
-				<h1>Kitchen</h1>
+			<section>
+				<h2>Kitchen</h2>
 				<label for="txtSink">Sink:</label><input type="text" name="txtSink">
 				<label for="txtGrids">Grids</label><input type="text" name="txtGrids">
 				<label for="txtStrainer">Strainer:</label><input type="text" name="txtStrainer">
@@ -126,11 +136,11 @@
 			<button type="submit">Save Section</button>
 		</fieldset>
 		
-		<h3>Installation Details</h3><br>
+		<h1>Installation Details</h1><br>
 		<fieldset class="InstalDetails">
 			
-			<section class="Vanity">
-				<h1>Vanity, Cut</h1>
+			<section>
+				<h2>Vanity, Cut</h2>
 				<!--check-->
 				<label for="selSink">Sink:</label><select name="selSink">
 					<option value="1">1</option>
@@ -155,19 +165,19 @@
 				
 		</fieldset>
 		
-		<h3>Estimate</h3><br>
+		<h1>Estimate</h1><br>
 		<fieldset class="Estimate">
 			
 			<button type="submit">Save Section</button>
 		</fieldset>
 		
-		<h3>Schedule</h3><br>
+		<h1>Schedule</h1><br>
 		<fieldset class="Schedule">
 			
 			<button type="submit">Save Section</button>
 		</fieldset>
 		
-		<h3>Comments</h3><br>
+		<h1>Comments</h1><br>
 		<fieldset class="Comments">
 			
 			<button type="submit">Save Section</button>
@@ -177,6 +187,8 @@
 	</form>
 	
 	<script src="Scripts/ShowHide-Cli.js" name="ShowHide-CliEdit"></script>
+	
+
 	
 </body>
 </html>
