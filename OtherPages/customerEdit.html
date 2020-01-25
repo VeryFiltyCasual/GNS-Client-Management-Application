@@ -31,6 +31,10 @@
 			//border-bottom: 0px;
 		}
 		
+		input, select{
+			margin-right: 30px;
+		}
+
 	</style>
 </head>
 
@@ -38,62 +42,129 @@
 
 
 	<form id="formMain">
-		<h3>Customer Basic Information</h3><br>
+		<h1>Customer Basic Information</h1><br>
 		<fieldset class="BasicInfo">
 			
-			<section class="CustName">
-				<h1>Name</h1>
-				<label for="txtName">Name:</label><input type="text" name="txtName" value="test First">
-				<label for="txtMiddle">Middle Name:</label><input type="text" name="txtMiddle" value="test Middle">
-				<label for="txtLast">Last Name:</label><input type="text" name="txtName" value="test Last">
+			<section>
+				<h2>Name</h2>
+				<label for="txtName">Name:</label><input type="text" name="txtName" id="txtName" title="Edit the client's first name" value="test First">
+				<label for="txtMiddle">Middle Name:</label><input type="text" name="txtMiddle" id="txtMiddle" title="Edit the client's middle name" value="test Middle">
+				<label for="txtLast">Last Name:</label><input type="text" name="txtLastName" id="txtLastName" title="Edit the client's last name" value="test Last">
 			</section>
 			
-			<section class="CustContact">
-				<h1>Contact</h1>
-				<label for="numPhoneNum">Phone Number:</label><input type="number" name="numPhoneNum" value="420">
-				<label for="txtEmail">Email:</label><input type="text" name="txtEmail" value="TheBoi@google.com">
+			<section>
+				<h2>Contact</h2>
+				<label for="numPhoneNum">Phone Number:</label><input type="number" name="numPhoneNum" title="Edit the client's phone number" id="numPhoneNum" value="420">
+				<label for="txtEmail">Email:</label><input type="text" name="txtEmail" id="txtEmail" title="Edit the client's email" value="TheBoi@google.com">
 			</section>
 			
-			<section class="CustAddress">
-				<h1>Address</h1>
-				<label for="txtAddressStreet">Street:</label><input type="text" name="txtAddressStreet" value="test Addr">
-				<label for="txtCity">City:</label><input name="txtCity" type="text" value="Dayton">
+			<section>
+				<h2>Address</h2>
+				<label for="txtAddressStreet">Street:</label><input type="text" name="txtAddressStreet" id="txtAddressStreet" title="street address (street name and house number)" value="test Addr">
+				<label for="txtCity">City:</label>
+					<select name="txtCity" id="txtCity" title="Edit the city" >
+						<option value="Day" selected>Dayton</option>
+						<option value="Cin">Cincinnati</option>
+					</select>
+					
 				<label for="txtState">State:</label>
-				<input type="combo" name="txtState">	
+				<select id="txtState" name="txtState">
+					<option value="AL">Alabama</option>
+					<option value="AK">Alaska</option>
+					<option value="AZ">Arizona</option>
+					<option value="AR">Arkansas</option>
+					<option value="CA">California</option>
+					<option value="CO">Colorado</option>
+					<option value="CT">Connecticut</option>
+					<option value="DE">Delaware</option>
+					<option value="DC">District Of Columbia</option>
+					<option value="FL">Florida</option>
+					<option value="GA">Georgia</option>
+					<option value="HI">Hawaii</option>
+					<option value="ID">Idaho</option>
+					<option value="IL">Illinois</option>
+					<option value="IN">Indiana</option>
+					<option value="IA">Iowa</option>
+					<option value="KS">Kansas</option>
+					<option value="KY">Kentucky</option>
+					<option value="LA">Louisiana</option>
+					<option value="ME">Maine</option>
+					<option value="MD">Maryland</option>
+					<option value="MA">Massachusetts</option>
+					<option value="MI">Michigan</option>
+					<option value="MN">Minnesota</option>
+					<option value="MS">Mississippi</option>
+					<option value="MO">Missouri</option>
+					<option value="MT">Montana</option>
+					<option value="NE">Nebraska</option>
+					<option value="NV">Nevada</option>
+					<option value="NH">New Hampshire</option>
+					<option value="NJ">New Jersey</option>
+					<option value="NM">New Mexico</option>
+					<option value="NY">New York</option>
+					<option value="NC">North Carolina</option>
+					<option value="ND">North Dakota</option>
+					<option value="OH">Ohio</option>
+					<option value="OK">Oklahoma</option>
+					<option value="OR">Oregon</option>
+					<option value="PA">Pennsylvania</option>
+					<option value="RI">Rhode Island</option>
+					<option value="SC">South Carolina</option>
+					<option value="SD">South Dakota</option>
+					<option value="TN">Tennessee</option>
+					<option value="TX">Texas</option>
+					<option value="UT">Utah</option>
+					<option value="VT">Vermont</option>
+					<option value="VA">Virginia</option>
+					<option value="WA">Washington</option>
+					<option value="WV">West Virginia</option>
+					<option value="WI">Wisconsin</option>
+					<option value="WY">Wyoming</option>
+				</select>				
+			</section>
+			
+			<section>
+				<h2>Contractor/Ref Info</h2>
+				<label for="txtConName">Name:</label> <input type="text" name="txtConName" id="txtConName" value="Freddie Mercury">
+				<label for="numConPhoneNum">Phone Number:</label> <input type="number" name="numConPhoneNum" id="numConPhoneNum" value="420">
+				<label for="txtConEmail">Email:</label> <input type="text" name="txtConEmail" id="txtConEmail" value="TheBoi@google.com">
+			</section>
+			
+			<section>
+				<h2>Project Info</h2>
+				<input type="text" name="txtProjInfo" value="">
+				
+				<label for="txtCabinet">Cabinet:</label><input type="" id="txtCabinet" name="txtCabinet">
+				<label for="txtAppliances">Appliances:</label><input type="" id="txtAppliances" name="txtAppliances">
+				<label for="txtFloor">Floor:</label><input type="" name="txtFloor">
+				<label for="txtOtherProj">Other:</label><input type="" id="txtOtherProj" name="txtOtherProj">
 			</section>
 
 			<button type="submit">Save Section</button>
 		</fieldset>
 		
-		<h3>Project Details</h3><br>
+		<h1>Materials/Profile</h1><br>
 		<fieldset class="ProjectDetails">
+
 			
-			<section class="Contractor">
-				<h1>Contractor/Ref Info</h1>
-				<label for="txtName">Name:</label><input type="text" name="txtName" value="Freddie Mercury">
-				<label for="numPhoneNum">Phone Number:</label><input type="number" name="numPhoneNum" value="420">
-				<label for="txtEmail">Email:</label><input type="text" name="txtEmail" value="TheBoi@google.com">
+			<section id="sectMaterials">
+				<h2>Materials Selected (Slab/Tiles)</h2>
+				<label for="txtKit">Kit:</label><input type="text" id="txtKit" name="txtKit">
+				<label for="txtOtherVan">Van/Other:</label><input type="text" id="txtOtherVan" name="txtOtherVan">
+				<label for="cmbSlabNum">REM/SLAB#:</label>
+					<select name="cmbSlabNum" id="cmbSlabNum">
+						<option value="1">1</option>
+					</select>
+					
+				<label for="cmbTile">Tile B/S:</label> 
+					<select id="cmbTile" name="cmbTile"><option value="Y">Y</option><option value="N">N</option></select>
+				<label for="chkSlabMarked">Slab/Rem Marked:</label><input type="checkbox" class="HiderCheck" id="chkSlabMarked" name="chkSlabMarked">
+				<input type="text" name="txtSlabMarked" id="txtSlabMarked">
 			</section>
 			
-			<section class="Project">
-				<h1>Project: <input type="text"></h1>				
-				<label for="txtCabinet">Cabinet:</label><input type="" name="txtCabinet">
-				<label for="txtAppliances">Appliances:</label><input type="" name="txtAppliances">
-				<label for="txtFloor">Floor:</label><input type="" name="txtFloor">
-				<label for="txtOther">Other:</label><input type="" name="txtOther">
-			</section>
-			
-			<section class="Materials">
-				<h1>Materials Selected (Slab/Tiles)</h1>
-				<label for="txtKit">Kit:</label><input type="text" name="txtKit">
-				<label for="txtOther">Van/Other:</label><input type="text" name="txtOther">
-				<label for="numAmount">REM/SLAB#:</label><input type="num" name="numAmount">
-			</section>
-			
-			<section class="Profile">
-				<h1>Profile & Other Selections</h1>
-				<label for="chkTile">Tile B/S:</label><input type="checkbox" name="chkTile">
-				<label for="chkSlabMarked">Slab/Rem Marked:</label><input type="checkbox" name="chkSlabMarked">
+			<section id="sectProfileOther">
+				<h2>Profile & Other Selections</h2>
+				
 				<label for="chkStandard">Standard</label><input type="checkbox" name="chkStandard">
 				
 				<label for="chkPrem txtPrem">Prem.</label><input type="text" name="txtPrem"><input type="checkbox" name="chkPrem">
@@ -103,14 +174,14 @@
 				<label for="chkBarSplash">Bar Splash:</label><input type="checkbox">
 				
 				<div class="overhangs">
-					<h2>Overhang (Per Customer)</h2>
+					<h3>Overhang (Per Customer)</h3>
 					<label for="txtBar">Bar</label><input type="text" name="txtBar">
 					<label for="txtIsland">Island</label><input type="text" name="txtIsland">
 				</div>
 			</section>
 			
-			<section class="Kitchen">
-				<h1>Kitchen</h1>
+			<section>
+				<h2>Kitchen</h2>
 				<label for="txtSink">Sink:</label><input type="text" name="txtSink">
 				<label for="txtGrids">Grids</label><input type="text" name="txtGrids">
 				<label for="txtStrainer">Strainer:</label><input type="text" name="txtStrainer">
@@ -126,11 +197,11 @@
 			<button type="submit">Save Section</button>
 		</fieldset>
 		
-		<h3>Installation Details</h3><br>
+		<h1>Installation Details</h1><br>
 		<fieldset class="InstalDetails">
 			
-			<section class="Vanity">
-				<h1>Vanity, Cut</h1>
+			<section>
+				<h2>Vanity, Cut</h2>
 				<!--check-->
 				<label for="selSink">Sink:</label><select name="selSink">
 					<option value="1">1</option>
@@ -155,19 +226,19 @@
 				
 		</fieldset>
 		
-		<h3>Estimate</h3><br>
+		<h1>Estimate</h1><br>
 		<fieldset class="Estimate">
 			
 			<button type="submit">Save Section</button>
 		</fieldset>
 		
-		<h3>Schedule</h3><br>
+		<h1>Schedule</h1><br>
 		<fieldset class="Schedule">
 			
 			<button type="submit">Save Section</button>
 		</fieldset>
 		
-		<h3>Comments</h3><br>
+		<h1>Comments</h1><br>
 		<fieldset class="Comments">
 			
 			<button type="submit">Save Section</button>
@@ -177,6 +248,20 @@
 	</form>
 	
 	<script src="Scripts/ShowHide-Cli.js" name="ShowHide-CliEdit"></script>
+	
+	<script name="hiddenOnes">
+	$(document).ready(function(){
+		$(".HiderCheck").next().hide();
+		
+		$(".HiderCheck").change(function(){
+			if(this.checked)
+				$(this).next().show();
+			else
+				$(this).next().hide();
+		});
+	});
+	</script>
+
 	
 </body>
 </html>
