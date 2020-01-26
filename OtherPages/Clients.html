@@ -1,12 +1,11 @@
-
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Global Natural Stones</title>
+		<title>Global Natural Stones</title>
 			
-		<link rel="stylesheet" href="../Stylesheets/Reset.css" type="text/css">
+		<link rel="stylesheet" href="../Stylesheets/Reset.css" type="text/css" />
 		<link rel="stylesheet" href="../Stylesheets/MainStyles.css" type="text/css"/>
 		<link rel="stylesheet" href="../JQUI/jquery-ui.css"/>
     	
@@ -21,21 +20,9 @@
 		
 		<script type="text/javascript" src="../JQUI/external/jquery/jquery.js"></script>
 		<script type="text/javascript" src="../JQUI/jquery-ui.js"></script>
-		<script name="JQ button">
-			//
-			$(document).ready(function(){
-				//$(".SortBy").find("button").button();				
-			});
-		</script>
 		
-		<style>
-			#CliSortBy button{
-				height: 1.8em;
-				width: auto;
-				font-size: 1em;
-				padding: .4em
-			}
-		</style>
+		
+
 	</head>
 
 	<body>
@@ -49,7 +36,7 @@
 					
 					<div class="SmallCategories">
 						<h2>View clients by...</h2>											
-						<button class="SmallCatButtons Basic neat-button"  id="CursorForBtn">Basic</button>
+						<button class="SmallCatButtons Basic neat-button">Basic</button>
 						<button class="SmallCatButtons outTemplate neat-button">Waiting for Template</button>
 						<button class="SmallCatButtons gotTemplate neat-button">Received Templates</button>
 						<button class="SmallCatButtons prepareInvoice neat-button">Prepare Invoice</button>
@@ -64,7 +51,7 @@
 					
 
 					<form>
-						<button id="AddClient">+ Add Client</button>
+						<button id="AddClient" class="GreenAddRemove">+ Add Client</button>
 					</form>
 				</nav>				
 			</aside>
@@ -75,9 +62,17 @@
 					<!--each li is a client-->
 					<div class="sectionHeading">
 						<h1 id="sectionTitle">Basic</h1>
-						<p>Sorted by: Newest to Oldest<i></i></p>
+						<p> Sort by: 
+							<select id="SortBy">
+								<option value="New" selected>Newest to Oldest</option>
+								<option value="Old">Oldest to Newest</option>
+								<option value="FirstName">First Name</option>
+								<option value="LastName">Last Name</option>
+							</select>
+						</p>
 					</div>
 					<hr>
+					
 					<li class="Client">
 						<section class="ListHead">
 							<h4>Joe Johnson</h4>
@@ -116,48 +111,50 @@
 						</section>
 					</li>
 					
-          <li class="Client">
-					<section class="ListHead">
-						<h4>Joe</h4>
-						<h4>Johnson</h4>
-						
-						<div class="CHeadTopLinks ">
-							<div>
-								<button class="btnShowInfo">Show All</button>
-								<button class="btnEditInfo">Edit</a>
+					<li class="Client">
+						<section class="ListHead">
+							<h4>Joe</h4>
+							<h4>Johnson</h4>
+							
+							<div class="CHeadTopLinks ">
+								<div>
+									<button class="btnShowInfo">Show All</button>
+									<button class="btnEditInfo">Edit</a>
+								</div>
 							</div>
-						</div>
-					</section>
-					
-					<section class="ClientInfo">
-						<nav class="SmallCategories">
-							<button class="SmallCatButtons Basic">Basic</button>
-							<button class="SmallCatButtons gotTemplate">Templates</button>
-							<button class="SmallCatButtons outInvoice">Invoice</button>
-							<button class="SmallCatButtons scheduleInstal">Scheduled Installation</button>
-							<button class="SmallCatButtons Comments">Comments</button>
-						</nav>
+						</section>
 						
-						<div class="ClientData">
-							<span class="Info"><h5>Phone:</h5><p class="CPhone">(478) 999-9999</p></span>
-							<span class="Info"><h5>Email:</h5><p class="CEmail">JimmyJohJohnson@email.com</p></span>
+						<section class="ClientInfo">
+							<nav class="SmallCategories">
+								<button class="SmallCatButtons Basic">Basic</button>
+								<button class="SmallCatButtons gotTemplate">Templates</button>
+								<button class="SmallCatButtons outInvoice">Invoice</button>
+								<button class="SmallCatButtons scheduleInstal">Scheduled Installation</button>
+								<button class="SmallCatButtons Comments">Comments</button>
+							</nav>
 							
-							<span class="Info"><h5>Address:</h5><p class="CAddress">123 Rainbow Road</p></span>
-							<span class="Info"><h5>City:</h5><p class="CCity">Dayton</p></span>
-							<span class="Info"><h5>State:</h5><p class="CState">OH</p></span>
-							<span class="Info"><h5>Zip:</h5><p>12345</p></span>
+							<div class="ClientData">
+								<span class="Info"><h5>Phone:</h5><p class="CPhone">(478) 999-9999</p></span>
+								<span class="Info"><h5>Email:</h5><p class="CEmail">JimmyJohJohnson@email.com</p></span>
+								
+								<span class="Info"><h5>Address:</h5><p class="CAddress">123 Rainbow Road</p></span>
+								<span class="Info"><h5>City:</h5><p class="CCity">Dayton</p></span>
+								<span class="Info"><h5>State:</h5><p class="CState">OH</p></span>
+								<span class="Info"><h5>Zip:</h5><p>12345</p></span>
+								
+								<span class="Info"><h5>Projects:</h5><p>Cabinet, Appliances, Floor</p></span>
+							</div>
 							
-							<span class="Info"><h5>Projects:</h5><p>Cabinet, Appliances, Floor</p></span>
-						</div>
-						
-						<button class="ClientNextPhase">Move client to next phase</button>
-						
-					</section>
-				</li>
+							<button class="ClientNextPhase">Move client to next phase</button>
+							
+						</section>
+					</li>
 					
 				</ul>
 			</main>
     </div>
+	
+		<script name="SortFunctions" src="Scripts/SortDisplayFunctions.js"></script>
      
 		<script name="MakeNewWindow-ClientMoreInfo">
 		
@@ -227,53 +224,59 @@
 			
 			//jquery, give all butons stage attr and handle clicking
 			$(document).ready(function(){
-				/*
-				//cursor DOM object for buttons
-				let cursor = $("<div id='CursorForBtn'>&nbsp;</div>");
-				//make cursor a triangle using css
-				$(cursor).css({
-					/*"width": 0,
-					"height": 0,
-					"border-style": "solid",
-					"border-width": "14px 0 14px 25px",
-					"border-color": "transparent transparent transparent rgb(243,243,243)",
-					"float": "left",
-					"margin-right": "15px"
-					
-					"width": 0,
-					"height": 0,
-					"border-top": "20px solid transparent",
-					"border-left": "30px solid #8f2831",
-					"border-bottom": "20px solid transparent",
-					
-					"position": "absolute",
-					"left": 0
-				});
-				$(cursor).insertBefore("#ClientCategories button.Basic");
-				*/
+
 				//fill buttons with stage info
 				let btnNum = 1;
 				$(".SmallCatButtons").each(function(){
 					$(this).attr("Stage", btnNum++);
 				});
 				
-				//when the button is clicked, fill the main and insert cursor
+				
+				//when the button is clicked, fill the main
 				$("aside .SmallCatButtons").click(function(){
-					$("#CursorForBtn").removeAttr("id");
-					$(this).attr("id", "CursorForBtn");
 					$("#sectionTitle").text($(this).text());
+					currentStageForm = $(this).attr("stage");
+					
 					//populate main with the stage value of the button
-					populateMain(
-						$(this).attr("stage")
-					);
-					
-					
+					populateMain(currentStageForm);
+							
 				});
+				
+				//jQUI sort by combo box
+				$("#SortBy").selectmenu({
+					width: 200,
+					  classes: {
+						"ui-selectmenu-button": "custom-clear",
+						"ui-selectmenu-text": "custom-underline",
+						"ui-selectmenu-button-closed": "custom-clear"
+					  },
+				
+					change: function(event, data){
+						switch (data.item.value){
+							case "New":
+								sortByNewest(AllClients);
+								break;
+							case "Old":
+								sortByOldest(AllClients);
+								break;
+							case "FirstName":
+								sortByFirstName(AllClients);
+								break;
+							case "LastName":
+								sortByLastName(AllClients);
+								break;
+						}
+						
+						populateMain(currentStageForm);
+					}
+				});	
+				
 			});
 			
 			
 
 		</script>
+		
 		
 		<script name="NavigateClients">
 			$(document).ready(function(){
@@ -293,25 +296,25 @@
 					let strAClass = "SmallCatButtons "; //to hold html class name
 					let ThisClientData = $(ThisClientInfo).find(".ClientData");
 					
-					if ($(this).attr("class") == strAClass + "gotTemplate"){
+					if ($(this).hasClass("gotTemplate")){
 						//display Template
 						console.log("client template is displayed");
 						
 						$("<p>Template stuff</p>").hide().appendTo(ThisClientData).fadeIn(CDATA_FADESPEED);
 					}
-					else if ($(this).attr("class") == strAClass + "outInvoice"){
+					else if ($(this).hasClass("outInvoice")){
 						//display Invoice
 						console.log("client invoice is displayed");
 						
 						$("<p>Invoice stuff</p>").hide().appendTo(ThisClientData).fadeIn(CDATA_FADESPEED);
 					}
-					else if ($(this).attr("class") == strAClass + "scheduleInstal"){
+					else if ($(this).hasClass("scheduleInstal")){
 						//display install stuff
 						console.log("client install is displayed");
 						
 						$("<p>Installation stuff</p>").hide().appendTo(ThisClientData).fadeIn(CDATA_FADESPEED);
 					}
-					else if ($(this).attr("class") == strAClass + "Comments"){
+					else if ($(this).hasClass("Comments")){
 						//display install stuff
 						console.log("client comments are displayed");
 						

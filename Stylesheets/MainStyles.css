@@ -35,6 +35,17 @@ a:click{
 	border-radius: 4px;
 }
 
+.custom-clear{
+	background-color: rgba(0,0,0,0);
+}
+.custom-underline{
+	text-decoration: underline;
+}
+
+.ui-button:hover, .ui-button:focus{
+	background-color: rgba(0,0,0,.05);
+}
+
 /*******
 	LOGIN
 **********/
@@ -142,7 +153,7 @@ form{
 	display: flex;
 	justify-content: center;
 }
-#AddClient{
+.GreenAddRemove{
 	background: #32c754;
 	margin: 10px;
 	padding: 10px;
@@ -151,12 +162,12 @@ form{
 	font-weight: 600;
 	border-radius: 2px;
 }
-#AddClient:hover{
+.GreenAddRemove:hover{
 	cursor: pointer;
 	background: linear-gradient(180deg, #32c754, #26a143 90%);
 }
 
-#AddClient span{
+.GreenAddRemove span{
 	padding: 2px 5px 3px 5px;
 	border: 1px solid rgb(180,180,180);
 }
