@@ -216,17 +216,7 @@ form{
 	color: #ffffff;
 	font-weight: 500;
 }
-/*
-.cursor{
-	width: 0;
-	height: 0;
-	border-style: solid;
-	border-width: 14px 0 14px 25px;
-	border-color: transparent transparent transparent white;
-	float: left;
-	margin-right: 10px;
-}
-*/
+
 
 /***************
 	ARTICLE accounts page
@@ -234,20 +224,21 @@ form{
 
 article{
 	width: 100%;
-	height: 40px;
+	height: auto;
 }
 
 article .AddRemove{
 	width: 30%;
-	background-color: rgb(199,235,250);
+	background-color: #3d577a;
 	float: left;
 	padding: 10px;
 }
 
 article nav.SortBy{
 	float: left;
-	width: calc(70% - 20px);
+	width: auto;
 	margin: auto;
+	padding: 15px;
 }
 
 /*********

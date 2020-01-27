@@ -8,6 +8,7 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 	
+	<link rel="stylesheet" href="../Stylesheets/Reset.css" type="text/css"/>
 	<link rel="stylesheet" href="../Stylesheets/extraForms.css" type="text/css"/>
 	<link rel="stylesheet" href="../JQUI/jquery-ui.css"/>
 	
@@ -31,8 +32,8 @@
 			//border-bottom: 0px;
 		}
 		
-		input, select{
-			margin-right: 30px;
+		label{
+			margin-left: 30px;
 		}
 
 	</style>
@@ -165,32 +166,34 @@
 			<section id="sectProfileOther">
 				<h2>Profile & Other Selections</h2>
 				
-				<label for="chkStandard">Standard</label><input type="checkbox" name="chkStandard">
+				<label for="radStandard">Standard</label><input type="radio" name="radCut" id="radStandard" value="Standard">
 				
-				<label for="chkPrem txtPrem">Prem.</label><input type="text" name="txtPrem"><input type="checkbox" name="chkPrem">
-				<label for="chkRadius numRadius">Radius</label><input type="number" name="numRadius"><input type="checkbox" name="chkRadius">
+				<label for="radRadius numRadius">Radius</label><input type="radio" name="radCut" id="radRadius" class="HiderRadio"><input title="Enter the length in feet" type="number" name="numRadius">
 				
-				<label for="chkBackSplash">Back Splash:</label><input type="checkbox">
-				<label for="chkBarSplash">Bar Splash:</label><input type="checkbox">
+				<label for="radPrem cmbPrem">Premium</label><input type="radio" name="radCut" id="radPrem" class="HiderRadio" value="Premium">
+				<span>
+					<select id="cmbPrem" name="cmbPrem"> 
+						<option value="#123">#123</option>
+						<option value="#456">#456</option>
+					</select>
+					<input type="number" name="numPremLenght" title="Enter the length in feet" />
+				</span>
 				
-				<div class="overhangs">
-					<h3>Overhang (Per Customer)</h3>
-					<label for="txtBar">Bar</label><input type="text" name="txtBar">
-					<label for="txtIsland">Island</label><input type="text" name="txtIsland">
-				</div>
-			</section>
-			
-			<section>
-				<h2>Kitchen</h2>
-				<label for="txtSink">Sink:</label><input type="text" name="txtSink">
-				<label for="txtGrids">Grids</label><input type="text" name="txtGrids">
-				<label for="txtStrainer">Strainer:</label><input type="text" name="txtStrainer">
-				<label for="numFaucet">Faucet#:</label><input type="numer" name="numFaucet">
-				<label for="chkCutboard">CutBoard:</label><input type="checkbox">
-				<!--check-->
-				<label for="Package">Package</label><input type="">
-				<!--check-->
-				<label for="Disp">Display</label><input type="">
+				<br>
+				
+				<label for="cmbBackSplash">Back Splash:</label><select id="cmbBackSplash" name="cmbBackSplash">
+					<option value="Y">Y</option>
+					<option value="N">N</option>
+					<option value="O">Maybe</option>
+				</select>
+				
+				<label for="cmbBarSplash">Bar Splash:</label>
+				<select id="cmbBarSplash" name="cmbBarSplash">
+					<option value="Y">Y</option>
+					<option value="N">N</option>
+					<option value="O">Maybe</option>
+				</select>
+				
 			</section>
 			
 			
@@ -252,16 +255,32 @@
 	<script name="hiddenOnes">
 	$(document).ready(function(){
 		$(".HiderCheck").next().hide();
-		
+		$(".HiderRadio").next().hide();
+
 		$(".HiderCheck").change(function(){
 			if(this.checked)
 				$(this).next().show();
 			else
 				$(this).next().hide();
 		});
+		
+		$("input[type='radio']").change(function(){
+			let radioGroup = $(this).attr("name");
+			
+			$("input[name='" + radioGroup + "'].HiderRadio")
+			.each(function(){
+				$(this).next().hide();
+				
+				if(this.checked)
+					$(this).next().show();
+			});
+		});
 	});
 	</script>
 
+	<script name="nowrap">
+		//$("<br>").insertBefore("label");
+	</script>
 	
 </body>
 </html>
