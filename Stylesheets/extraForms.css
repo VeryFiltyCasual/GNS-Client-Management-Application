@@ -4,6 +4,25 @@ body{
 	padding: 15px;
 }
 
+.bigTextBox{
+	resize: both;
+	overflow: auto;
+	height: 100px;
+	width: 300px;
+}
+
+.labelfor-BigText{
+	vertical-align: top;
+}
+
+#NotesEstimates *{
+	vertical-align: top;
+}
+
+label{
+	margin-right: 4px;
+}
+
 fieldset{
 	margin-bottom: 24px;
 	background-color: #fff;
@@ -30,3 +49,4 @@ h2{
 	text-decoration: underline;
 	margin-bottom: .6em;
 }
+

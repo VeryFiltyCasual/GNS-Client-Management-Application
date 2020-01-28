@@ -200,51 +200,18 @@
 			<button type="submit">Save Section</button>
 		</fieldset>
 		
-		<h1>Installation Details</h1><br>
-		<fieldset class="InstalDetails">
+		<h1>Notes/Estimates</h1><br>
+		<fieldset id="NotesEstimates">
+			<label for="chkRecievedLay">Client has Recieved Layout</label><input class="HiderCheck" type="checkbox" name="chkRecievedLay" id="chkRecievedLay"><input name="datLayoutRecieved" id="datLayoutRecieved" type="text">
+			
+			<label for="txtBigNotes" class="labelfor-BigText">Notes:</label><textarea class="bigTextBox" type="text" id="txtBigNotes" name="txtBigNotes"></textarea>
 			
 			<section>
-				<h2>Vanity, Cut</h2>
-				<!--check-->
-				<label for="selSink">Sink:</label><select name="selSink">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-				</select>
-				<label for="txtSinkType">Sink Type:</label><input type="text" name="txtSinkType">
-				<label for="numSinkQty">Qty:</label><input type="number" name="numSinkQty">
+				<h2>Follow-up</h2>
 				
-				<label for="numFaucet">Faucet#:</label><input type="number" name="numFaucet">
-				<label for="numFaucQty">Qty:</label><input type="number" name="numFaucQty">
-				
-				<!--check-->
-				<label for="txtDrain">Drain:</label><input type="text" name="txtDrain">
-				<label for="numFaucQty">Qty:</label><input type="number" name="numFaucQty">
+				<div>
+				</div>
 			</section>
-				
-			
-			<button type="submit">Save Section</button>
-				
-				
-		</fieldset>
-		
-		<h1>Estimate</h1><br>
-		<fieldset class="Estimate">
-			
-			<button type="submit">Save Section</button>
-		</fieldset>
-		
-		<h1>Schedule</h1><br>
-		<fieldset class="Schedule">
-			
-			<button type="submit">Save Section</button>
-		</fieldset>
-		
-		<h1>Comments</h1><br>
-		<fieldset class="Comments">
-			
-			<button type="submit">Save Section</button>
 		</fieldset>
 		
 		<button id="saveAll">Save All</button>
@@ -280,6 +247,15 @@
 
 	<script name="nowrap">
 		//$("<br>").insertBefore("label");
+	</script>
+	
+	<script name="jqui">
+	$(document).ready(function(){
+		$("#datLayoutRecieved").datepicker({
+			changeMonth: true,
+			changeYear: true,
+		});
+	});
 	</script>
 	
 </body>
