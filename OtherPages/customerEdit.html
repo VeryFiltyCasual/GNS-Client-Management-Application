@@ -168,9 +168,12 @@
 				
 				<label for="radStandard">Standard</label><input type="radio" name="radCut" id="radStandard" value="Standard">
 				
-				<label for="radRadius numRadius">Radius</label><input type="radio" name="radCut" id="radRadius" class="HiderRadio"><input title="Enter the length in feet" type="number" name="numRadius">
+				<label for="radRadius numRadius">Radius</label>
+				<input type="radio" name="radCut" id="radRadius" class="HiderRadio">
+				<input title="Enter the length in feet" type="number" name="numRadius">
 				
-				<label for="radPrem cmbPrem">Premium</label><input type="radio" name="radCut" id="radPrem" class="HiderRadio" value="Premium">
+				<label for="radPrem cmbPrem">Premium</label>
+				<input type="radio" name="radCut" id="radPrem" class="HiderRadio" value="Premium">
 				<span>
 					<select id="cmbPrem" name="cmbPrem"> 
 						<option value="#123">#123</option>
@@ -200,16 +203,93 @@
 			<button type="submit">Save Section</button>
 		</fieldset>
 		
+		<h1>Estimate</h1><br>
+		<fieldset class="Estimate">
+			<section>
+				<h2>Estimates</h2>
+				<label for="EstimateQuantity">Estimate Quantity: </label><input type="text" name="EstimateQuantity"/>
+				 
+				<label for="txtActualQuantity">Actual Quantity: </label><input type="text" name="txtActualQuantity"/>
+				 
+				<!-- 
+				Textarea can be manually or auto resized. Use class Resize
+				-->
+				<label for="txtEstimateTotal">Estimate $: </label><textarea name="txtEstimateTotal" id="EstimateTotal" class="Resize"></textarea>
+				 
+				<label for="txtInstallationNotes">Important Notes for Installation: </label><textarea name="txtInstallationNotes" id="InstallationNotes" class="Resize"></textarea>
+			</section>
+			<button type="submit">Save Section</button>
+		</fieldset>
+		
+		<h1>Dates</h1><br>
+		<fieldset id="Dates">
+			<section>
+				<h2>Schedule</h2>
+				<label for="txtTemplate">Template: </label><input type="text" name="txtTemplate" class="Datepick"/>
+				 
+				<label for="txtTear">Tear: </label><input type="text" name="txtTear" class="Datepick"/>
+				<label for="Con1">Contractor: </label><input type="checkbox" name="Con1" value="Contractor" class="Contractor"/>
+				 
+				<label for="txtBrackets">Brackets: </label><input type="text" name="txtBrackets" class="Datepick"/>
+				<label for="Con2">Contractor: </label><input type="checkbox" name="Con2" value="Contractor" class="Contractor"/>
+				 
+				<label for="txtInstall">Install/Drop: </label><input type="text" name="txtInstall" class="Datepick"/>
+				 
+				<label for="txtPlumb">Plumb: </label><input type="text" name="txtPlumb" class="Datepick"/>
+				<label for="Con3">Contractor: </label><input type="checkbox" name="Con3" value="Contractor" class="Contractor"/>
+				 
+			</section>
+			<section>
+				<h2>Customer/Title Info</h2>
+				<label for="txtInvoiceSent">Order Invoice Sent: </label><input type="text" name="txtInvoiceSent" class="Datepick"/>
+				 
+				<label for="txtConfirmationReceived">Order Confirmation Received: </label><input type="text" name="txtConfirmationReceived" class="Datepick"/>
+				 
+				<label for="txtServiceCall">Service Call: </label><input type="text" name="txtServiceCall" class="Datepick"/>
+				<label for="chkPic">Pic</label><input type="checkbox" name="chkPic"/>
+				 
+				<label for="txtServiceSchedule">Service Schedule: </label><input type="text" name="txtServiceSchedule" class="Datepick"/>
+				 
+				<!--
+				Only show if checked, use ShowHide class for what is being toggled, chkShowHide class for the checkbox
+				-->
+				<label for="chkCompleted">Service Completed: </label><input type="checkbox" name="chkCompleted" id="chkServiceCompleted" class="HiderCheck"/>
+				<input type="text" name="txtServiceCompleted" class="Datepick ShowHide" id="txtServiceCompleted" title="Date the service was completed"/>
+			</section>
+			<section>
+				<!-- 
+				Take data from earlier?
+				-->
+				<h2>Customer Picked Up</h2>
+				<label for="txtFaucet">Faucet: </label><input type="text" name="txtFaucet" class="Datepick"/>
+				 
+				<label for="txtGridSet">Grid Set: </label><input type="text" name="txtGridSet" class="Datepick"/>
+				 
+				<label for="txtStrainer">Strainer: </label><input type="text" name="txtStrainer" class="Datepick"/>
+				 
+				<label for="txtBrackets">Brackets: </label><input type="text" name="txtBrackets" class="Datepick"/>
+				 
+				<label for="txtCounters">Counters: </label><input type="text" name="txtCounters" class="Datepick"/>
+			</section>
+			
+			<button type="submit">Save Section</button>
+		</fieldset>
+		
 		<h1>Notes/Estimates</h1><br>
 		<fieldset id="NotesEstimates">
-			<label for="chkRecievedLay">Client has Recieved Layout</label><input class="HiderCheck" type="checkbox" name="chkRecievedLay" id="chkRecievedLay"><input name="datLayoutRecieved" id="datLayoutRecieved" type="text">
+			<label for="chkRecievedLay">Client has Recieved Layout</label><input class="HiderCheck" type="checkbox" name="chkRecievedLay" id="chkRecievedLay"><input name="datLayoutRecieved" id="datLayoutRecieved" class="Datepick" type="text">
 			
 			<label for="txtBigNotes" class="labelfor-BigText">Notes:</label><textarea class="bigTextBox" type="text" id="txtBigNotes" name="txtBigNotes"></textarea>
+			
 			
 			<section>
 				<h2>Follow-up</h2>
 				
-				<div>
+				<div id="ulFollowUp">
+					<ul>
+						<li>
+							<input type="text" class="Datepick"/> - <input type="text">
+						</li>
 				</div>
 			</section>
 		</fieldset>
@@ -242,16 +322,24 @@
 					$(this).next().show();
 			});
 		});
+		
+		// autoresize the textarea
+		$(".Resize").on('input', function() {
+			this.style.height = 'auto';
+			this.style.height =  (this.scrollHeight) + 'px';
+		});
 	});
 	</script>
 
 	<script name="nowrap">
 		//$("<br>").insertBefore("label");
+		$("<br>").insertBefore("#Dates label");
 	</script>
 	
 	<script name="jqui">
 	$(document).ready(function(){
-		$("#datLayoutRecieved").datepicker({
+		
+		$(".Datepick").datepicker({
 			changeMonth: true,
 			changeYear: true,
 		});
