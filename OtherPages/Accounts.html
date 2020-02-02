@@ -4,27 +4,44 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Global Natural Stones</title>
-			
+		
+		<!-- Our Styles -->
 		<link rel="stylesheet" href="../Stylesheets/Reset.css" type="text/css">
 		<link rel="stylesheet" href="../Stylesheets/MainStyles.css" type="text/css"/>
 		<link rel="stylesheet" href="../JQUI/jquery-ui.css"/>
-    	
+
+		<!-- Icons -->
+		<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		
+		<!-- jQuery -->
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 		
+		<!-- jQuery UI -->
 		<script type="text/javascript" src="../JQUI/external/jquery/jquery.js"></script>
 		<script type="text/javascript" src="../JQUI/jquery-ui.js"></script>
 	</head>
 	  
 	<body>
 		<script src="MainHeader.js"></script>
-		<script>display("Accounts");</script>
+		<script>
+			display("Accounts");
+			const {ipcRenderer} = require("electron");
+			//Update the profile picture
+			window.onload = () => {
+				ipcRenderer.send("user");
+			}
+			ipcRenderer.on("getUser", (event, user) => {
+				document.getElementById('profilePic').setAttribute('src',user.picture);
+			});
+		</script>
 		
 		<!-- holds the navs right under the header -->
 		<article>
 			<nav class="AddRemove">
-				<button class="GreenAddRemove">+ Add</button>
-				<button class="GreenAddRemove">- Remove</button>
+				<button class="GreenAdd">+ Add</button>
+				<button class="RedRemove">- Remove</button>
 			</nav>
 			
 			<nav class="SortBy">
@@ -70,5 +87,6 @@
 				}
 			});
 		});
+		</script>
 	</body>
 </html>

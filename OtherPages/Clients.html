@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -11,7 +11,10 @@
     	
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-		
+
+		<!-- Icons -->
+		<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		
 		<script name="TestData" src="Scripts/TestDatabase.js"></script>	
 		<script name="ConstVars">
@@ -51,7 +54,7 @@
 					
 
 					<form>
-						<button id="AddClient" class="GreenAddRemove">+ Add Client</button>
+						<button id="AddClient" class="GreenAdd">+ Add Client</button>
 					</form>
 				</nav>				
 			</aside>
@@ -171,6 +174,14 @@
 			//send the 'display-client-edit' command to the main js (will display new page with client	info)
 			//needs id
 			ipcRenderer.send("display-client-edit", 1);
+		});
+
+		//Update the profile picture
+		window.onload = () => {
+			ipcRenderer.send("user");
+		}
+		ipcRenderer.on("getUser", (event, user) => {
+			document.getElementById('profilePic').setAttribute('src',user.picture);
 		});
 		</script>
 		

@@ -33,7 +33,9 @@ ipcMain.on('display-client-info', (event, id) => {
   runCustInfo(); //run custEdit (display a webpage)
   cliId_ExtraPage = id;
 })
-
+ipcMain.on('user', async () => {
+  win.main.webContents.send("getUser", await userAuth.getUser());
+});
 ipcMain.on('getID', (event, arg) => {
  
   event.returnValue = cliId_ExtraPage;
@@ -132,8 +134,6 @@ function runCustInfo(id){
 //Creates the client view
 function createClientViewer({user, tokens}) {
   win.main.loadURL(`file://${__dirname}/OtherPages/Clients.html`);
-  
-  win.main.webContents.executeJavaScript(`document.getElementById('profilePic').setAttribute('src','${user.picture}')`);
 
   // Create a new websocket client
   const client = new WebSocket('ws://localhost:3000', {

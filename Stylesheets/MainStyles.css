@@ -153,8 +153,7 @@ form{
 	display: flex;
 	justify-content: center;
 }
-.GreenAddRemove{
-	background: #32c754;
+.GreenAdd, .RedRemove{
 	margin: 10px;
 	padding: 10px;
 	border: none;
@@ -162,12 +161,21 @@ form{
 	font-weight: 600;
 	border-radius: 2px;
 }
-.GreenAddRemove:hover{
+.GreenAdd:hover{
 	cursor: pointer;
 	background: linear-gradient(180deg, #32c754, #26a143 90%);
 }
-
-.GreenAddRemove span{
+.GreenAdd {
+	background: #32c754;
+}
+.RedRemove {
+	background: #EA2027;
+}
+.RedRemove:hover{
+	cursor: pointer;
+	background: linear-gradient(180deg, #EA2027, rgb(204, 27, 33) 90%);
+}
+.GreenAdd span, .RedRemove span{
 	padding: 2px 5px 3px 5px;
 	border: 1px solid rgb(180,180,180);
 }
@@ -269,14 +277,7 @@ main ul li{
 	font-size: 30px;
 	font-weight: 500;
 }
-i {
-	border: solid black;
-	border-width: 0 2px 2px 0;
-	display: inline-block;
-	padding: 3px;
-	margin: 4px;
-	transform: rotate(45deg);
-}
+
 .ListHead{
 	white-space: nowrap;
 	background-color: #ffffff;
