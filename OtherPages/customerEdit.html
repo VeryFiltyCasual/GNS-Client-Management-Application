@@ -204,7 +204,7 @@
 		</fieldset>
 		
 		<h1>Estimate</h1><br>
-		<fieldset class="Estimate">
+		<fieldset id="Estimate">
 			<section>
 				<h2>Estimates</h2>
 				<label for="EstimateQuantity">Estimate Quantity: </label><input type="text" name="EstimateQuantity"/>
@@ -288,14 +288,19 @@
 				<div id="ulFollowUp">
 					<ul>
 						<li>
-							<input type="text" class="Datepick"/> - <input type="text">
+							<input type="text" class="Datepick"/> - <input type="text" />
 						</li>
+						<li>
+							<input type="text" class="Datepick"/> - <input type="text" />
+						</li>
+					</ul>
 				</div>
 			</section>
 		</fieldset>
 		
 		<button id="saveAll">Save All</button>
 	</form>
+	
 	
 	<script src="Scripts/ShowHide-Cli.js" name="ShowHide-CliEdit"></script>
 	
@@ -343,6 +348,8 @@
 			changeMonth: true,
 			changeYear: true,
 		});
+		
+		$(".Datepick").attr("placeholder", "Datepicker").attr("readonly", "true");
 	});
 	</script>
 	
