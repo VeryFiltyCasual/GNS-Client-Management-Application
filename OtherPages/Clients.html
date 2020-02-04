@@ -149,7 +149,7 @@
 		<script name="ExpandListBodyClick">
 		
 		$(document).ready( function() {
-			
+	
 			//displays the client information when clicking on an li
 			$(".ListHead").click(function() {			
 				var thisClient = $(this).parent();
@@ -159,10 +159,10 @@
 				$('.Client').not(thisClient).find(".CHeadTopLinks").hide(400);
 				
 				//opens the clicked client info
-				$(thisClient).find(".ListBody").animate({height: "toggle"});
+				$(thisClient).find(".ListBody").slideToggle(400);
 				$(thisClient).find(".CHeadTopLinks").toggle(400);
 			});
-		
+			
 		});
 		</script>
 		
@@ -193,9 +193,10 @@
 				$("<label class='info'>Projects: <p>" + projects + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 			}
 			
+			//makes single client html
 			function makeAClient(client){
 				let htmlLI = $('<li class="Client"></li>'); //make li
-				let htmlLiBody = $("<section class='ListBody'></section>").append(html_ButtonsNav).append('<div class="ClientData"></div>').append("<p>Yeet</p>"); //make ListBody
+				let htmlLiBody = $("<section class='ListBody'></section>").append(html_ButtonsNav).append('<div class="ClientData"></div>'); //make ListBody
 				
 				//make the head
 				let htmlLiHead = $("<section class='ListHead'></section>")
@@ -203,7 +204,9 @@
 					.append("<p class='cliID'>" + client.ClID + "</p>")
 					.append("<p>Joined " + formatDate(client.DateAdded) + "</p>")
 					.append(html_TopNav);
-					
+				
+				populateBasic(client.Basic, htmlLiBody);
+				
 				return $(htmlLI).append(htmlLiHead).append(htmlLiBody);
 			}
 			
@@ -222,8 +225,10 @@
 				for (Client of AllClients){
 					if (Client.Stage == currentStage){				
 						$("#ClientList").append(makeAClient(Client));
+						
 					}
 				}
+				
 			}			
 			populateMain(1);
 			
