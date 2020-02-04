@@ -72,9 +72,9 @@
 					
 					<li class="Client">
 						<section class="ListHead">
-							<h4>Joe Johnson</h4>
+							<h4 class="Name">Joe Johnson</h4>
 							<p class="cliID">1</p>
-							<p>Joined 22 January, 2020</p>
+							<p class="Joined">Joined 22 January, 2020</p>
 							<div class="CHeadTopLinks ">
 								<div>
 									<button class="btnShowInfo">Show All</button>
@@ -83,7 +83,7 @@
 							</div>
 						</section>
 						
-						<section class="ClientInfo">
+						<section class="ListBody">
 							<nav class="SmallCategories">
 								<button class="SmallCatButtons Basic">Basic</button>
 								<button class="SmallCatButtons Installation">Installation</button>
@@ -146,7 +146,7 @@
 		});
 		</script>
 		
-		<script name="ExpandClientInfoClick">
+		<script name="ExpandListBodyClick">
 		
 		$(document).ready( function() {
 			
@@ -155,11 +155,11 @@
 				var thisClient = $(this).parent();
 				
 				//closes all other clint info's				
-				$('.Client').not(thisClient).find(".ClientInfo").hide(400);
+				$('.Client').not(thisClient).find(".ListBody").hide(400);
 				$('.Client').not(thisClient).find(".CHeadTopLinks").hide(400);
 				
 				//opens the clicked client info
-				$(thisClient).find(".ClientInfo").animate({height: "toggle"});
+				$(thisClient).find(".ListBody").animate({height: "toggle"});
 				$(thisClient).find(".CHeadTopLinks").toggle(400);
 			});
 		
@@ -167,8 +167,11 @@
 		</script>
 		
 		<script name="DisplayClients">
-			/* ANDREW NEEDS CODE IN PopulateMain FUNCTION */
 			let currentStageForm = 1;
+			
+			//define htmls
+			let html_ButtonsNav = $('<nav class="SmallCategories"><button class="SmallCatButtons Basic">Basic</button><button class="SmallCatButtons Installation">Installation</button><button class="SmallCatButtons Estimate">Estimate/Balance</button><button class="SmallCatButtons Availability">Availability</button><button class="SmallCatButtons Comments">Comments</button></nav>');			
+			let html_TopNav = $('<div class="CHeadTopLinks "><div><button class="btnShowInfo">Show All</button><button class="btnEditInfo">Edit</a></div></div>');
 			
 			//populate the basic client section
 			function populateBasic(clientBas, thisCliInfo){
@@ -190,23 +193,35 @@
 				$("<label class='info'>Projects: <p>" + projects + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 			}
 			
+			function makeAClient(client){
+				let htmlLI = $('<li class="Client"></li>'); //make li
+				let htmlLiBody = $("<section class='ListBody'></section>").append(html_ButtonsNav).append('<div class="ClientData"></div>').append("<p>Yeet</p>"); //make ListBody
+				
+				//make the head
+				let htmlLiHead = $("<section class='ListHead'></section>")
+					.append("<h4>" + client.Fname + " " + client.Lname + "</h4>")
+					.append("<p class='cliID'>" + client.ClID + "</p>")
+					.append("<p>Joined " + formatDate(client.DateAdded) + "</p>")
+					.append(html_TopNav);
+					
+				return $(htmlLI).append(htmlLiHead).append(htmlLiBody);
+			}
+			
 			//populate basic form
 			function populateMain(currentStage){
 				console.log("Loading clients from stage " + currentStage);
 				var Client;
 				
 				//remove clients in the form already
-				/* ADD FOLLOWING ONCE ANDREW'S CODE IS IMPLEMENTED */
-				/*$("main").children().fadeOut(
+				$(".Client").fadeOut(
 					120, 
 					function() {$(this).remove();}
 				
-				);*/
+				);
 			
 				for (Client of AllClients){
-					if (Client.Stage == currentStage){
-					/* SHOULD BE REPLACED WITH ANDREW'S CODE */
-						console.log(Client.Fname + " is printed.");
+					if (Client.Stage == currentStage){				
+						$("#ClientList").append(makeAClient(Client));
 					}
 				}
 			}			
@@ -272,17 +287,17 @@
 		<script name="NavigateClients">
 			$(document).ready(function(){
 			
-				$(".ClientInfo .SmallCategories button").click(function(){
-					let ThisClientInfo = $(this).parent().parent();
+				$(".ListBody .SmallCategories button").click(function(){
+					let ThisListBody = $(this).parent().parent();
 					
 					//remove the things already there
-					$(ThisClientInfo).find(".ClientData").children().fadeOut(
+					$(ThisListBody).find(".ClientData").children().fadeOut(
 						CDATA_FADESPEED, 
 						function() {$(this).remove();}
 					);
 					
 					//fill info 
-					let ThisClientData = $(ThisClientInfo).find(".ClientData");
+					let ThisClientData = $(ThisListBody).find(".ClientData");
 					
 					if ($(this).hasClass("Installation")){
 						//display Template
@@ -310,7 +325,7 @@
 					}
 					else {
 						//display basic (if none other found)
-						populateBasic(AllClients[ThisClientInfo.parent().find(".cliID").text()].Basic, ThisClientInfo);
+						populateBasic(AllClients[ThisListBody.parent().find(".cliID").text()].Basic, ThisListBody);
 					}
 				});
 				

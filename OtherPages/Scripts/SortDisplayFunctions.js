@@ -1,11 +1,11 @@
 /*********MISC FUNCTION********/
-//does not accurately determine date, but accurately puts dates in order
-function findDateBool(Date){
-	var blDate = Date.Year;
-	blDate += Date.Month / 12;
-	blDate += Date.Day / 365;
+//return date string in m/d/yyyy
+function formatDate(dateObj){
+	m = dateObj.getMonth() + 1;
+	d = dateObj.getDate();
+	yyyy = dateObj.getFullYear();
 	
-	return blDate;
+	return m + "/" + d + "/" + yyyy;
 }
 
 //make a string array one string
@@ -53,34 +53,15 @@ function sortByID(CliArray){
 }
 function sortByOldest(CliArray){
 	CliArray.sort(function (a,b){
-		if (findDateBool(a.DateAdded) < findDateBool(b.DateAdded)) return -1;
-		if (findDateBool(a.DateAdded) > findDateBool(b.DateAdded)) return 1;
+		if ((a.DateAdded.getTime()) < findDateBool(b.DateAdded.getTime())) return -1;
+		if (findDateBool(a.DateAdded.getTime()) > findDateBool(b.DateAdded.getTime())) return 1;
 	});
 }
 function sortByNewest(CliArray){
 	CliArray.sort(function (a,b){
-		if (findDateBool(a.DateAdded) < findDateBool(b.DateAdded)) return 1;
-		if (findDateBool(a.DateAdded) > findDateBool(b.DateAdded)) return -1;
+		if (findDateBool(a.DateAdded.getTime()) < findDateBool(b.DateAdded.getTime())) return 1;
+		if (findDateBool(a.DateAdded.getTime()) > findDateBool(b.DateAdded.getTime())) return -1;
 	});
 }
 
-/********populate basic form********/
-function populateMain(currentStage, CliArray){
-	console.log("Loading clients from stage " + currentStage);
-	var Client;
-	
-	//remove clients in the form already
-	/* ADD FOLLOWING ONCE ANDREW'S CODE IS IMPLEMENTED */
-	/*$("#ClientList").children().fadeOut(
-		120, 
-		function() {$(this).remove();}
-	
-	);*/
-
-	for (Client of CliArray){
-		if (Client.Stage == currentStage){
-		/* SHOULD BE REPLACED WITH ANDREW'S CODE */
-			console.log(Client.Fname + " is printed.");
-		}
-	}
-}			
+		

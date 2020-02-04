@@ -6,11 +6,7 @@ var AllClients = [
 		"Lname" : "Johnson",
 		"Stage" : 2,
 		
-		"DateAdded": {
-			"Day": 2,
-			"Month": 5,
-			"Year": 2004,
-		},
+		"DateAdded": new Date(2004, 5, 2),
 		
 		"Basic" : {
 			"Phone" : "14789999999",
@@ -42,11 +38,7 @@ var AllClients = [
 		"Lname" : "Oosterban",
 		"Stage" : 1,
 		
-		"DateAdded": {
-			"Day": 4,
-			"Month": 11,
-			"Year": 2019,
-		},
+		"DateAdded": new Date(2019, 10, 4),
 		
 		"Basic" : {
 			"Phone" : "14789999999",
@@ -78,11 +70,7 @@ var AllClients = [
 		"Lname" : "Zorts",
 		"Stage" : 2,
 		
-		"DateAdded": {
-			"Day": 2,
-			"Month": 5,
-			"Year": 2020,
-		},
+		"DateAdded": new Date(2020, 0, 16),
 		
 		"Basic" : {
 			"Phone" : "14789999999",
@@ -114,11 +102,7 @@ var AllClients = [
 		"Lname" : "Backer",
 		"Stage" : 1,
 		
-		"DateAdded": {
-			"Day": 2,
-			"Month": 12,
-			"Year": 2019,
-		},
+		"DateAdded": new Date(2019, 11, 3),
 		
 		"Basic" : {
 			"Phone" : "14789999999",
