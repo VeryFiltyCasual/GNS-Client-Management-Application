@@ -125,16 +125,16 @@
 			//send the 'display-client' command to the main js (will display new page with client info)
 			//needs id
 			let cliID = $(this).parent().parent().parent().find(".cliID").text();
-			let ThisClient = getClient(AllClients, cliID);
 			
-			
-			ipcRenderer.send("display-client-Info", 1);
+			ipcRenderer.send("display-client-Info", getClient(AllClients, cliID));
 		});
 		
 		document.querySelector(".btnEditInfo").addEventListener("click", function() {
-			//send the 'display-client-edit' command to the main js (will display new page with client	info)
+			//send the 'display-client-edit' command to the main js (will display new page with client info)
 			//needs id
-			ipcRenderer.send("display-client-edit", 1);
+			let cliID = $(this).parent().parent().parent().find(".cliID").text();
+			
+			ipcRenderer.send("display-client-edit", getClient(AllClients, cliID));
 		});
 
 		//Update the profile picture

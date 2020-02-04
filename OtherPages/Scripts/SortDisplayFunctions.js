@@ -21,17 +21,12 @@ function allinone(strArray){
 
 //return the client that maches the passed ID
 function getClient(CliArray, cliID){
-	let found = {};
-	
-	function checkID(client){
-		if(client.CLID == cliID){
-			found = client;
-		}
+	for (i = 0; i < CliArray.length; i++){
+		if (CliArray[i].ClID == cliID)
+			return CliArray[i];
 	}
 	
-	CliArray.forEach(checkID);
-	
-	return found;
+	return {};
 }
 
 

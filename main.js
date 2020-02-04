@@ -9,7 +9,7 @@ const { app, BrowserWindow, Menu, dialog} = electron;
 const { ipcMain } = electron;
 let win = { main: null, extra: null }; 
 
-let cliId_ExtraPage = 0;
+let client_ExtraPage = 0;
 /****************
 *****Windows*****
 *****************/
@@ -25,21 +25,23 @@ app.on('ready', async () => {
 ipcMain.on('display-client-edit', (event, id) => {
   prepareExtraWin();
   runCustEdit(id); //run custEdit (display a webpage)
-  cliId_ExtraPage = id;
+  client_ExtraPage = id;
 })
 
 ipcMain.on('display-client-info', (event, id) => {
   prepareExtraWin();
   runCustInfo(); //run custEdit (display a webpage)
-  cliId_ExtraPage = id;
+  client_ExtraPage = id;
 })
+
 ipcMain.on('user', async () => {
   win.main.webContents.send("getUser", await userAuth.getUser());
 });
+
 ipcMain.on('getID', (event, arg) => {
- 
-  event.returnValue = cliId_ExtraPage;
+  event.returnValue = client_ExtraPage;
 })
+
 //When the webpage sends the user auth code
 ipcMain.on('google', (event, code) => {
   userAuth.getAccessTokens(code);
