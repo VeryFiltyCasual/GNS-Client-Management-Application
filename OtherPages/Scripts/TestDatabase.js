@@ -4,7 +4,7 @@ var AllClients = [
 		"ClID" : 0,
 		"Fname" : "Joe",
 		"Lname" : "Johnson",
-		"Stage" : 1,
+		"Stage" : 2,
 		
 		"DateAdded": {
 			"Day": 2,
@@ -76,7 +76,7 @@ var AllClients = [
 		"ClID" : 2,
 		"Fname" : "Abby",
 		"Lname" : "Zorts",
-		"Stage" : 3,
+		"Stage" : 2,
 		
 		"DateAdded": {
 			"Day": 2,
@@ -112,7 +112,7 @@ var AllClients = [
 		"ClID" : 3,
 		"Fname" : "Zack",
 		"Lname" : "Backer",
-		"Stage" : 2,
+		"Stage" : 1,
 		
 		"DateAdded": {
 			"Day": 2,

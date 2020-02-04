@@ -1,4 +1,4 @@
-/*********DATE FUNCTION********/
+/*********MISC FUNCTION********/
 //does not accurately determine date, but accurately puts dates in order
 function findDateBool(Date){
 	var blDate = Date.Year;
@@ -6,6 +6,17 @@ function findDateBool(Date){
 	blDate += Date.Day / 365;
 	
 	return blDate;
+}
+
+//make a string array one string
+function allinone(strArray){
+	let holder = "";
+	strArray.forEach(myFunc);
+	
+	function myFunc(item){
+	holder += item + " ";}
+	
+	return holder;
 }
 
 
