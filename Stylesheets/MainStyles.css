@@ -21,6 +21,10 @@ button{
 button:focus {
 	outline: none;
 }
+button:hover{
+	background-color: rgba(0,0,0, .15);
+}
+
 a{
 	color: blue;
 }
@@ -219,11 +223,7 @@ form{
 	bottom: 0;
 	width: 100%;
 }
-#CursorForBtn {
-	background-color: #8f2831;
-	color: #ffffff;
-	font-weight: 500;
-}
+
 
 
 /***************

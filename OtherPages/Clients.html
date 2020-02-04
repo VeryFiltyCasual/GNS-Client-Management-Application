@@ -41,7 +41,7 @@
 						<h2>View clients by...</h2>											
 						<button class="SmallCatButtons neat-button">Stage 1</button>
 						<button class="SmallCatButtons  neat-button">Stage 2</button>
-						<button class="SmallCatButtons  neat-button">Archive</button>
+						<button class="SmallCatButtons  neat-button">Archived</button>
 						
 					</div>
 					
@@ -124,6 +124,10 @@
 		document.querySelector(".btnShowInfo").addEventListener("click", function() {
 			//send the 'display-client' command to the main js (will display new page with client info)
 			//needs id
+			let cliID = $(this).parent().parent().parent().find(".cliID").text();
+			let ThisClient = getClient(AllClients, cliID);
+			
+			
 			ipcRenderer.send("display-client-Info", 1);
 		});
 		

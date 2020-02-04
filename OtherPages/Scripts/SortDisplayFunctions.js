@@ -19,6 +19,21 @@ function allinone(strArray){
 	return holder;
 }
 
+//return the client that maches the passed ID
+function getClient(CliArray, cliID){
+	let found = {};
+	
+	function checkID(client){
+		if(client.CLID == cliID){
+			found = client;
+		}
+	}
+	
+	CliArray.forEach(checkID);
+	
+	return found;
+}
+
 
 /*************SORTS****************/
 function sortByFirstName(CliArray){
