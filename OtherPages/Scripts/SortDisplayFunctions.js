@@ -53,14 +53,14 @@ function sortByID(CliArray){
 }
 function sortByOldest(CliArray){
 	CliArray.sort(function (a,b){
-		if ((a.DateAdded.getTime()) < findDateBool(b.DateAdded.getTime())) return -1;
-		if (findDateBool(a.DateAdded.getTime()) > findDateBool(b.DateAdded.getTime())) return 1;
+		if (a.DateAdded.getTime() < b.DateAdded.getTime()) return -1;
+		if (a.DateAdded.getTime() > b.DateAdded.getTime()) return 1;
 	});
 }
 function sortByNewest(CliArray){
 	CliArray.sort(function (a,b){
-		if (findDateBool(a.DateAdded.getTime()) < findDateBool(b.DateAdded.getTime())) return 1;
-		if (findDateBool(a.DateAdded.getTime()) > findDateBool(b.DateAdded.getTime())) return -1;
+		if (a.DateAdded.getTime() < b.DateAdded.getTime()) return 1;
+		if (a.DateAdded.getTime() > b.DateAdded.getTime()) return -1;
 	});
 }
 

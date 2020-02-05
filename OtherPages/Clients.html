@@ -55,20 +55,22 @@
 			
 			<!--list of clients -->
 			<main>
+				<div class="sectionHeading">
+					<h1 id="sectionTitle">Stage 1</h1>
+					<p> Sort by: 
+						<select id="SortBy">
+							<option value="New" selected>Newest to Oldest</option>
+							<option value="Old">Oldest to Newest</option>
+							<option value="FirstName">First Name</option>
+							<option value="LastName">Last Name</option>
+						</select>
+					</p>
+				</div>
+				<hr>
+				
 				<ul id="ClientList">
 					<!--each li is a client-->
-					<div class="sectionHeading">
-						<h1 id="sectionTitle">Stage 1</h1>
-						<p> Sort by: 
-							<select id="SortBy">
-								<option value="New" selected>Newest to Oldest</option>
-								<option value="Old">Oldest to Newest</option>
-								<option value="FirstName">First Name</option>
-								<option value="LastName">Last Name</option>
-							</select>
-						</p>
-					</div>
-					<hr>
+					
 					
 					<li class="Client">
 						<section class="ListHead">
@@ -151,7 +153,7 @@
 		$(document).ready( function() {
 	
 			//displays the client information when clicking on an li
-			$(".ListHead").click(function() {			
+			$("#ClientList").on('click', ".ListHead", function() {			
 				var thisClient = $(this).parent();
 				
 				//closes all other clint info's				
@@ -216,20 +218,21 @@
 				var Client;
 				
 				//remove clients in the form already
-				$(".Client").fadeOut(
+				$(".Client").remove();
+				/*fadeOut(
 					120, 
 					function() {$(this).remove();}
 				
-				);
+				);*/
 			
 				for (Client of AllClients){
 					if (Client.Stage == currentStage){				
-						$("#ClientList").append(makeAClient(Client));
-						
+						$(makeAClient(Client)).hide().appendTo("#ClientList").fadeIn(600);						
 					}
 				}
 				
-			}			
+			}	
+			sortByNewest(AllClients);
 			populateMain(1);
 			
 			
@@ -287,8 +290,7 @@
 			
 
 		</script>
-		
-		
+			
 		<script name="NavigateClients">
 			$(document).ready(function(){
 			
