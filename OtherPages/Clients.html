@@ -172,8 +172,8 @@
 			let currentStageForm = 1;
 			
 			//define htmls
-			let html_ButtonsNav = $('<nav class="SmallCategories"><button class="SmallCatButtons Basic">Basic</button><button class="SmallCatButtons Installation">Installation</button><button class="SmallCatButtons Estimate">Estimate/Balance</button><button class="SmallCatButtons Availability">Availability</button><button class="SmallCatButtons Comments">Comments</button></nav>');			
-			let html_TopNav = $('<div class="CHeadTopLinks "><div><button class="btnShowInfo">Show All</button><button class="btnEditInfo">Edit</a></div></div>');
+			let html_ButtonsNav = '<nav class="SmallCategories"><button class="SmallCatButtons Basic">Basic</button><button class="SmallCatButtons Installation">Installation</button><button class="SmallCatButtons Estimate">Estimate/Balance</button><button class="SmallCatButtons Availability">Availability</button><button class="SmallCatButtons Comments">Comments</button></nav>';			
+			let html_TopNav = '<div class="CHeadTopLinks"><div><button class="btnShowInfo">Show All</button><button class="btnEditInfo">Edit</a></div></div>';
 			
 			//populate the basic client section
 			function populateBasic(clientBas, thisCliInfo){
@@ -294,7 +294,7 @@
 		<script name="NavigateClients">
 			$(document).ready(function(){
 			
-				$(".ListBody .SmallCategories button").click(function(){
+				$("#ClientList").on("click", ".ListBody .SmallCategories button", function(){
 					let ThisListBody = $(this).parent().parent();
 					
 					//remove the things already there

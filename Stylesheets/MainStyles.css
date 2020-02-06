@@ -333,29 +333,27 @@ main ul li{
 
 .ListBody .SmallCategories{
 	float: left;
+	background-color: #e1e1e1;
+
 }
 
 .ListBody .SmallCategories button {
 	padding: .7em;
-	background-color: #e1e1e1;
 	border-bottom: 1px solid rgb(160,160,160);
 	border-right: 1px solid rgb(180,180,180);
 	transition: 0.2s;
 }
-.ListBody .SmallCategories button:last-child {
-	border-bottom: none;
-}
+
 .ListBody .SmallCategories button:hover {
 	background-color: #f1f1f1;
 }
-#selected {
-	background-color: #ffffff;
-	border-right: none;
-}
+
 .ClientData{
 	float: left;
 	width: calc(100% - 20.5em);
 	padding: 2em;
+	overflow: auto;
+	height: calc(160px - 2em);
 }
 
 .ClientData *{
