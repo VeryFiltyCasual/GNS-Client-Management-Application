@@ -6,3 +6,5 @@ node_modules/
 .vs/
 #Yarn files
 yarn.lock
+#Google auth tokens
+tokens.json

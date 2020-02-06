@@ -1,4 +1,5 @@
 const {google} = require('googleapis');
+const fs = require('fs');
 /**
  * @author Ryan Wolf
  * @file googleauth.js
@@ -15,8 +16,27 @@ class Authenticator {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
         this.redirectURL = redirectURL;
+        //Path for the tokens
+        this.tokensPath = 'tokens.json';
         //Generate the authentication client
         this.authClient = new google.auth.OAuth2(this.clientId, this.clientSecret, this.redirectURL);
+    }
+    /**
+     * Checks if tokens.json has valid tokens that don't need to be refreshed
+     * @returns {Promise<boolean>} if tokens.json has valid tokens
+     */
+    needsTokens() {
+        return new Promise((resolve, reject) => {
+            fs.readFile(this.tokensPath, (err, data) => {
+                //If there was an error, that means the tokens weren't there
+                if (err) return resolve(true);
+                //Otherwise, use the tokens
+                const tokens = JSON.parse(data);
+                this.authClient.setCredentials(tokens);
+                this.tokens = tokens;
+                resolve(false);
+            });
+        });
     }
     /**
      * Generates and returns a url to use for authenticating the user
@@ -32,19 +52,32 @@ class Authenticator {
         return url;
     }
     /**
-     * Gets the access tokens for the user specified via the code parameter
+     * Retrieves the access tokens for the user specified via the code parameter
      * @param {string} code The code parameter of the url.
      * @returns {Credentials} The access tokens
      */
-    async getAccessTokens(code) {
+    async retAccessTokens(code) {
         //Get the tokens from the Oauth client
         const {tokens} = await this.authClient.getToken(code);
         //Set the credentials of the internal client
         this.authClient.setCredentials(tokens);
+        //Save the tokens
+        fs.writeFile(this.tokensPath, JSON.stringify(tokens), (err) => {
+            if (err) return console.log("Error writing tokens to " + this.tokensPath);
+            console.log("Wrote tokens to " + this.tokensPath);
+        });
         //Create a calendar
         this.calendar = google.calendar({version: 'v3', auth: this.authClient});
         //Return the tokens
+        this.tokens = tokens;
         return tokens;
+    }
+    /**
+     * Gets the access tokens for the user
+     * @returns {Credentials} The access tokens
+     */
+    getAccessTokens() {
+        return this.tokens;
     }
     /**
      * Gets the user's information

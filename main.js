@@ -17,7 +17,25 @@ let client_ExtraPage = 0;
 //******loading*******
 
 app.on('ready', async () => {
-  const data = await promptSignIn();
+  let data;
+  let prompt = await userAuth.needsTokens();
+  //Check if the user needs to sign in
+  if (prompt) {
+    data = await promptSignIn();
+  } else {
+    const tokens = userAuth.getAccessTokens();
+    //Get the user's profile information
+    const user = await userAuth.getUser();
+    data = {user, tokens};
+    // Create the browser window.
+    win.main = new BrowserWindow({
+      width: 1200,
+      height: 800,
+      webPreferences: {
+        nodeIntegration: true
+      }
+    });
+  }
   createClientViewer(data);
 });
 
@@ -41,12 +59,6 @@ ipcMain.on('user', async () => {
 ipcMain.on('getID', (event, arg) => {
   event.returnValue = client_ExtraPage;
 })
-
-//When the webpage sends the user auth code
-ipcMain.on('google', (event, code) => {
-  userAuth.getAccessTokens(code);
-});
-
 
 //*********Window Functions *****
 
@@ -74,9 +86,6 @@ function promptSignIn() {
     
     //when the window is closed...
     win.main.on('closed', () => { 
-    // Dereference the window object, usually you would store windows
-      // in an array if your app supports multi windows, this is the time
-      // when you should delete the corresponding element.
       win.main = null
       win.extra = null
     });
@@ -87,7 +96,7 @@ function promptSignIn() {
     try {
       ipcMain.on('google', async (event, code) => {
           //After getting the code, get the access tokens
-          const tokens = await userAuth.getAccessTokens(code);
+          const tokens = await userAuth.retAccessTokens(code);
           //Get the user's profile information
           const user = await userAuth.getUser();
           resolve({user, tokens});
