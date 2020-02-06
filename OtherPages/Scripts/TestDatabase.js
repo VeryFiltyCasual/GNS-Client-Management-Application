@@ -4,7 +4,7 @@ var AllClients = [
 		"ClID" : 0,
 		"Fname" : "Joe",
 		"Lname" : "Johnson",
-		"Stage" : 2,
+		"Stage" : 1,
 		
 		"DateAdded": new Date(2004, 5, 2),
 		
@@ -36,7 +36,7 @@ var AllClients = [
 		"ClID" : 1,
 		"Fname" : "Jeremy",
 		"Lname" : "Oosterban",
-		"Stage" : 1,
+		"Stage" : 2,
 		
 		"DateAdded": new Date(2019, 10, 4),
 		
@@ -68,7 +68,7 @@ var AllClients = [
 		"ClID" : 2,
 		"Fname" : "Abby",
 		"Lname" : "Zorts",
-		"Stage" : 2,
+		"Stage" : 1,
 		
 		"DateAdded": new Date(2020, 0, 16),
 		

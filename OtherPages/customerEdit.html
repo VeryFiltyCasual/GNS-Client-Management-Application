@@ -35,6 +35,10 @@
 		label{
 			margin-left: 30px;
 		}
+		
+		input[type=checkbox] {
+            transform: scale(1.3);
+        }    
 
 	</style>
 </head>
@@ -203,6 +207,108 @@
 			<button type="submit">Save Section</button>
 		</fieldset>
 		
+		<h1>Installation Details</h1><br>
+		<fieldset class="InstalDetails">  
+            <!--Kitchen Section-->
+            <section>
+            <h2><input type="checkbox" class="chkShowHideKit" name="chkKitchen" id="chkKitchen">Kitchen</h2>
+            <div class="ShowHideKit">
+                <label for="kitSink">Sink #:</label><select name="kitSink" id="kitSink">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+                <label for="chkGrids">Grids:</label><input type="checkbox" name="chkGrids" id="chkGrids">
+                <label for="chkStrainer">Strainer:</label><input type="checkbox" name="chkStrainer" id="chkStrainer">
+                <label for="numFaucet">Faucet#:</label><select name="faucetNumber" id="faucetNumber">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+                <label for="chkCutboard">CutBoard:</label><input type="checkbox" name="chkCutboard" id="chkCutboard">
+                <label for="chkDisplay">Display:</label><input type="checkbox" name="chkDisplay" id="chkDisplay">
+                
+                <!--Cut Section-->
+                <h3>Cut</h3>
+                <label for="cutSink">Sink #:</label><select name="cutSink" id="cutSink">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+                <label for="chkCookTop">CookTop:</label><input type="checkbox" name="chkCookTop" id="chkCookTop">
+                <label for="chkBrackets">Brackets($50):</label><input type="checkbox" name="chkBrackets" class="HiderCheck" id="chkBrackets">
+                <span>
+                    <label for="numQuantity">Qty:</label><input type="number" name="numQuantity" id="numQuantity">
+                    <label for="numSize">Size:</label><input type="number" name="numSize" id="numSize">
+                    <label for="chkInstall">Install($150):</label><input type="checkbox" name="chkInstall" id="chkInstall">
+                </span>
+                
+                <!--Services Section-->
+                <h3>Services</h3>
+                <label for="kitTearService">Tear:</label><select name="kitTearService" id="kitTearService">
+                    <option value="1">Yes</option>
+                    <option value="2">No</option>
+                    <option value="3">Maybe</option>
+                </select>
+                <label for="kitPlumbService">Plumb:</label><select name="kitPlumbService" id="kitPlumbService">
+                    <option value="1">Yes</option>
+                    <option value="2">No</option>
+                    <option value="3">Maybe</option>
+                </select>
+            </div>
+            </section>
+            
+            <!--Vanity Section-->
+            <section>
+            <h2><input type="checkbox" class="chkShowHideVan" name="chkVanity" id="chkVanity">Vanity</h2>
+            <div class="ShowHideVan">
+
+                <!--Cut Section-->
+                <h3>Cut</h3>
+                <label for="vanSinkCut">Sink Cut:</label><select name="vanSinkCut" id="vanSinkCut">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+                <label for="txtSinkType">Sink Type:</label><input type="text" name="txtSinkType" id="txtSinkType">
+                <label for="numSinkQty">Qty:</label><input type="number" name="numSinkQty">
+                
+                <label for="numFaucet" class="ShowHide">Faucet#:</label><select name="faucetNumber" id="faucetNumber">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+                <label for="numFaucQty">Qty:</label><input type="number" name="numFaucQty" id="numFaucQty">
+                
+                <label for="chkDrain">Drain:</label><input type="checkbox" name="chkDrain" class="HiderCheck" id="chkDrain">
+                <span>
+                    <label for="numFaucQty">Qty:</label><input type="number" name="numFaucQty" id="numFaucQty">
+                </span>
+                
+                <h3>Services</h3>
+                <label for="vanTearService">Tear:</label><select name="vanTearService" id="vanTearService">
+                    <option value="1">Yes</option>
+                    <option value="2">No</option>
+                    <option value="3">Maybe</option>
+                </select>
+                <label for="vanPlumbService">Plumb:</label><select name="vanPlumbService" id="vanPlumbService">
+                    <option value="1">Yes</option>
+                    <option value="2">No</option>
+                    <option value="3">Maybe</option>
+                </select>
+            </div>
+            </section>                
+            
+            <button type="submit">Save Section</button>                
+                
+        </fieldset>
+
+		
 		<h1>Estimate</h1><br>
 		<fieldset id="Estimate">
 			<section>
@@ -333,6 +439,45 @@
 			this.style.height = 'auto';
 			this.style.height =  (this.scrollHeight) + 'px';
 		});
+		
+		// click checkbox to reveal textbox, hide when checkbox is unclicked
+		let checked = false;
+		
+		if (checked)
+			$(".ShowHideKit").show();
+		else
+			$(".ShowHideKit").hide();
+				
+		if (checked)
+			$(".ShowHideVan").show();
+		else
+			$(".ShowHideVan").hide();
+		// kitchen section
+		$(".chkShowHideKit").click(function() {            
+			if ($(this).is(":checked"))
+				checked = true;
+			else
+				checked = false;
+
+			if (checked)
+				$(".ShowHideKit").show();
+			else
+				$(".ShowHideKit").hide();
+		});
+		
+		// vanity section
+		$(".chkShowHideVan").click(function() {                
+			if ($(this).is(":checked"))
+				checked = true;
+			else
+				checked = false;
+
+			if (checked)
+				$(".ShowHideVan").show();
+			else
+				$(".ShowHideVan").hide();
+		});
+
 	});
 	</script>
 
