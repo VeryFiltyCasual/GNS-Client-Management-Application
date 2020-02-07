@@ -1,9 +1,9 @@
 //get all the clients
-var AllClients = [
+var testData = [
 	{
 		"ClID" : 0,
 		"Fname" : "Joe",
-		"Lname" : "Johnson",
+		"Lname" : "Bryant",
 		"Stage" : 1,
 		
 		"DateAdded": new Date(2004, 5, 2),

@@ -39,19 +39,25 @@ app.on('ready', async () => {
   createClientViewer(data);
 });
 
+
+/***************
+******IPC*******
+****************/
 //when webpage sends 'display-client' to here...
+//runs clientEdit.html page
 ipcMain.on('display-client-edit', (event, id) => {
   prepareExtraWin();
   runCustEdit(id); //run custEdit (display a webpage)
   client_ExtraPage = id;
 })
-
+//runs clientInfo.html page
 ipcMain.on('display-client-info', (event, id) => {
   prepareExtraWin();
   runCustInfo(); //run custEdit (display a webpage)
   client_ExtraPage = id;
 })
 
+//recieves 'user' message, sends 'getUser' message
 ipcMain.on('user', async () => {
   win.main.webContents.send("getUser", await userAuth.getUser());
 });
@@ -60,7 +66,40 @@ ipcMain.on('getID', (event, arg) => {
   event.returnValue = client_ExtraPage;
 })
 
-//*********Window Functions *****
+
+/****sending to server*****/
+ipcMain.on("RequestStage1", (event) => {
+	let jsonMessage = {
+		"status": "ok",
+		"event": 0,
+		"data": {}
+	}
+	
+	client.send(JSON.stringify(jsonMessage));
+})
+ipcMain.on("RequestStage2", (event) => {
+	let jsonMessage = {
+		"status": "ok",
+		"event": 1,
+		"data": {}
+	}
+	
+	client.send(JSON.stringify(jsonMessage));
+})
+ipcMain.on("RequestStage3", (event) => {
+	let jsonMessage = {
+		"status": "ok",
+		"event": 2,
+		"data": {}
+	}
+	
+	client.send(JSON.stringify(jsonMessage));
+})
+
+
+/***************************
+******Window Functions *****
+***************************/
 
 //create first window
 function promptSignIn() {
@@ -119,12 +158,7 @@ function prepareExtraWin(){
   })
 	
     win.extra.on("closed", function () {
-		
-		//dialog.showMessageBox(null, dialogOptions_ExitEdit, (response, checkboxChecked) => {
-		//	if (response == 1)
-				win.extra = null;
-			
-		//});
+		win.extra = null;
         win.main.webContents.send("ExtraWinClosed");
     })
 }
@@ -142,16 +176,20 @@ function runCustInfo(id){
 }
 
 
+/******************
+*****WebSockets****
+******************/
 //Creates the client view
 function createClientViewer({user, tokens}) {
   win.main.loadURL(`file://${__dirname}/OtherPages/Clients.html`);
 
-  // Create a new websocket client
-  const client = new WebSocket('ws://localhost:3000', {
-      headers: {
-          token: tokens
-      }
-  });
+
+// Create a new websocket client
+const client = new WebSocket('ws://localhost:3000', {
+  headers: {
+	  token: tokens
+  }
+});
 
   // Handle when the client connects
   client.on('open', () => {
@@ -165,34 +203,56 @@ function createClientViewer({user, tokens}) {
       console.log(`The connection has been closed with code: ${code} and description: ${description}`);
   });
 
-  client.on('message', async rawMessage => {
-      //If there is a list of clients, display them!
-      const message = JSON.parse(rawMessage);
-      switch(message.event) {
-          case 0:
-              //Clients event
-              const {data: clients} = message;
-              let newHTML = '';
-              clients.forEach(client => {
-                  newHTML += client.first_name + ' ';
-              });
-        
-              win.main.webContents.executeJavaScript(`
-                  document.getElementById('clients').innerHTML = '${newHTML}';
-              `);
-              break;
-          default:
-              console.log('Unrecognized message');
-              break;
-      }
-  });
+//Handle server sending a message
+client.on('message', async rawMessage => {
+  const message = JSON.parse(rawMessage);
+  switch(message.event) {
+		//CLIENT_STAGE1 event
+		case 0:
+			win.main.webContents.send("updatedClients", {cliarr: message.data.clients, comarr: message.data.comments, stage: 1});
+			break;
+			
+		//CLIENT_STAGE2 event
+		case 1:
+			win.main.webContents.send("updatedClients", {cliarr: message.data.clients, comarr: message.data.comments, stage: 2});
+			break;
+			
+		//CLIENT_ARCHIVED event
+		case 2:
+			win.main.webContents.send("updatedClients", {cliarr: message.data.clients, comarr: message.data.comments, stage: 3});
+			break;
+		
+		//UPDATE
+		case 3:
+			//[STAGE?]
+			win.main.webContents.send("updatedClients", {cliarr: message.data.clients, comarr: message.data.comments, stage: 0});
+			break;
+		
+		//ADD_COMMENT
+		case 4:
+			win.main.webContents.send("updatedComments", {comarr: message.data});
+			break;
+		
+		//DELETE_COMMENT
+		case 5:
+			win.main.webContents.send("updatedComments", {comarr: message.data});
+			break;
+			
+	  default:
+		  console.log('Unrecognized message');
+		  break;
+  }
+});
 
   ipcMain.on('calendar', () => {
       userAuth.createEvent();
   });
 }
 
-//********General Win Management*********
+
+/**********************************
+******General Win Management*******
+**********************************/
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {

@@ -15,10 +15,11 @@
 		<!-- Icons -->
 		<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		
-		<script name="TestData" src="Scripts/TestDatabase.js"></script>	
+			
 		<script name="ConstVars">
 			const CDATA_FADESPEED = 120;
+			let AllClients = [];
+			let AllComments = [];
 		</script>
 		
 		<script type="text/javascript" src="../JQUI/external/jquery/jquery.js"></script>
@@ -117,36 +118,7 @@
     </div>
 	
 		<script name="SortFunctions" src="Scripts/SortDisplayFunctions.js"></script>
-     
-		<script name="MakeNewWindow-ClientMoreInfo">
-		
-		const { ipcRenderer } = require('electron');
-		
-		//when the show info button clicked
-		document.querySelector(".btnShowInfo").addEventListener("click", function() {
-			//send the 'display-client' command to the main js (will display new page with client info)
-			//needs id
-			let cliID = $(this).parent().parent().parent().find(".cliID").text();
-			
-			ipcRenderer.send("display-client-Info", getClient(AllClients, cliID));
-		});
-		
-		document.querySelector(".btnEditInfo").addEventListener("click", function() {
-			//send the 'display-client-edit' command to the main js (will display new page with client info)
-			//needs id
-			let cliID = $(this).parent().parent().parent().find(".cliID").text();
-			
-			ipcRenderer.send("display-client-edit", getClient(AllClients, cliID));
-		});
-
-		//Update the profile picture
-		window.onload = () => {
-			ipcRenderer.send("user");
-		}
-		ipcRenderer.on("getUser", (event, user) => {
-			document.getElementById('profilePic').setAttribute('src',user.picture);
-		});
-		</script>
+		<script name="IPC-Initiate">const { ipcRenderer } = require('electron');</script>
 		
 		<script name="ExpandListBodyClick">
 		
@@ -232,11 +204,9 @@
 				}
 				
 			}	
-			sortByNewest(AllClients);
-			populateMain(1);
 			
 			
-			//jquery, give all butons stage attr and handle clicking
+			//jquery, give all butons stage attr and handle clicking, jquery ui
 			$(document).ready(function(){
 
 				//fill buttons with stage info
@@ -252,8 +222,8 @@
 					currentStageForm = $(this).attr("stage");
 					
 					//populate main with the stage value of the button
-					populateMain(currentStageForm);
-							
+					populateMain(currentStageForm); //[DEV, GET RID LATER]
+					//ipcRenderer.send("RequestStage" + currentStageForm);
 				});
 				
 				//jQUI sort by combo box
@@ -288,7 +258,6 @@
 			});
 			
 			
-
 		</script>
 			
 		<script name="NavigateClients">
@@ -337,6 +306,65 @@
 				});
 				
 			});
+		</script>
+		
+		<script name="IPC-Functions">
+		
+		/*********SEND*********/
+		//when the show info button clicked
+		document.querySelector(".btnShowInfo").addEventListener("click", function() {
+			//send the 'display-client' command to the main js (will display new page with client info)
+			//needs id
+			let cliID = $(this).parent().parent().parent().find(".cliID").text();
+			
+			ipcRenderer.send("display-client-Info", getClient(AllClients, cliID));
+		});
+		
+		document.querySelector(".btnEditInfo").addEventListener("click", function() {
+			//send the 'display-client-edit' command to the main js (will display new page with client info)
+			//needs id
+			let cliID = $(this).parent().parent().parent().find(".cliID").text();
+			
+			ipcRenderer.send("display-client-edit", getClient(AllClients, cliID));
+		});
+		
+		//Update the profile picture
+		window.onload = () => {
+			ipcRenderer.send("user");
+		}
+		
+		
+		/*********Recieve**********/
+		//gets an updated client array
+		ipcRenderer.on("updatedClients", (event, data) =>{
+			AllClients = data.cliarr;
+			AllComments = data.commarr;
+			
+			sortByNewest(AllClients);
+			populateMain(data.stage);
+		});
+		
+		//gets an updated comment array
+		ipcRenderer.on("updatedClients", (event, data) =>{
+			AllComments = data.commarr;
+		});
+		
+		//get google profile picture
+		ipcRenderer.on("getUser", (event, user) => {
+			document.getElementById('profilePic').setAttribute('src',user.picture);
+		});
+
+
+		
+		</script>
+		
+		<script src="Scripts/TestDatabase.js"></script>
+		<script name="DEV,Test ipcRenderer!">
+		AllClients = testData;
+		AllComments = []; //ADD
+		
+		sortByNewest(AllClients);
+		populateMain(1);
 		</script>
 	</body>
 </html>
