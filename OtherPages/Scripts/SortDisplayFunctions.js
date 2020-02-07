@@ -1,6 +1,8 @@
 /*********MISC FUNCTION********/
 //return date string in m/d/yyyy
-function formatDate(dateObj){
+function formatDate(strDate){
+	let dateObj = new Date(strDate);
+	
 	m = dateObj.getMonth() + 1;
 	d = dateObj.getDate();
 	yyyy = dateObj.getFullYear();
@@ -22,7 +24,7 @@ function allinone(strArray){
 //return the client that maches the passed ID
 function getClient(CliArray, cliID){
 	for (i = 0; i < CliArray.length; i++){
-		if (CliArray[i].ClID == cliID)
+		if (CliArray[i].id == cliID)
 			return CliArray[i];
 	}
 	
@@ -33,34 +35,34 @@ function getClient(CliArray, cliID){
 /*************SORTS****************/
 function sortByFirstName(CliArray){
 	CliArray.sort(function(a,b){
-		if (a.Fname < b.Fname) return -1;
-		if (a.Fname > b.Fname) return 1;
+		if (a.first_name < b.first_name) return -1;
+		if (a.first_name > b.first_name) return 1;
 	});
 }
 
 function sortByLastName(CliArray){
 	CliArray.sort(function(a,b){
-		if (a.Lname < b.Lname) return -1;
-		if (a.Lname > b.Lname) return 1;
+		if (a.last_name < b.last_name) return -1;
+		if (a.last_name > b.last_name) return 1;
 	});
 }
 
 function sortByID(CliArray){
 	CliArray.sort(function(a,b){
-		if (a.ClID < b.ClID) return -1;
-		if (a.ClID > b.ClID) return 1;
+		if (a.id < b.id) return -1;
+		if (a.id > b.id) return 1;
 	});
 }
 function sortByOldest(CliArray){
 	CliArray.sort(function (a,b){
-		if (a.DateAdded.getTime() < b.DateAdded.getTime()) return -1;
-		if (a.DateAdded.getTime() > b.DateAdded.getTime()) return 1;
+		if (new Date(a.DateAdded).getTime() < new Date(b.DateAdded).getTime()) return -1;
+		else return 1;
 	});
 }
 function sortByNewest(CliArray){
 	CliArray.sort(function (a,b){
-		if (a.DateAdded.getTime() < b.DateAdded.getTime()) return 1;
-		if (a.DateAdded.getTime() > b.DateAdded.getTime()) return -1;
+		if (new Date(a.DateAdded).getTime() < new Date(b.DateAdded).getTime()) return 1;
+		else return -1;
 	});
 }
 

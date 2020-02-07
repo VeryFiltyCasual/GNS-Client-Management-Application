@@ -151,17 +151,17 @@
 			function populateBasic(clientBas, thisCliInfo){
 				let clientData = $(thisCliInfo).find(".ClientData");
 			
-				$("<label class='info'>Phone: <p>" + clientBas.Phone + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
+				$("<label class='info'>Phone: <p>" + clientBas.phone + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 				
-				$("<label class='info'>Email: <p>" + clientBas.Email + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
+				$("<label class='info'>Email: <p>" + clientBas.email + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 				
-				$("<label class='info'>Address: <p>" + clientBas.Address1.Street + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
+				$("<label class='info'>Address: <p>" + clientBas.street_address + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 				
-				$("<label class='info'>City: <p>" + clientBas.Address1.City + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
+				$("<label class='info'>City: <p>" + clientBas.city + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 				
-				$("<label class='info'>State: <p>" + clientBas.Address1.State + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
+				$("<label class='info'>State: <p>" + clientBas.state + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 				
-				$("<label class='info'>Zip code: <p>" + clientBas.Address1.Zip + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
+				$("<label class='info'>Zip code: <p>" + clientBas.zip + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 				
 				let projects = allinone(clientBas.Projects);
 				$("<label class='info'>Projects: <p>" + projects + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
@@ -174,12 +174,12 @@
 				
 				//make the head
 				let htmlLiHead = $("<section class='ListHead'></section>")
-					.append("<h4>" + client.Fname + " " + client.Lname + "</h4>")
-					.append("<p class='cliID'>" + client.ClID + "</p>")
-					.append("<p>Joined " + formatDate(client.DateAdded) + "</p>")
+					.append("<h4>" + client.first_name + " " + client.last_name + "</h4>")
+					.append("<p class='cliID'>" + client.id + "</p>")
+					.append("<p>Joined " + formatDate(client.date_added) + "</p>")
 					.append(html_TopNav);
 				
-				populateBasic(client.Basic, htmlLiBody);
+				populateBasic(client, htmlLiBody);
 				
 				return $(htmlLI).append(htmlLiHead).append(htmlLiBody);
 			}
@@ -198,7 +198,7 @@
 				);*/
 			
 				for (Client of AllClients){
-					if (Client.Stage == currentStage){				
+					if (Client.stage == currentStage){				
 						$(makeAClient(Client)).hide().appendTo("#ClientList").fadeIn(600);						
 					}
 				}
@@ -301,7 +301,7 @@
 					}
 					else {
 						//display basic (if none other found)
-						populateBasic(AllClients[ThisListBody.parent().find(".cliID").text()].Basic, ThisListBody);
+						populateBasic(AllClients[ThisListBody.parent().find(".cliID").text()], ThisListBody);
 					}
 				});
 				
@@ -359,7 +359,7 @@
 		</script>
 		
 		<script src="Scripts/TestDatabase.js"></script>
-		<script name="DEV,Test ipcRenderer!">
+		<script name="DEV, Test ipcRenderer!">
 		AllClients = testData;
 		AllComments = []; //ADD
 		
