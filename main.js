@@ -67,34 +67,7 @@ ipcMain.on('getID', (event, arg) => {
 })
 
 
-/****sending to server*****/
-ipcMain.on("RequestStage1", (event) => {
-	let jsonMessage = {
-		"status": "ok",
-		"event": 0,
-		"data": {}
-	}
-	
-	client.send(JSON.stringify(jsonMessage));
-})
-ipcMain.on("RequestStage2", (event) => {
-	let jsonMessage = {
-		"status": "ok",
-		"event": 1,
-		"data": {}
-	}
-	
-	client.send(JSON.stringify(jsonMessage));
-})
-ipcMain.on("RequestStage3", (event) => {
-	let jsonMessage = {
-		"status": "ok",
-		"event": 2,
-		"data": {}
-	}
-	
-	client.send(JSON.stringify(jsonMessage));
-})
+
 
 
 /***************************
@@ -252,6 +225,35 @@ client.on('message', async rawMessage => {
   ipcMain.on('calendar', () => {
       userAuth.createEvent();
   });
+  
+	/****sending to server*****/
+	ipcMain.on("RequestStage1", (event) => {
+		let jsonMessage = {
+			"status": "ok",
+			"event": 0,
+			"data": {}
+		}
+		
+		client.send(JSON.stringify(jsonMessage));
+	})
+	ipcMain.on("RequestStage2", (event) => {
+		let jsonMessage = {
+			"status": "ok",
+			"event": 1,
+			"data": {}
+		}
+		
+		client.send(JSON.stringify(jsonMessage));
+	})
+	ipcMain.on("RequestStage3", (event) => {
+		let jsonMessage = {
+			"status": "ok",
+			"event": 2,
+			"data": {}
+		}
+		
+		client.send(JSON.stringify(jsonMessage));
+	})
 }
 
 
