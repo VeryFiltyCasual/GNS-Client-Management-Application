@@ -152,17 +152,17 @@
 			function populateBasic(clientBas, thisCliInfo){
 				let clientData = $(thisCliInfo).find(".ClientData");
 			
-				$("<label class='info'>Phone: <p>" + clientBas.phone + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
+				$("<label class='info'>Phone: <p>" + p(clientBas.phone) + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 				
-				$("<label class='info'>Email: <p>" + clientBas.email + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
+				$("<label class='info'>Email: <p>" + p(clientBas.email) + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 				
-				$("<label class='info'>Address: <p>" + clientBas.street_address + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
+				$("<label class='info'>Address: <p>" + p(clientBas.street_address) + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 				
-				$("<label class='info'>City: <p>" + clientBas.city + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
+				$("<label class='info'>City: <p>" + p(clientBas.city) + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 				
-				$("<label class='info'>State: <p>" + clientBas.state + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
+				$("<label class='info'>State: <p>" + p(clientBas.state) + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 				
-				$("<label class='info'>Zip code: <p>" + clientBas.zip + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
+				$("<label class='info'>Zip code: <p>" + p(clientBas.zip) + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 				let projects = (clientBas.projects) ? allinone(clientBas.projects) : " ";
 				$("<label class='info'>Projects: <p>" + projects + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 			}
