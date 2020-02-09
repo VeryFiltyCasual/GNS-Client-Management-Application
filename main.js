@@ -165,7 +165,7 @@ function createClientViewer({user, tokens}) {
 // Create a new websocket client
 const client = new WebSocket('ws://localhost:3000', {
   headers: {
-	  token: tokens
+	  token: tokens.id_token
   }
 });
 
@@ -187,38 +187,48 @@ client.on('message', async rawMessage => {
   switch(message.event) {
 		//CLIENT_STAGE1 event
 		case 0:
-			win.main.webContents.send("updatedClients", {cliarr: message.data.clients, comarr: message.data.comments, stage: 1});
+      sendOnceLoaded("updatedClients", {cliarr: message.data, stage: 1});
 			break;
 			
 		//CLIENT_STAGE2 event
 		case 1:
-			win.main.webContents.send("updatedClients", {cliarr: message.data.clients, comarr: message.data.comments, stage: 2});
+			sendOnceLoaded("updatedClients", {cliarr: message.data.clients, comarr: message.data.comments, stage: 2});
 			break;
 			
 		//CLIENT_ARCHIVED event
 		case 2:
-			win.main.webContents.send("updatedClients", {cliarr: message.data.clients, comarr: message.data.comments, stage: 3});
+			sendOnceLoaded("updatedClients", {cliarr: message.data.clients, comarr: message.data.comments, stage: 3});
 			break;
 		
 		//UPDATE
 		case 3:
 			//[STAGE?]
-			win.main.webContents.send("updatedClients", {cliarr: message.data.clients, comarr: message.data.comments, stage: 0});
+			sendOnceLoaded("updatedClients", {cliarr: message.data.clients, comarr: message.data.comments, stage: 0});
 			break;
 		
 		//ADD_COMMENT
 		case 4:
-			win.main.webContents.send("updatedComments", {comarr: message.data});
+			sendOnceLoaded("updatedComments", {comarr: message.data});
 			break;
 		
 		//DELETE_COMMENT
 		case 5:
-			win.main.webContents.send("updatedComments", {comarr: message.data});
+			sendOnceLoaded("updatedComments", {comarr: message.data});
 			break;
 			
 	  default:
 		  console.log('Unrecognized message');
 		  break;
+  }
+  /**
+   * Sends a message once the win.main content has loaded
+   * @param {string} event The event name
+   * @param {any} message the parameters to send
+   */
+  function sendOnceLoaded(event, message) {
+    win.main.webContents.on('did-finish-load', () => {
+      win.main.webContents.send(event, message);
+    });
   }
 });
 
