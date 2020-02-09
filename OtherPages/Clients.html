@@ -146,6 +146,7 @@
 			//define htmls
 			let html_ButtonsNav = '<nav class="SmallCategories"><button class="SmallCatButtons Basic">Basic</button><button class="SmallCatButtons Installation">Installation</button><button class="SmallCatButtons Estimate">Estimate/Balance</button><button class="SmallCatButtons Availability">Availability</button><button class="SmallCatButtons Comments">Comments</button></nav>';			
 			let html_TopNav = '<div class="CHeadTopLinks"><div><button class="btnShowInfo">Show All</button><button class="btnEditInfo">Edit</a></div></div>';
+			let html_DivSec = "<div class='body-section'></div>";
 			
 			//populate the basic client section
 			function populateBasic(clientBas, thisCliInfo){
@@ -167,6 +168,28 @@
 				$("<label class='info'>Projects: <p>" + projects + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 			}
 			
+			function populateAvailability(clientAv, thisCliInfo){
+				let clientData = $(thisCliInfo).find(".ClientData");
+				let div1 = $(html_DivSec);
+				let div2 = $(html_DivSec);
+				
+				$("<h4>Schedule</h4><br>").appendTo(div1);
+				$("<label class='info'>Template: <p>" + formatDate(clientAv.schedule_template) + "</p></label>").appendTo(div1);
+				$("<label class='info'>Tear: <p>" + formatDate(clientAv.schedule_tear) + "</p></label>").appendTo(div1);
+				$("<label class='info'>Brackets: <p>" + formatDate(clientAv.schedule_brackets) + "</p></label>").appendTo(div1);
+				$("<label class='info'>Install/Dropoff: <p>" + formatDate(clientAv.schedule_install_drop) + "</p></label>").appendTo(div1);
+				$("<label class='info'>Plumbing: <p>" + formatDate(clientAv.schedule_plumb) + "</p></label>").appendTo(div1);
+				
+				$("<h4>Customer Picked Up</h4><br>").appendTo(div2);
+				$("<label class='info'>Faucet: <p>" + formatDate(clientAv.picked_faucet) + "</p></label>").appendTo(div2);
+				$("<label class='info'>Grid set: <p>" + formatDate(clientAv.picked_grid) + "</p></label>").appendTo(div2);
+				$("<label class='info'>Strainer: <p>" + formatDate(clientAv.picked_strainer) + "</p></label>").appendTo(div2);
+				$("<label class='info'>Brackets: <p>" + formatDate(clientAv.picked_brackets) + "</p></label>").appendTo(div2);
+				$("<label class='info'>Counters: <p>" + formatDate(clientAv.picked_counters) + "</p></label>").appendTo(div2);
+				
+				$(clientData).append(div1).append(div2);
+			}
+			
 			//makes single client html
 			function makeAClient(client){
 				let htmlLI = $('<li class="Client"></li>'); //make li
@@ -184,7 +207,7 @@
 				return $(htmlLI).append(htmlLiHead).append(htmlLiBody);
 			}
 			
-			//populate basic form
+			//populate form
 			function populateMain(currentStage){
 				console.log("Loading clients from stage " + currentStage);
 				var Client;
@@ -266,6 +289,7 @@
 			
 				$("#ClientList").on("click", ".ListBody .SmallCategories button", function(){
 					let ThisListBody = $(this).parent().parent();
+					let ThisID = ThisListBody.parent().find(".cliID").text();
 					
 					//remove the things already there
 					$(ThisListBody).find(".ClientData").children().fadeOut(
@@ -292,7 +316,7 @@
 						//display install stuff
 						console.log("client install is displayed");
 						
-						$("<p>Installation stuff</p>").hide().appendTo(ThisClientData).fadeIn(CDATA_FADESPEED);
+						populateAvailability(getClient(AllClients, ThisID), ThisListBody);
 					}
 					else if ($(this).hasClass("Comments")){
 						//display install stuff
@@ -302,7 +326,7 @@
 					}
 					else {
 						//display basic (if none other found)
-						populateBasic(AllClients[ThisListBody.parent().find(".cliID").text()], ThisListBody);
+						populateBasic(getClient(AllClients,ThisID), ThisListBody);
 					}
 				});
 				

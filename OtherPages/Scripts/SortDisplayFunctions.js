@@ -1,15 +1,4 @@
 /*********MISC FUNCTION********/
-//return date string in m/d/yyyy
-function formatDate(strDate){
-	let dateObj = new Date(strDate);
-	
-	m = dateObj.getMonth() + 1;
-	d = dateObj.getDate();
-	yyyy = dateObj.getFullYear();
-	
-	return m + "/" + d + "/" + yyyy;
-}
-
 //make a string array one string
 function allinone(strArray){
 	let holder = "";
@@ -29,6 +18,37 @@ function getClient(CliArray, cliID){
 	}
 	
 	return {};
+}
+
+//returns "not set" if varaible is empty
+function p(stringvar){
+	if (stringvar != null && stringvar != "" && stringvar != undefined)
+		return stringvar;
+	return "<i>not set</i>";
+}
+
+
+/*************DATES****************/
+//checks if a date object is valid
+function isValid(objDate){
+	if (objDate === undefined) return false;
+	if (objDate.getTime() != objDate.getTime()) return false;
+	
+	return true;
+}
+
+//return date string in m/d/yyyy
+function formatDate(strDate){
+	let dateObj = new Date(strDate);
+	
+	//if date isnt valid, return string
+	if (!isValid(dateObj) || strDate == null) return p(strDate);
+	
+	m = dateObj.getMonth() + 1;
+	d = dateObj.getDate();
+	yyyy = dateObj.getFullYear();
+	
+	return m + "/" + d + "/" + yyyy;
 }
 
 

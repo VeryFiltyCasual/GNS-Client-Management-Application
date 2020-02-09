@@ -25,6 +25,11 @@ button:hover{
 	background-color: rgba(0,0,0, .15);
 }
 
+.view-selected{
+	border: 3px solid #8f2831;
+	background-color: rgba(143,40,49,.2);
+}
+
 a{
 	color: blue;
 }
@@ -35,7 +40,7 @@ a:click{
 .neat-button{
 	text-decoration: none;
 	color: #dfdfdf;
-	background-color: transparent;
+	background-color: rgba(0,0,0,0);
 	border-radius: 4px;
 }
 
@@ -48,6 +53,21 @@ a:click{
 
 .ui-button:hover, .ui-button:focus{
 	background-color: rgba(0,0,0,.05);
+}
+
+.body-section{
+	width: 50%;
+	min-width: 170px;
+	float: left;
+}
+.body-section h4{
+	font-size: 1.3em;
+	color: rgba(0,0,0,.5);
+	margin: 5px 0;
+}
+
+.info{
+	margin-bottom: 2px;
 }
 
 /*******
@@ -334,7 +354,7 @@ main ul li{
 .ListBody .SmallCategories{
 	float: left;
 	background-color: #e1e1e1;
-
+	box-shadow: 3px 3px 5px #bfbfbf;
 }
 
 .ListBody .SmallCategories button {
@@ -350,7 +370,7 @@ main ul li{
 
 .ClientData{
 	float: left;
-	width: calc(100% - 20.5em);
+	width: calc(100% - 15em);
 	padding: 2em;
 	overflow: auto;
 	height: calc(160px - 2em);
