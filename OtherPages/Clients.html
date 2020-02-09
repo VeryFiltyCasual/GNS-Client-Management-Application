@@ -197,10 +197,8 @@
 				
 				);*/
 			
-				for (Client of AllClients){
-					if (Client.stage == currentStage){				
-						$(makeAClient(Client)).hide().appendTo("#ClientList").fadeIn(600);						
-					}
+				for (Client of AllClients){				
+					$(makeAClient(Client)).hide().appendTo("#ClientList").fadeIn(600);
 				}
 				
 			}	
@@ -219,11 +217,14 @@
 				//when the button is clicked, fill the main
 				$("aside .SmallCatButtons").click(function(){
 					$("#sectionTitle").text($(this).text());
-					currentStageForm = $(this).attr("stage");
-					
+					currentStageForm = $(this).attr("stage");			
 					//populate main with the stage value of the button
 					populateMain(currentStageForm); //[DEV, GET RID LATER]
 					//ipcRenderer.send("RequestStage" + currentStageForm);
+					
+					//styling
+					$("aside .SmallCatButtons").removeClass("view-selected");
+					$(this).addClass("view-selected");
 				});
 				
 				//jQUI sort by combo box
