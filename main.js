@@ -167,8 +167,15 @@ function createClientViewer({user, tokens}) {
 
   client.on('message', async rawMessage => {
       //If there is a list of clients, display them!
+      /*
+        Message has 3 data fields
+        status = 'ok'/'error'
+        event = Code # in the table
+        data = Important message
+      */
       const message = JSON.parse(rawMessage);
       switch(message.event) {
+          //Data is array of clients, as JSON, with each field of client info is the bold name in the spreadsheet
           case 0:
               //Clients event
               const {data: clients} = message;
@@ -181,6 +188,54 @@ function createClientViewer({user, tokens}) {
                   document.getElementById('clients').innerHTML = '${newHTML}';
               `);
               break;
+          //Data is array of clients, as JSON, with each field of client info is the bold name in the spreadsheet
+          case 1:
+            break;
+          //Data is array of clients, as JSON, with each field of client info is the bold name in the spreadsheet
+          case 2:
+            break;
+          /* Data is an object with an id and array of objects with 'name' and 'value' fields.
+              ex.
+              {
+                id: 0,
+                changed: [
+                    {
+                      key: 'first_name',
+                      value: 'Ryan'
+                    },
+                    {
+                      key: 'kitchen_sink_num',
+                      value: 5,
+                    }
+                ]
+              }
+          */
+          case 3:
+            break;
+          /*
+            Data is a new array of comments
+            ex. [
+              {
+                id: 0,
+                client_id: 1,
+                author_id: 4,
+                message: 'This customer was very nice to me!',
+                date: 'YYYY-MM-DD-32190321315710'
+              }
+              {
+                id: 1,
+                client_id: 1,
+                author_id: 5,
+                message: 'Cool bro!',
+                date: 'YYYY-MM-DD-32190321319710'
+              }
+            ]
+          */
+          case 4:
+            break;
+          //Data is a new array of comments
+          case 5:
+            break;
           default:
               console.log('Unrecognized message');
               break;
