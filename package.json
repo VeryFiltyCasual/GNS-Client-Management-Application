@@ -1,5 +1,5 @@
 {
-  "name": "test",
+  "name": "gns",
   "version": "1.0.0",
   "description": "an electron test that will probably go wrong",
   "main": "main.js",
