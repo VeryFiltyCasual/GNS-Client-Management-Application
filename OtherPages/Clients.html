@@ -162,8 +162,7 @@
 				$("<label class='info'>State: <p>" + clientBas.state + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 				
 				$("<label class='info'>Zip code: <p>" + clientBas.zip + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
-				
-				let projects = allinone(clientBas.Projects);
+				let projects = (clientBas.projects) ? allinone(clientBas.projects) : " ";
 				$("<label class='info'>Projects: <p>" + projects + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 			}
 			
@@ -197,7 +196,7 @@
 				
 				);*/
 			
-				for (Client of AllClients){				
+				for (Client of AllClients){			
 					$(makeAClient(Client)).hide().appendTo("#ClientList").fadeIn(600);
 				}
 				
@@ -338,8 +337,9 @@
 		/*********Recieve**********/
 		//gets an updated client array
 		ipcRenderer.on("updatedClients", (event, data) =>{
+			
 			AllClients = data.cliarr;
-			AllComments = data.commarr;
+			//AllComments = data.;
 			
 			sortByNewest(AllClients);
 			populateMain(data.stage);
@@ -359,13 +359,13 @@
 		
 		</script>
 		
-		<script src="Scripts/TestDatabase.js"></script>
+		<!--<script src="Scripts/TestDatabase.js"></script>
 		<script name="DEV, Test ipcRenderer!">
 		AllClients = testData;
 		AllComments = []; //ADD
 		
 		sortByNewest(AllClients);
 		populateMain(1);
-		</script>
+		</script>-->
 	</body>
 </html>

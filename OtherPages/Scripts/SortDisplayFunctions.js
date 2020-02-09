@@ -55,13 +55,13 @@ function sortByID(CliArray){
 }
 function sortByOldest(CliArray){
 	CliArray.sort(function (a,b){
-		if (new Date(a.DateAdded).getTime() < new Date(b.DateAdded).getTime()) return -1;
+		if (new Date(a.date_added).getTime() < new Date(b.date_added).getTime()) return -1;
 		else return 1;
 	});
 }
 function sortByNewest(CliArray){
 	CliArray.sort(function (a,b){
-		if (new Date(a.DateAdded).getTime() < new Date(b.DateAdded).getTime()) return 1;
+		if (new Date(a.date_added).getTime() < new Date(b.date_added).getTime()) return 1;
 		else return -1;
 	});
 }
