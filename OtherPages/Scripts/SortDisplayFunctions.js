@@ -20,17 +20,37 @@ function getClient(CliArray, cliID){
 	return {};
 }
 
-//returns "not set" if varaible is empty
+/************Display functions***********/
+//makes sure variable is a valid string
+function aString(stringvar){
+	return (stringvar != null && stringvar != "" && stringvar != undefined);
+}
+
+//returns "<i>not set</i>" if invalid string
 function p(stringvar){
-	if (stringvar != null && stringvar != "" && stringvar != undefined)
+	if (aString(stringvar))
 		return stringvar;
 	return "<i>not set</i>";
+}
+//for currency
+function c(stringvar){
+	if (aString(stringvar))
+		return "$" + stringvar;
+	return "<i>not set</i>";
+}
+
+//returns "not set" if invalid
+function pp(stringvar){
+	if (!aString(stringvar))
+		return "not set"
+	
+	return stringvar;
 }
 
 
 /*************DATES****************/
 //checks if a date object is valid
-function isValid(objDate){
+function isValidD(objDate){
 	if (objDate === undefined) return false;
 	if (objDate.getTime() != objDate.getTime()) return false;
 	
@@ -42,7 +62,7 @@ function formatDate(strDate){
 	let dateObj = new Date(strDate);
 	
 	//if date isnt valid, return string
-	if (!isValid(dateObj) || strDate == null) return p(strDate);
+	if (!isValidD(dateObj) || strDate == null) return p(strDate);
 	
 	m = dateObj.getMonth() + 1;
 	d = dateObj.getDate();

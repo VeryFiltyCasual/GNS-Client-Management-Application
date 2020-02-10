@@ -144,11 +144,11 @@
 			let currentStageForm = 1;
 			
 			//define htmls
-			let html_ButtonsNav = '<nav class="SmallCategories"><button class="SmallCatButtons Basic">Basic</button><button class="SmallCatButtons Installation">Installation</button><button class="SmallCatButtons Estimate">Estimate/Balance</button><button class="SmallCatButtons Availability">Availability</button><button class="SmallCatButtons Comments">Comments</button></nav>';			
+			let html_ButtonsNav = '<nav class="SmallCategories"><button class="SmallCatButtons Basic">Basic</button><button class="SmallCatButtons Estimate">Estimate/Balance</button><button class="SmallCatButtons Availability">Availability</button><button class="SmallCatButtons Comments">Comments</button></nav>';			
 			let html_TopNav = '<div class="CHeadTopLinks"><div><button class="btnShowInfo">Show All</button><button class="btnEditInfo">Edit</a></div></div>';
 			let html_DivSec = "<div class='body-section'></div>";
 			
-			//populate the basic client section
+			//populate client body functions
 			function populateBasic(clientBas, thisCliInfo){
 				let clientData = $(thisCliInfo).find(".ClientData");
 			
@@ -187,6 +187,15 @@
 				$("<label class='info'>Counters: <p>" + formatDate(clientAv.picked_counters) + "</p></label>").appendTo(div2);
 				
 				$(clientData).append(div1).append(div2);
+			}
+			
+			function populateEstimate(clientEst, thisCliInfo){
+				let clientData = $(thisCliInfo).find(".ClientData");
+			
+				$("<label class='info'>Estimated Q: <p>" + c(clientEst.actual_qty) + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
+				$("<label class='info'>Actual Q: <p>" + c(clientEst.actual_qty) + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
+				$("<label class='info'>Estimate: <p>" + c(clientEst.estimate) + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
+				$("<label class='info'>Notes for Installation: <textarea readonly>" + pp(clientEst.estimate) + "</textarea></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 			}
 			
 			//makes single client html
@@ -299,28 +308,19 @@
 					//fill info 
 					let ThisClientData = $(ThisListBody).find(".ClientData");
 					
-					if ($(this).hasClass("Installation")){
-						//display Template
-						console.log("client template is displayed");
-						
-						$("<p>Template stuff</p>").hide().appendTo(ThisClientData).fadeIn(CDATA_FADESPEED);
-					}
-					else if ($(this).hasClass("Estimate")){
+					if ($(this).hasClass("Estimate")){
 						//display Invoice
-						console.log("client invoice is displayed");
-						
-						$("<p>Invoice stuff</p>").hide().appendTo(ThisClientData).fadeIn(CDATA_FADESPEED);
+						console.log("client invoice is displayed");						
+						populateEstimate(getClient(AllClients, ThisID), ThisListBody);
 					}
 					else if ($(this).hasClass("Availability")){
 						//display install stuff
-						console.log("client install is displayed");
-						
+						console.log("client install is displayed");				
 						populateAvailability(getClient(AllClients, ThisID), ThisListBody);
 					}
 					else if ($(this).hasClass("Comments")){
 						//display install stuff
-						console.log("client comments are displayed");
-						
+						console.log("client comments are displayed");						
 						$("<p>Comments</p>").hide().appendTo(ThisClientData).fadeIn(CDATA_FADESPEED);
 					}
 					else {
@@ -383,13 +383,13 @@
 		
 		</script>
 		
-		<!--<script src="Scripts/TestDatabase.js"></script>
+		<script src="Scripts/TestDatabase.js"></script>
 		<script name="DEV, Test ipcRenderer!">
 		AllClients = testData;
 		AllComments = []; //ADD
 		
 		sortByNewest(AllClients);
 		populateMain(1);
-		</script>-->
+		</script>
 	</body>
 </html>
