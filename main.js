@@ -192,18 +192,18 @@ client.on('message', async rawMessage => {
 			
 		//CLIENT_STAGE2 event
 		case 1:
-			sendOnceLoaded("updatedClients", {cliarr: message.data.clients, comarr: message.data.comments, stage: 2});
+			sendOnceLoaded("updatedClients", {cliarr: message.data, stage: 2});
 			break;
 			
 		//CLIENT_ARCHIVED event
 		case 2:
-			sendOnceLoaded("updatedClients", {cliarr: message.data.clients, comarr: message.data.comments, stage: 3});
+			sendOnceLoaded("updatedClients", {cliarr: message.data, stage: 3});
 			break;
 		
 		//UPDATE
 		case 3:
 			//[STAGE?]
-			sendOnceLoaded("updatedClients", {cliarr: message.data.clients, comarr: message.data.comments, stage: 0});
+			sendOnceLoaded("updatedClients", {cliarr: message.data, stage: 0});
 			break;
 		
 		//ADD_COMMENT

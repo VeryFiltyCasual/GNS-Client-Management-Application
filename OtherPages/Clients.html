@@ -17,9 +17,8 @@
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 			
 		<script name="ConstVars">
-			const CDATA_FADESPEED = 120;
+			const CDATA_FADESPEED = 200;
 			let AllClients = [];
-			let AllComments = [];
 		</script>
 		
 		<script type="text/javascript" src="../JQUI/external/jquery/jquery.js"></script>
@@ -163,8 +162,6 @@
 				$("<label class='info'>State: <p>" + p(clientBas.state) + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 				
 				$("<label class='info'>Zip code: <p>" + p(clientBas.zip) + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
-				let projects = (clientBas.projects) ? allinone(clientBas.projects) : " ";
-				$("<label class='info'>Projects: <p>" + projects + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 			}
 			
 			function populateAvailability(clientAv, thisCliInfo){
@@ -198,6 +195,18 @@
 				$("<label class='info'>Notes for Installation: <textarea readonly>" + pp(clientEst.estimate) + "</textarea></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 			}
 			
+			function populateComments(clientCom, thisCliInfo){
+				let clientData = $(thisCliInfo).find(".ClientData");
+			
+				if (clientCom.comments == [] || !aString(clientCom.comments[0]) || !aString(clientCom.comments))
+					$("<p class='info'>No comments for this user yet</p>").appendTo(clientData);
+				else {
+					for(var c = 0; c < clientCom.comments.length; c++){
+						$("<p class='info'>" + clientCom.comments[c] + "</p><br>").appendTo(clientData);
+					}
+				}
+			}
+			
 			//makes single client html
 			function makeAClient(client){
 				let htmlLI = $('<li class="Client"></li>'); //make li
@@ -215,7 +224,7 @@
 				return $(htmlLI).append(htmlLiHead).append(htmlLiBody);
 			}
 			
-			//populate form
+			//populates main (all clients)
 			function populateMain(currentStage){
 				console.log("Loading clients from stage " + currentStage);
 				var Client;
@@ -298,16 +307,17 @@
 				$("#ClientList").on("click", ".ListBody .SmallCategories button", function(){
 					let ThisListBody = $(this).parent().parent();
 					let ThisID = ThisListBody.parent().find(".cliID").text();
-					
-					//remove the things already there
-					$(ThisListBody).find(".ClientData").children().fadeOut(
-						CDATA_FADESPEED, 
-						function() {$(this).remove();}
-					);
-					
-					//fill info 
 					let ThisClientData = $(ThisListBody).find(".ClientData");
 					
+					//remove the things already there
+					$(ThisClientData).children().remove();
+					$(ThisClientData).hide();
+					
+					//styling 
+					$(".ListBody .SmallCategories button").removeClass("smallcat-selected");
+					$(this).addClass("smallcat-selected");
+					
+					//fill info 				
 					if ($(this).hasClass("Estimate")){
 						//display Invoice
 						console.log("client invoice is displayed");						
@@ -321,12 +331,14 @@
 					else if ($(this).hasClass("Comments")){
 						//display install stuff
 						console.log("client comments are displayed");						
-						$("<p>Comments</p>").hide().appendTo(ThisClientData).fadeIn(CDATA_FADESPEED);
+						populateComments(getClient(AllClients,ThisID), ThisListBody);
 					}
 					else {
 						//display basic (if none other found)
 						populateBasic(getClient(AllClients,ThisID), ThisListBody);
 					}
+					
+					$(ThisClientData).fadeIn(CDATA_FADESPEED);
 				});
 				
 			});
@@ -360,18 +372,16 @@
 		
 		/*********Recieve**********/
 		//gets an updated client array
-		ipcRenderer.on("updatedClients", (event, data) =>{
-			
+		ipcRenderer.on("updatedClients", (event, data) =>{			
 			AllClients = data.cliarr;
-			//AllComments = data.;
 			
 			sortByNewest(AllClients);
 			populateMain(data.stage);
 		});
 		
 		//gets an updated comment array
-		ipcRenderer.on("updatedClients", (event, data) =>{
-			AllComments = data.commarr;
+		ipcRenderer.on("updatedComments", (event, data) =>{
+			AllClients = data.cliarr;
 		});
 		
 		//get google profile picture
@@ -386,7 +396,6 @@
 		<script src="Scripts/TestDatabase.js"></script>
 		<script name="DEV, Test ipcRenderer!">
 		AllClients = testData;
-		AllComments = []; //ADD
 		
 		sortByNewest(AllClients);
 		populateMain(1);

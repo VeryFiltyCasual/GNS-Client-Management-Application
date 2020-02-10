@@ -126,7 +126,13 @@ var testData = [
 			"install_conf_D": "2012-06-26T10:05:45-06:00",
 		"ask_feedback": true,
 		"location": "Dayton",
-		"acct": "2012-06-02T10:05:45-06:00"
+		"acct": "2012-06-02T10:05:45-06:00",
+		
+		
+		"comments": [
+			"Client is color blind",
+			"Client is only red-green color blind"
+		]
 	},
 	
 	
