@@ -27,13 +27,14 @@ class Authenticator {
      */
     needsTokens() {
         return new Promise((resolve, reject) => {
-            fs.readFile(this.tokensPath, (err, data) => {
+            fs.readFile(this.tokensPath, async (err, data) => {
                 //If there was an error, that means the tokens weren't there
                 if (err) return resolve(true);
                 //Otherwise, use the tokens
-                const tokens = JSON.parse(data);
-                this.authClient.setCredentials(tokens);
-                this.tokens = tokens;
+                const token = JSON.parse(data);
+                const {tokens: newTokens} = await this.authClient.refreshToken(token);
+                this.authClient.setCredentials(newTokens);
+                this.tokens = newTokens;
                 resolve(false);
             });
         });
@@ -46,10 +47,18 @@ class Authenticator {
         //Create the url from the Oauth client
         const url = this.authClient.generateAuthUrl({
             //The application has access to the user's profile, email, and calendar
-            scope: 'profile email https://www.googleapis.com/auth/calendar'
+            scope: 'profile email https://www.googleapis.com/auth/calendar',
+            access_type: 'offline'
         });
         //Return the url
         return url;
+    }
+    writeToken(token) {
+        //Save the tokens
+        fs.writeFile(this.tokensPath, JSON.stringify(token), (err) => {
+            if (err) return console.log("Error writing refresh token to " + this.tokensPath);
+            console.log("Wrote token to " + this.tokensPath);
+        });
     }
     /**
      * Retrieves the access tokens for the user specified via the code parameter
@@ -61,11 +70,7 @@ class Authenticator {
         const {tokens} = await this.authClient.getToken(code);
         //Set the credentials of the internal client
         this.authClient.setCredentials(tokens);
-        //Save the tokens
-        fs.writeFile(this.tokensPath, JSON.stringify(tokens), (err) => {
-            if (err) return console.log("Error writing tokens to " + this.tokensPath);
-            console.log("Wrote tokens to " + this.tokensPath);
-        });
+        this.writeToken(tokens.refresh_token);
         //Create a calendar
         this.calendar = google.calendar({version: 'v3', auth: this.authClient});
         //Return the tokens
