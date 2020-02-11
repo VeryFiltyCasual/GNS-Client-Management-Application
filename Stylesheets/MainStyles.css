@@ -144,17 +144,28 @@ header::after{
 	display: inline-block;
 	border: 1px solid rgba(0,0,0,0);
 	padding: 6px;
-	transition: all .3s
+	transition: all .1s;
+	border-radius: 2px;
+}
+#profilePic {
+	vertical-align: middle;
+	max-width: 45px;
 }
 .head nav ul li:hover{
 	background: rgba(255,255,255,.14);
-	text-decoration: underline;
 	border: 1px solid rgba(0,0,0,.4);
+}
+.head nav i {
+	display: inline;
+	font-size: inherit;
+}
+.head nav h2 {
+	display: inline;
 }
 .head nav a{
 	text-decoration: none;
 	color: white;
-	font-size: .83em;
+	font-size: 1em;
 	text-align: center;
 }
 .head nav img{

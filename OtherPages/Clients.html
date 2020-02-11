@@ -126,14 +126,14 @@
 			//displays the client information when clicking on an li
 			$("#ClientList").on('click', ".ListHead", function() {			
 				var thisClient = $(this).parent();
-				
+				const timeDelay = 200;
 				//closes all other clint info's				
-				$('.Client').not(thisClient).find(".ListBody").hide(400);
-				$('.Client').not(thisClient).find(".CHeadTopLinks").hide(400);
+				$('.Client').not(thisClient).find(".ListBody").hide(timeDelay);
+				$('.Client').not(thisClient).find(".CHeadTopLinks").hide(timeDelay);
 				
 				//opens the clicked client info
-				$(thisClient).find(".ListBody").slideToggle(400);
-				$(thisClient).find(".CHeadTopLinks").toggle(400);
+				$(thisClient).find(".ListBody").slideToggle(timeDelay);
+				$(thisClient).find(".CHeadTopLinks").toggle(timeDelay);
 			});
 			
 		});
