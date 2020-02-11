@@ -208,9 +208,31 @@
 			}
 			
 			//makes single client html
-			function makeAClient(client){
+			function makeAClient(client, stage){
+				let btnMessage ="";				
+				switch (stage){
+					case 1:
+						btnMessage = "Move to stage 2";
+						break;
+					case 2:
+						btnMessage = "Archive client";
+						break;
+					case 3:
+						btnMessage = "Move to previous stage";
+						break;
+					default:
+						btnMessage = "none";
+						break;
+				}
+			
 				let htmlLI = $('<li class="Client"></li>'); //make li
-				let htmlLiBody = $("<section class='ListBody'></section>").append(html_ButtonsNav).append('<div class="ClientData"></div>'); //make ListBody
+				
+				//make ListBody
+				let htmlLiBody = $("<section class='ListBody'></section>")
+					.append(html_ButtonsNav)
+					.append('<div class="ClientData"></div>')
+					.append("<button class='ClientNextPhase'>" + btnMessage + "</button>"); 
+				console.log(btnMessage);
 				
 				//make the head
 				let htmlLiHead = $("<section class='ListHead'></section>")
@@ -220,7 +242,7 @@
 					.append(html_TopNav);
 				
 				populateBasic(client, htmlLiBody);
-				
+					
 				return $(htmlLI).append(htmlLiHead).append(htmlLiBody);
 			}
 			
@@ -231,18 +253,19 @@
 				
 				//remove clients in the form already
 				$(".Client").remove();
-				/*fadeOut(
-					120, 
-					function() {$(this).remove();}
 				
-				);*/
-			
+				//makes and appends all clients
 				for (Client of AllClients){			
-					$(makeAClient(Client)).hide().appendTo("#ClientList").fadeIn(600);
+					$(makeAClient(Client, currentStage)).hide().appendTo("#ClientList").fadeIn(600);
 				}
 				
 			}	
 			
+			
+			//when expected a client from server, gray out screen
+			function awaitClient(){
+				
+			}
 			
 			//jquery, give all butons stage attr and handle clicking, jquery ui
 			$(document).ready(function(){
@@ -252,13 +275,13 @@
 				$(".SmallCatButtons").each(function(){
 					$(this).attr("Stage", btnNum++);
 				});
-				
+
 				
 				//when the button is clicked, fill the main
 				$("aside .SmallCatButtons").click(function(){
 					$("#sectionTitle").text($(this).text());
-					currentStageForm = $(this).attr("stage");			
-					//populate main with the stage value of the button
+					currentStageForm = parseInt($(this).attr("stage"));		
+					
 					populateMain(currentStageForm); //[DEV, GET RID LATER]
 					//ipcRenderer.send("RequestStage" + currentStageForm);
 					
@@ -266,6 +289,7 @@
 					$("aside .SmallCatButtons").removeClass("view-selected");
 					$(this).addClass("view-selected");
 				});
+		
 				
 				//jQUI sort by combo box
 				$("#SortBy").selectmenu({
@@ -341,6 +365,13 @@
 					$(ThisClientData).fadeIn(CDATA_FADESPEED);
 				});
 				
+				$("#ClientList").on("click", ".ClientNextPhase", function(){
+					let thisID = parseInt($(this).parent().parent().find(".cliID").text());
+					let newStage = currentStageForm >= 3 ? 2 : currentStageForm++;
+					
+					
+					ipcRenderer.send("NewStage", {Client_ID: thisID, NewStage: newStage});
+				});
 			});
 		</script>
 		
@@ -374,14 +405,17 @@
 		//gets an updated client array
 		ipcRenderer.on("updatedClients", (event, data) =>{			
 			AllClients = data.cliarr;
+			let sentStage = data.stage == 0 ? currentStageForm : data.stage;
 			
 			sortByNewest(AllClients);
-			populateMain(data.stage);
+			populateMain(sentStage);
+			console.log("new clients recieved from the server");
 		});
 		
 		//gets an updated comment array
 		ipcRenderer.on("updatedComments", (event, data) =>{
 			AllClients = data.cliarr;
+			console.log("new comments recieved from the server");
 		});
 		
 		//get google profile picture

@@ -184,6 +184,7 @@ const client = new WebSocket('ws://localhost:3000', {
 //Handle server sending a message
 client.on('message', async rawMessage => {
   const message = JSON.parse(rawMessage);
+  
   switch(message.event) {
 		//CLIENT_STAGE1 event
 		case 0:
@@ -214,6 +215,11 @@ client.on('message', async rawMessage => {
 		//DELETE_COMMENT
 		case 5:
 			sendOnceLoaded("updatedComments", {comarr: message.data});
+			break;
+			
+		//ADD_CLIENT
+		case 7:
+			sendOnceLoaded("updatedClients", {comarr: message.data});
 			break;
 			
 	  default:
@@ -260,6 +266,15 @@ client.on('message', async rawMessage => {
 			"status": "ok",
 			"event": 2,
 			"data": {}
+		}
+		
+		client.send(JSON.stringify(jsonMessage));
+	})
+	ipcMain.on("NewStage", (event, param) => {
+		let jsonMessage = {
+			"status": "ok",
+			"event": 8,
+			"data": param
 		}
 		
 		client.send(JSON.stringify(jsonMessage));
