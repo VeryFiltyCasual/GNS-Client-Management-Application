@@ -282,9 +282,10 @@
 					$("#sectionTitle").text($(this).text());
 					currentStageForm = parseInt($(this).attr("stage"));		
 					
-					populateMain(currentStageForm); //[DEV, GET RID LATER]
-					//ipcRenderer.send("RequestStage" + currentStageForm);
-					
+					//populateMain(currentStageForm); //[DEV, GET RID LATER]
+					ipcRenderer.send("RequestStage" + currentStageForm);
+					console.log('Clients recieved from stage ' + currentStageForm);
+
 					//styling
 					$("aside .SmallCatButtons").removeClass("view-selected");
 					$(this).addClass("view-selected");
@@ -406,7 +407,6 @@
 		ipcRenderer.on("updatedClients", (event, data) =>{			
 			AllClients = data.cliarr;
 			let sentStage = data.stage == 0 ? currentStageForm : data.stage;
-			
 			sortByNewest(AllClients);
 			populateMain(sentStage);
 			console.log("new clients recieved from the server");

@@ -162,16 +162,24 @@ function createClientViewer({user, tokens}) {
   win.main.loadURL(`file://${__dirname}/OtherPages/Clients.html`);
 
 
-// Create a new websocket client
-const client = new WebSocket('ws://localhost:3000', {
-  headers: {
-	  token: tokens.id_token
-  }
-});
+  // Create a new websocket client
+  const client = new WebSocket('wss://localhost:3000', {
+    headers: {
+      token: tokens.id_token
+    },
+    //Just while using a self signed certificate
+    rejectUnauthorized: false
+  });
 
   // Handle when the client connects
   client.on('open', () => {
       console.log('The WebSocket Client has connected');
+      const message = {
+        status: 'ok',
+        event: 0,
+        data: {}
+      }
+      client.send(JSON.stringify(message));
   });
   // Handle connection errors
   client.on('error', (err) => {
@@ -181,50 +189,51 @@ const client = new WebSocket('ws://localhost:3000', {
       console.log(`The connection has been closed with code: ${code} and description: ${description}`);
   });
 
-//Handle server sending a message
-client.on('message', async rawMessage => {
-  const message = JSON.parse(rawMessage);
-  
-  switch(message.event) {
-		//CLIENT_STAGE1 event
-		case 0:
-      sendOnceLoaded("updatedClients", {cliarr: message.data, stage: 1});
-			break;
-			
-		//CLIENT_STAGE2 event
-		case 1:
-			sendOnceLoaded("updatedClients", {cliarr: message.data, stage: 2});
-			break;
-			
-		//CLIENT_ARCHIVED event
-		case 2:
-			sendOnceLoaded("updatedClients", {cliarr: message.data, stage: 3});
-			break;
-		
-		//UPDATE
-		case 3:
-			//[STAGE?]
-			sendOnceLoaded("updatedClients", {cliarr: message.data, stage: 0});
-			break;
-		
-		//ADD_COMMENT
-		case 4:
-			sendOnceLoaded("updatedComments", {comarr: message.data});
-			break;
-		
-		//DELETE_COMMENT
-		case 5:
-			sendOnceLoaded("updatedComments", {comarr: message.data});
-			break;
-			
-		//ADD_CLIENT
-		case 7:
-			sendOnceLoaded("updatedClients", {comarr: message.data});
-			break;
-			
-	  default:
-		  console.log('Unrecognized message');
-		  break;
+  //Handle server sending a message
+  client.on('message', async rawMessage => {
+    const message = JSON.parse(rawMessage);
+    
+    switch(message.event) {
+      //CLIENT_STAGE1 event
+      case 0:
+        sendOnceLoaded("updatedClients", {cliarr: message.data, stage: 1});
+        win.main.webContents.send("updatedClients", {cliarr: message.data, stage: 1});
+        break;
+        
+      //CLIENT_STAGE2 event
+      case 1:
+        win.main.webContents.send("updatedClients", {cliarr: message.data, stage: 2});
+        break;
+        
+      //CLIENT_ARCHIVED event
+      case 2:
+        win.main.webContents.send("updatedClients", {cliarr: message.data, stage: 3});
+        break;
+      
+      //UPDATE
+      case 3:
+        //[STAGE?]
+        win.main.webContents.send("updatedClients", {cliarr: message.data, stage: 0});
+        break;
+      
+      //ADD_COMMENT
+      case 4:
+        win.main.webContents.send("updatedComments", {comarr: message.data});
+        break;
+      
+      //DELETE_COMMENT
+      case 5:
+        win.main.webContents.send("updatedComments", {comarr: message.data});
+        break;
+        
+      //ADD_CLIENT
+      case 7:
+        win.main.webContents.send("updatedClients", {comarr: message.data});
+        break;
+        
+      default:
+        console.log('Unrecognized message');
+        break;
   }
   /**
    * Sends a message once the win.main content has loaded
