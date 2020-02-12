@@ -64,8 +64,6 @@
 							<option value="FirstName">First Name</option>
 							<option value="LastName">Last Name</option>
 						</select>
-						
-						<button id="refresh" title="Refresh the clients page">Refresh</button>
 					</p>
 				</div>
 				<hr>
@@ -300,11 +298,6 @@
 					$("aside .SmallCatButtons").removeClass("view-selected");
 					$(this).addClass("view-selected");
 				});
-				
-				$("#refresh").click(function(){
-					populateMain(currentStageForm); // [DEV]
-					//requestingClients("RequestStage"+ currentStageForm);
-				});
 		
 				
 				/*******************JQUI******************/
@@ -338,11 +331,6 @@
 					}
 				});	
 				
-				//refresh button
-				$("#refresh").button({
-					icon: "ui-icon-refresh",
-					showLabel: false
-				})
 				
 			});
 			
