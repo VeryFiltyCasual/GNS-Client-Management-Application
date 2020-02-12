@@ -53,6 +53,10 @@ class Authenticator {
         //Return the url
         return url;
     }
+    /**
+     * Writes a refresh token to the token path
+     * @param {string} token The refresh token
+     */
     writeToken(token) {
         //Save the tokens
         fs.writeFile(this.tokensPath, JSON.stringify(token), (err) => {
@@ -98,6 +102,15 @@ class Authenticator {
         //Get the user data and deconstruct it
         const {data} = await oauth.userinfo.get();
         return data;
+    }
+    /**
+     * Deletes the file containing the refresh token
+     */
+    async deleteToken() {
+        //Delete the file
+        fs.unlink(this.tokensPath, () => {});
+        //Delete the current authentication credentials
+        await this.authClient.revokeCredentials();
     }
     async listEvents() {
         this.calendar.events.list({

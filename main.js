@@ -16,7 +16,8 @@ let client_ExtraPage = 0;
 
 //******loading*******
 
-app.on('ready', async () => {
+app.on('ready', start);
+async function start() {
   let data;
   let prompt = await userAuth.needsTokens();
   //Check if the user needs to sign in
@@ -37,8 +38,7 @@ app.on('ready', async () => {
     });
   }
   createClientViewer(data);
-});
-
+}
 
 /***************
 ******IPC*******
@@ -64,7 +64,7 @@ ipcMain.on('user', async () => {
 
 ipcMain.on('getID', (event, arg) => {
   event.returnValue = client_ExtraPage;
-})
+});
 
 
 
@@ -161,6 +161,12 @@ function runCustInfo(id){
 function createClientViewer({user, tokens}) {
   win.main.loadURL(`file://${__dirname}/OtherPages/Clients.html`);
 
+  ipcMain.on('signout', async evt => {
+    //Delete the tokens
+    await userAuth.deleteToken();
+    //Quit the application
+    app.quit();
+  });
 
   // Create a new websocket client
   const client = new WebSocket('wss://localhost:3000', {

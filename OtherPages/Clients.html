@@ -347,7 +347,10 @@
 				
 			});
 			
-			
+			//Sign out
+			function signOut() {
+				ipcRenderer.send('signout');
+			}
 		</script>
 			
 		<script name="NavigateClients">
