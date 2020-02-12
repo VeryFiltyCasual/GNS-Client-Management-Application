@@ -252,7 +252,7 @@ function createClientViewer({user, tokens}) {
   });
   
 	/****sending to server*****/
-	ipcMain.on("RequestStage1", (event) => {
+	ipcMain.on("RequestStage1", (event, arg) => {
 		let jsonMessage = {
 			"status": "ok",
 			"event": 0,
@@ -261,7 +261,7 @@ function createClientViewer({user, tokens}) {
 		
 		client.send(JSON.stringify(jsonMessage));
 	})
-	ipcMain.on("RequestStage2", (event) => {
+	ipcMain.on("RequestStage2", (event, arg) => {
 		let jsonMessage = {
 			"status": "ok",
 			"event": 1,
@@ -270,7 +270,7 @@ function createClientViewer({user, tokens}) {
 		
 		client.send(JSON.stringify(jsonMessage));
 	})
-	ipcMain.on("RequestStage3", (event) => {
+	ipcMain.on("RequestStage3", (event, arg) => {
 		let jsonMessage = {
 			"status": "ok",
 			"event": 2,
@@ -279,11 +279,11 @@ function createClientViewer({user, tokens}) {
 		
 		client.send(JSON.stringify(jsonMessage));
 	})
-	ipcMain.on("NewStage", (event, param) => {
+	ipcMain.on("NewStage", (event, arg) => {
 		let jsonMessage = {
 			"status": "ok",
 			"event": 8,
-			"data": param
+			"data": arg
 		}
 		
 		client.send(JSON.stringify(jsonMessage));

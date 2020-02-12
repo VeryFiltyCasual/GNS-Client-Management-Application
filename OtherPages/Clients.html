@@ -64,6 +64,8 @@
 							<option value="FirstName">First Name</option>
 							<option value="LastName">Last Name</option>
 						</select>
+						
+						<button id="refresh" title="Refresh the clients page">Refresh</button>
 					</p>
 				</div>
 				<hr>
@@ -147,6 +149,7 @@
 			let html_TopNav = '<div class="CHeadTopLinks"><div><button class="btnShowInfo">Show All</button><button class="btnEditInfo">Edit</a></div></div>';
 			let html_DivSec = "<div class='body-section'></div>";
 			
+			/**************FUNCTIONS****************/
 			//populate client body functions
 			function populateBasic(clientBas, thisCliInfo){
 				let clientData = $(thisCliInfo).find(".ClientData");
@@ -261,13 +264,21 @@
 				
 			}	
 			
-			
-			//when expected a client from server, gray out screen
-			function awaitClient(){
-				
+			//doesnt allow site to be interactable while awaiting clients
+			function requestingClients(event, data = "none"){
+				$("body").addClass("ui-widget-overlay");
+				ipcRenderer.send(event, data)
 			}
-			
-			//jquery, give all butons stage attr and handle clicking, jquery ui
+			function recievedClients(stage){
+				$("body").removeClass("ui-widget-overlay");
+				
+				sortByNewest(AllClients)
+				populateMain(stage);
+				
+				console.log("new clients recieved from the server");
+			}
+
+			/*****************JQUERY******************/
 			$(document).ready(function(){
 
 				//fill buttons with stage info
@@ -290,9 +301,16 @@
 					$("aside .SmallCatButtons").removeClass("view-selected");
 					$(this).addClass("view-selected");
 				});
+				
+				$("#refresh").click(function(){
+					populateMain(currentStageForm); // [DEV]
+					//requestingClients("RequestStage"+ currentStageForm);
+				});
 		
 				
-				//jQUI sort by combo box
+				/*******************JQUI******************/
+				
+				//sort by selectmenu
 				$("#SortBy").selectmenu({
 					width: 200,
 					  classes: {
@@ -320,6 +338,12 @@
 						populateMain(currentStageForm);
 					}
 				});	
+				
+				//refresh button
+				$("#refresh").button({
+					icon: "ui-icon-refresh",
+					showLabel: false
+				})
 				
 			});
 			
@@ -371,7 +395,7 @@
 					let newStage = currentStageForm >= 3 ? 2 : currentStageForm++;
 					
 					
-					ipcRenderer.send("NewStage", {Client_ID: thisID, NewStage: newStage});
+					requestingClients("NewStage", {Client_ID: thisID, NewStage: newStage});
 				});
 			});
 		</script>
@@ -380,15 +404,15 @@
 		
 		/*********SEND*********/
 		//when the show info button clicked
-		document.querySelector(".btnShowInfo").addEventListener("click", function() {
+		$("#ClientList").on("click", ".btnShowInfo", function() {
 			//send the 'display-client' command to the main js (will display new page with client info)
 			//needs id
 			let cliID = $(this).parent().parent().parent().find(".cliID").text();
 			
-			ipcRenderer.send("display-client-Info", getClient(AllClients, cliID));
+			ipcRenderer.send("display-client-info", getClient(AllClients, cliID));
 		});
 		
-		document.querySelector(".btnEditInfo").addEventListener("click", function() {
+		$("#ClientList").on("click", ".btnEditInfo", function() {
 			//send the 'display-client-edit' command to the main js (will display new page with client info)
 			//needs id
 			let cliID = $(this).parent().parent().parent().find(".cliID").text();
@@ -415,7 +439,8 @@
 		//gets an updated comment array
 		ipcRenderer.on("updatedComments", (event, data) =>{
 			AllClients = data.cliarr;
-			console.log("new comments recieved from the server");
+			
+			recievedClients(currentStageForm);
 		});
 		
 		//get google profile picture
