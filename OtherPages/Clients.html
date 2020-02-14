@@ -291,9 +291,10 @@
 					$("#sectionTitle").text($(this).text());
 					currentStageForm = parseInt($(this).attr("stage"));		
 					
-					populateMain(currentStageForm); //[DEV, GET RID LATER]
-					//requestingClients("RequestStage" + currentStageForm);
-					
+					//populateMain(currentStageForm); //[DEV, GET RID LATER]
+					ipcRenderer.send("RequestStage" + currentStageForm);
+					console.log('Clients recieved from stage ' + currentStageForm);
+
 					//styling
 					$("aside .SmallCatButtons").removeClass("view-selected");
 					$(this).addClass("view-selected");
@@ -334,7 +335,10 @@
 				
 			});
 			
-			
+			//Sign out
+			function signOut() {
+				ipcRenderer.send('signout');
+			}
 		</script>
 			
 		<script name="NavigateClients">
@@ -382,7 +386,7 @@
 					let newStage = currentStageForm >= 3 ? 2 : currentStageForm++;
 					
 					
-					requestingClients("NewStage", {Client_ID: thisID, NewStage: newStage});
+					requestingClients("NewStage", {client_id: thisID, new_stage: newStage});
 				});
 			});
 		</script>
@@ -417,9 +421,10 @@
 		//gets an updated client array
 		ipcRenderer.on("updatedClients", (event, data) =>{			
 			AllClients = data.cliarr;
-			currentStageForm = data.stage == 0 ? currentStageForm : data.stage;
-			
-			recievedClients(currentStageForm);
+			let sentStage = data.stage == 0 ? currentStageForm : data.stage;
+			sortByNewest(AllClients);
+			populateMain(sentStage);
+			console.log("new clients recieved from the server");
 		});
 		
 		//gets an updated comment array
