@@ -22,9 +22,11 @@ var testData = [
 		"contractor_email": "coolguy@email.com",
 		
 		
-		"Projects" : [
-			"Cabinets", "Floor"
-		],
+		"project" : "",
+		"cabinet": "",
+		"appliances": "",
+		"floor": "",
+		"other": "",
 		
 		//materials
 		"materials_kit": "",

@@ -15,9 +15,12 @@
 	<script type="text/javascript" src="../JQUI/external/jquery/jquery.js"></script>
 	<script type="text/javascript" src="../JQUI/jquery-ui.js"></script>
 	
+	<script name="DEV, test client">
+	
+	</script>
 	<script name="Get CliID">
 		const { ipcRenderer } = require('electron');
-		let cli;
+		//let cli;
 		
 		cli = ipcRenderer.sendSync("getID");
 		
@@ -26,10 +29,10 @@
 	
 	<style>		
 		.ui-button{
-			//border: 2px solid rgb(180,180,180);
+			border: 2px solid rgb(180,180,180);
 			margin: 0;
 			width: 275px;
-			//border-bottom: 0px;
+			border-bottom: 0px;
 		}
 		
 		label{
@@ -46,34 +49,33 @@
 <body>
 
 
-	<form id="formMain">
+	<form id="formMain" method="get" action="">
 		<h1>Customer Basic Information</h1><br>
 		<fieldset class="BasicInfo">
 			
-			<section>
-				<h2>Name</h2>
-				<label for="txtName">Name:</label><input type="text" name="txtName" id="txtName" title="Edit the client's first name" value="test First">
-				<label for="txtMiddle">Middle Name:</label><input type="text" name="txtMiddle" id="txtMiddle" title="Edit the client's middle name" value="test Middle">
-				<label for="txtLast">Last Name:</label><input type="text" name="txtLastName" id="txtLastName" title="Edit the client's last name" value="test Last">
-			</section>
+			<label for="first_name">First Name:</label><input type="text" name="txtName" id="first_name" value="test First">
+			<label for="last_name">Last Name:</label><input type="text" name="txtLastName" id="last_name" title="Edit the client's last name" value="test Last">
+
 			
 			<section>
 				<h2>Contact</h2>
-				<label for="numPhoneNum">Phone Number:</label><input type="number" name="numPhoneNum" title="Edit the client's phone number" id="numPhoneNum" value="420">
-				<label for="txtEmail">Email:</label><input type="text" name="txtEmail" id="txtEmail" title="Edit the client's email" value="TheBoi@google.com">
+				<label for="phone">Phone Number:</label><input type="number" name="numPhoneNum" id="phone" value="420">
+				<label for="email">Email:</label><input type="text" name="txtEmail" id="email"  value="TheBoi@google.com">
 			</section>
 			
 			<section>
 				<h2>Address</h2>
-				<label for="txtAddressStreet">Street:</label><input type="text" name="txtAddressStreet" id="txtAddressStreet" title="street address (street name and house number)" value="test Addr">
-				<label for="txtCity">City:</label>
-					<select name="txtCity" id="txtCity" title="Edit the city" >
+				<label for="street_address">Street:</label><input type="text" name="txtAddressStreet" id="street_address" title="enter street name and house number" value="test Addr">
+				<label for="zip">Zip code:</label><input type="text" id="zip">
+				
+				<label for="city">City:</label>
+					<select name="city" id="city">
 						<option value="Day" selected>Dayton</option>
 						<option value="Cin">Cincinnati</option>
 					</select>
 					
-				<label for="txtState">State:</label>
-				<select id="txtState" name="txtState">
+				<label for="state">State:</label>
+				<select id="state" name="txtState">
 					<option value="AL">Alabama</option>
 					<option value="AK">Alaska</option>
 					<option value="AZ">Arizona</option>
@@ -125,77 +127,78 @@
 					<option value="WV">West Virginia</option>
 					<option value="WI">Wisconsin</option>
 					<option value="WY">Wyoming</option>
-				</select>				
+				</select>								
 			</section>
 			
 			<section>
 				<h2>Contractor/Ref Info</h2>
-				<label for="txtConName">Name:</label> <input type="text" name="txtConName" id="txtConName" value="Freddie Mercury">
-				<label for="numConPhoneNum">Phone Number:</label> <input type="number" name="numConPhoneNum" id="numConPhoneNum" value="420">
-				<label for="txtConEmail">Email:</label> <input type="text" name="txtConEmail" id="txtConEmail" value="TheBoi@google.com">
+				<label for="contractor">Name:</label> <input type="text" name="txtConName" id="contractor" value="Freddie Mercury">
+				<label for="contractor_phone">Phone Number:</label> <input type="number" name="numConPhoneNum" id="contractor_phone" value="420">
+				<label for="contractor_email">Email:</label> <input type="text" name="txtConEmail" id="contractor_email" value="TheBoi@google.com">
 			</section>
 			
 			<section>
 				<h2>Project Info</h2>
-				<input type="text" name="txtProjInfo" value="">
+				<input type="text" id="project" value="">
 				
-				<label for="txtCabinet">Cabinet:</label><input type="" id="txtCabinet" name="txtCabinet">
-				<label for="txtAppliances">Appliances:</label><input type="" id="txtAppliances" name="txtAppliances">
-				<label for="txtFloor">Floor:</label><input type="" name="txtFloor">
-				<label for="txtOtherProj">Other:</label><input type="" id="txtOtherProj" name="txtOtherProj">
+				<label for="cabinet">Cabinet:</label><input type="text" id="cabinet" name="txtCabinet">
+				<label for="appliances">Appliances:</label><input type="text" id="appliances" name="txtAppliances">
+				<label for="floor">Floor:</label><input id="floor" type="text" name="txtFloor">
+				<label for="other">Other:</label><input type="" id="other" name="txtOtherProj">
 			</section>
 
-			<button type="submit">Save Section</button>
+			<button type="button" class="SaveSect">Save Section</button>
 		</fieldset>
 		
 		<h1>Materials/Profile</h1><br>
-		<fieldset class="ProjectDetails">
+		<fieldset class="MatProfile">
 
 			
-			<section id="sectMaterials">
+			<section>
 				<h2>Materials Selected (Slab/Tiles)</h2>
-				<label for="txtKit">Kit:</label><input type="text" id="txtKit" name="txtKit">
-				<label for="txtOtherVan">Van/Other:</label><input type="text" id="txtOtherVan" name="txtOtherVan">
-				<label for="cmbSlabNum">REM/SLAB#:</label>
-					<select name="cmbSlabNum" id="cmbSlabNum">
+				<label for="materials_kit">Kit:</label><input type="text" id="materials_kit" name="txtKit">
+				<label for="materials_van_other">Van/Other:</label><input type="text" id="materials_van_other" name="txtOtherVan">
+				<label for="slab_num">REM/SLAB#:</label>
+					<select name="cmbSlabNum" id="slab_num">
 						<option value="1">1</option>
 					</select>
 					
-				<label for="cmbTile">Tile B/S:</label> 
-					<select id="cmbTile" name="cmbTile"><option value="Y">Y</option><option value="N">N</option></select>
-				<label for="chkSlabMarked">Slab/Rem Marked:</label><input type="checkbox" class="HiderCheck" id="chkSlabMarked" name="chkSlabMarked">
-				<input type="text" name="txtSlabMarked" id="txtSlabMarked">
+				<label for="tile_bs">Tile B/S:</label> 
+					<select id="tile_bs" name="cmbTile"><option value="Y">Y</option><option value="N">N</option></select>
+					
+				<label for="slabrem_marked">Slab/Rem Marked:</label><input type="checkbox" class="HiderCheck" id="slabrem_marked" name="chkSlabMarked">
+				<input type="text" name="txtSlabMarked" id="slabrem_marked_N">
 			</section>
 			
 			<section id="sectProfileOther">
 				<h2>Profile & Other Selections</h2>
 				
-				<label for="radStandard">Standard</label><input type="radio" name="radCut" id="radStandard" value="Standard">
+				<label for="profile_std">Standard</label><input type="radio" name="radCut" id="profile_std" value="Standard">
 				
-				<label for="radRadius numRadius">Radius</label>
-				<input type="radio" name="radCut" id="radRadius" class="HiderRadio">
-				<input title="Enter the length in feet" type="number" name="numRadius">
+				<label for="profile_rad profile_rad_L">Radius</label>
+				<input type="radio" name="radCut" id="profile_rad" class="HiderRadio">
+				<input title="Enter the length in feet" type="number" name="profile_rad_L">
 				
-				<label for="radPrem cmbPrem">Premium</label>
-				<input type="radio" name="radCut" id="radPrem" class="HiderRadio" value="Premium">
+				<label for="profile_prem profile_prem_L">Premium</label>
+				<input type="radio" name="radCut" id="profile_prem" class="HiderRadio" value="Premium">
 				<span>
-					<select id="cmbPrem" name="cmbPrem"> 
+					<select id="" name="cmbPrem"> 
 						<option value="#123">#123</option>
 						<option value="#456">#456</option>
 					</select>
-					<input type="number" name="numPremLenght" title="Enter the length in feet" />
+					<input type="number" id="profile_prem_L" name="numPremLenght" title="Enter the length in feet" />
 				</span>
 				
 				<br>
 				
-				<label for="cmbBackSplash">Back Splash:</label><select id="cmbBackSplash" name="cmbBackSplash">
+				<label for="profile_backs">Back Splash:</label><select id="profile_backs" name="cmbBackSplash">
 					<option value="Y">Y</option>
 					<option value="N">N</option>
 					<option value="O">Maybe</option>
 				</select>
 				
-				<label for="cmbBarSplash">Bar Splash:</label>
-				<select id="cmbBarSplash" name="cmbBarSplash">
+				<label for="profile_bars">Bar Splash:</label>
+				<select id="profile_bars" name="cmbBarSplash">
 					<option value="Y">Y</option>
 					<option value="N">N</option>
 					<option value="O">Maybe</option>
@@ -204,56 +207,57 @@
 			</section>
 			
 			
-			<button type="submit">Save Section</button>
+			<button type="button" class="SaveSect">Save Section</button>
 		</fieldset>
 		
 		<h1>Installation Details</h1><br>
 		<fieldset class="InstalDetails">  
             <!--Kitchen Section-->
             <section>
-            <h2><input type="checkbox" class="chkShowHideKit" name="chkKitchen" id="chkKitchen">Kitchen</h2>
+            <h2><input type="checkbox" class="chkShowHideKit" name="chkKitchen" id="kitchen_pkg">Kitchen</h2>
             <div class="ShowHideKit">
-                <label for="kitSink">Sink #:</label><select name="kitSink" id="kitSink">
+                <label for="kitchen_sink_num">Sink #:</label><select name="kitSink" id="kitchen_sink_num">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                 </select>
-                <label for="chkGrids">Grids:</label><input type="checkbox" name="chkGrids" id="chkGrids">
-                <label for="chkStrainer">Strainer:</label><input type="checkbox" name="chkStrainer" id="chkStrainer">
-                <label for="numFaucet">Faucet#:</label><select name="faucetNumber" id="faucetNumber">
+                <label for="kitchen_grids">Grids:</label><input type="checkbox" name="chkGrids" id="kitchen_grids">
+                <label for="kitchen_strainer">Strainer:</label><input type="checkbox" name="chkStrainer" id="kitchen_strainer">
+                <label for="kitchen_faucet_num">Faucet#:</label><select name="faucetNumber" id="kitchen_faucet_num">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                 </select>
-                <label for="chkCutboard">CutBoard:</label><input type="checkbox" name="chkCutboard" id="chkCutboard">
-                <label for="chkDisplay">Display:</label><input type="checkbox" name="chkDisplay" id="chkDisplay">
+                <label for="kitchen_cutboard">CutBoard:</label><input type="checkbox" name="chkCutboard" id="kitchen_cutboard">
+                <label for="kitchen_soap_disp">Soap Dispencer:</label><input type="checkbox" name="chkDisplay" id="kitchen_soap_disp">
                 
                 <!--Cut Section-->
                 <h3>Cut</h3>
-                <label for="cutSink">Sink #:</label><select name="cutSink" id="cutSink">
+                <label for="kitchen_cut_sink">Sink #:</label><select name="cutSink" id="kitchen_cut_sink">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                 </select>
-                <label for="chkCookTop">CookTop:</label><input type="checkbox" name="chkCookTop" id="chkCookTop">
-                <label for="chkBrackets">Brackets($50):</label><input type="checkbox" name="chkBrackets" class="HiderCheck" id="chkBrackets">
+				<label for="kitchen_cutboard">Holes:</label><input type="number" id="kitchen_cutboard">
+                <label for="kitchen_cook_top">CookTop:</label><input type="checkbox" name="chkCookTop" id="kitchen_cook_top">
+                <label for="kitchen_brackets">Brackets($50):</label><input type="checkbox" name="chkBrackets" class="HiderCheck" id="kitchen_brackets">
                 <span>
-                    <label for="numQuantity">Qty:</label><input type="number" name="numQuantity" id="numQuantity">
-                    <label for="numSize">Size:</label><input type="number" name="numSize" id="numSize">
-                    <label for="chkInstall">Install($150):</label><input type="checkbox" name="chkInstall" id="chkInstall">
+                    <label for="kitchen_brackets_qty">Qty:</label><input type="number" name="numQuantity" id="kitchen_brackets_qty">
+                    <label for="kitchen_brackets_size">Size:</label><input type="number" name="numSize" id="kitchen_brackets_size">
+                    <label for="kitchen_install">Install($150):</label><input type="checkbox" name="chkInstall" id="kitchen_install">
                 </span>
                 
                 <!--Services Section-->
                 <h3>Services</h3>
-                <label for="kitTearService">Tear:</label><select name="kitTearService" id="kitTearService">
+                <label for="kitchen_tear">Tear:</label><select name="kitTearService" id="kitchen_tear">
                     <option value="1">Yes</option>
                     <option value="2">No</option>
                     <option value="3">Maybe</option>
                 </select>
-                <label for="kitPlumbService">Plumb:</label><select name="kitPlumbService" id="kitPlumbService">
+                <label for="kitchen_plumb">Plumb:</label><select name="kitPlumbService" id="kitchen_plumb">
                     <option value="1">Yes</option>
                     <option value="2">No</option>
                     <option value="3">Maybe</option>
@@ -263,49 +267,47 @@
             
             <!--Vanity Section-->
             <section>
-            <h2><input type="checkbox" class="chkShowHideVan" name="chkVanity" id="chkVanity">Vanity</h2>
+            <h2><input type="checkbox" class="chkShowHideVan" name="chkVanity" id="vanity_pkg">Vanity</h2>
             <div class="ShowHideVan">
 
                 <!--Cut Section-->
                 <h3>Cut</h3>
-                <label for="vanSinkCut">Sink Cut:</label><select name="vanSinkCut" id="vanSinkCut">
+                <label for="vanity_cut_sink">Sink Cut:</label><select name="vanSinkCut" id="vanity_cut_sink">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                 </select>
-                <label for="txtSinkType">Sink Type:</label><input type="text" name="txtSinkType" id="txtSinkType">
-                <label for="numSinkQty">Qty:</label><input type="number" name="numSinkQty">
+                <label for="vanity_sink_num">Sink Type:</label><input type="text" name="txtSinkType" id="vanity_sink_num">
+                <label for="vanity_sink_qty">Qty:</label><input type="number" id="vanity_sink_qty">
                 
-                <label for="numFaucet" class="ShowHide">Faucet#:</label><select name="faucetNumber" id="faucetNumber">
+                <label for="vanity_facuet_num" class="ShowHide">Faucet#:</label><select name="faucetNumber" id="vanity_facuet_num">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                 </select>
-                <label for="numFaucQty">Qty:</label><input type="number" name="numFaucQty" id="numFaucQty">
+                <label for="vanity_facuet_qty">Qty:</label><input type="number" name="numFaucQty" id="vanity_facuet_qty">
                 
-                <label for="chkDrain">Drain:</label><input type="checkbox" name="chkDrain" class="HiderCheck" id="chkDrain">
-                <span>
-                    <label for="numFaucQty">Qty:</label><input type="number" name="numFaucQty" id="numFaucQty">
-                </span>
+                <label for="vanity_drain">Drain:</label><input type="checkbox" name="chkDrain" class="HiderCheck" id="vanity_drain">
+				<span>
+                    <label for="vanity_drain_qty">Qty:</label><input type="number" name="numFaucQty" id="vanity_drain_qty">
+				</span>
                 
                 <h3>Services</h3>
-                <label for="vanTearService">Tear:</label><select name="vanTearService" id="vanTearService">
+                <label for="vanity_tear">Tear:</label><select name="vanTearService" id="vanity_tear">
                     <option value="1">Yes</option>
                     <option value="2">No</option>
                     <option value="3">Maybe</option>
                 </select>
-                <label for="vanPlumbService">Plumb:</label><select name="vanPlumbService" id="vanPlumbService">
+                <label for="vanity_plumb">Plumb:</label><select name="vanPlumbService" id="vanity_plumb">
                     <option value="1">Yes</option>
                     <option value="2">No</option>
                     <option value="3">Maybe</option>
                 </select>
             </div>
             </section>                
-            
-            <button type="submit">Save Section</button>                
-                
+            <button type="button" class="SaveSect">Save Section</button>                
         </fieldset>
 
 		
@@ -313,102 +315,150 @@
 		<fieldset id="Estimate">
 			<section>
 				<h2>Estimates</h2>
-				<label for="EstimateQuantity">Estimate Quantity: </label><input type="text" name="EstimateQuantity"/>
-				 
-				<label for="txtActualQuantity">Actual Quantity: </label><input type="text" name="txtActualQuantity"/>
-				 
-				<!-- 
-				Textarea can be manually or auto resized. Use class Resize
-				-->
-				<label for="txtEstimateTotal">Estimate $: </label><textarea name="txtEstimateTotal" id="EstimateTotal" class="Resize"></textarea>
-				 
-				<label for="txtInstallationNotes">Important Notes for Installation: </label><textarea name="txtInstallationNotes" id="InstallationNotes" class="Resize"></textarea>
+				<label for="estimated_qty">Estimate Quantity: </label><input type="text" id="estimated_qty"/>
+				<label for="actual_qty">Actual Quantity: </label><input type="text" id="actual_qty"/>
+	
+				<!--Textarea can be manually or auto resized. Use class Resize-->
+				<label for="estimate">Estimate $: </label><input type="text" name="txtEstimateTotal" id="estimate"></textarea>
+				<label for="installation_N" id="lblInstallationNotes"class="labelfor-BigText">Important Notes for Installation: </label><textarea name="txtInstallationNotes" id="installation_N" class="Resize bigTextBox"></textarea>
 			</section>
-			<button type="submit">Save Section</button>
+			<button type="button" class="SaveSect">Save Section</button>
 		</fieldset>
 		
 		<h1>Dates</h1><br>
 		<fieldset id="Dates">
+			<label for="availability">Availability:</label><input type="text" id="availability">
+			
 			<section>
 				<h2>Schedule</h2>
-				<label for="txtTemplate">Template: </label><input type="text" name="txtTemplate" class="Datepick"/>
+				<label for="schedule_template">Template: </label><input type="text" id="schedule_template" class="Datepick"/>
 				 
-				<label for="txtTear">Tear: </label><input type="text" name="txtTear" class="Datepick"/>
-				<label for="Con1">Contractor: </label><input type="checkbox" name="Con1" value="Contractor" class="Contractor"/>
+				<label for="schedule_tear">Tear: </label><input type="text" id="schedule_tear" class="Datepick"/>
+				<label for="Con1">Contractor: </label><input type="checkbox" name="Con1" value="Contractor" id="schedule_tear_con"/>
 				 
-				<label for="txtBrackets">Brackets: </label><input type="text" name="txtBrackets" class="Datepick"/>
-				<label for="Con2">Contractor: </label><input type="checkbox" name="Con2" value="Contractor" class="Contractor"/>
+				<label for="schedule_brackets">Brackets: </label><input type="text" id="schedule_brackets" class="Datepick"/>
+				<label for="schedule_brackets_con">Contractor: </label><input type="checkbox" id="schedule_brackets_con" value="Contractor" class="Contractor"/>
 				 
-				<label for="txtInstall">Install/Drop: </label><input type="text" name="txtInstall" class="Datepick"/>
+				<label for="schedule_install_drop">Install/Drop: </label><input type="text" id="schedule_install_drop" class="Datepick"/>
 				 
-				<label for="txtPlumb">Plumb: </label><input type="text" name="txtPlumb" class="Datepick"/>
-				<label for="Con3">Contractor: </label><input type="checkbox" name="Con3" value="Contractor" class="Contractor"/>
+				<label for="schedule_plumb">Plumb: </label><input type="text" id="schedule_plumb" class="Datepick"/>
+				<label for="schedule_plumb_con">Contractor: </label><input type="checkbox" id="schedule_plumb_con" value="Contractor" class="Contractor"/>
 				 
 			</section>
 			<section>
 				<h2>Customer/Title Info</h2>
-				<label for="txtInvoiceSent">Order Invoice Sent: </label><input type="text" name="txtInvoiceSent" class="Datepick"/>
-				 
-				<label for="txtConfirmationReceived">Order Confirmation Received: </label><input type="text" name="txtConfirmationReceived" class="Datepick"/>
-				 
-				<label for="txtServiceCall">Service Call: </label><input type="text" name="txtServiceCall" class="Datepick"/>
-				<label for="chkPic">Pic</label><input type="checkbox" name="chkPic"/>
-				 
-				<label for="txtServiceSchedule">Service Schedule: </label><input type="text" name="txtServiceSchedule" class="Datepick"/>
-				 
+				<label for="customer_inv_sent">Order Invoice Sent: </label><input type="text" id="customer_inv_sent" class="Datepick"/>
+				
+				<label for="customer_conf_rvd">Order Confirmation Received: </label><input type="text" id="customer_conf_rvd" class="Datepick"/>
+				
+				<label for="customer_srv_call">Service Call: </label><input type="text" id="customer_srv_call" class="Datepick"/>
+				<label for="customer_srv_call_res">Pic:</label><input type="checkbox" id="customer_srv_call_res"/>
+				
+				<label for="customer_srv_sch">Service Schedule: </label><input type="text" id="customer_srv_sch" class="Datepick"/>
+				
 				<!--
 				Only show if checked, use ShowHide class for what is being toggled, chkShowHide class for the checkbox
 				-->
-				<label for="chkCompleted">Service Completed: </label><input type="checkbox" name="chkCompleted" id="chkServiceCompleted" class="HiderCheck"/>
-				<input type="text" name="txtServiceCompleted" class="Datepick ShowHide" id="txtServiceCompleted" title="Date the service was completed"/>
+				<label for="customer_srv_comp">Service Completed: </label><input type="checkbox" name="chkCompleted" id="customer_srv_comp" class="HiderCheck"/>
+				<input type="text" name="txtServiceCompleted" class="Datepick" id="customer_srv_comp_D" title="Date the service was completed"/>
 			</section>
 			<section>
-				<!-- 
-				Take data from earlier?
-				-->
 				<h2>Customer Picked Up</h2>
-				<label for="txtFaucet">Faucet: </label><input type="text" name="txtFaucet" class="Datepick"/>
+				<label for="picked_faucet">Faucet: </label><input type="text" id="picked_faucet" class="Datepick"/>
 				 
-				<label for="txtGridSet">Grid Set: </label><input type="text" name="txtGridSet" class="Datepick"/>
+				<label for="picked_grid">Grid Set: </label><input type="text" id="picked_grid" class="Datepick"/>
 				 
-				<label for="txtStrainer">Strainer: </label><input type="text" name="txtStrainer" class="Datepick"/>
+				<label for="picked_strainer">Strainer: </label><input type="text" id="picked_strainer" class="Datepick"/>
 				 
-				<label for="txtBrackets">Brackets: </label><input type="text" name="txtBrackets" class="Datepick"/>
+				<label for="picked_brackets">Brackets: </label><input type="text" id="picked_brackets" class="Datepick"/>
 				 
-				<label for="txtCounters">Counters: </label><input type="text" name="txtCounters" class="Datepick"/>
+				<label for="picked_counters">Counters: </label><input type="text" id="picked_counters" class="Datepick"/>
 			</section>
 			
-			<button type="submit">Save Section</button>
+			<section>
+				<label for="fabricating">Fabricating:</label>
+				<input type="text" id="fabricating" title="person/group responsible for fabrication">
+				
+				<label for="install">Installer:</label>
+				<input type="text" id="install" title="person/group responsible for installation">
+				
+				<label for="sink_rvd">Sink Recieved:</label>
+				<input type="text" class="Datepick" id="sink_rvd">
+				
+				<label for="mat_sent">Materials Sent</label>
+				<input type="text" class="Datepick" id="mat_sent" title="date the materials were sent">
+				<label for="mat_sent_qty">Qty:</label>
+				<input id="mat_sent_qty" type="number" title="Number of materials that were sent">
+				
+				<label for="sink_sent">Sink Sent:</label>
+				<input type="text" id="sink_sent" class="Datepick" title="Date the sink was sent">
+				<label for="sink_sent_qty">Qty:</label>
+				<input type="number" id="sink_sent_qty" title="Number of sinks that were sent">
+				
+				<label for="ord_conf_sent">Order sent to fabricator:</label>
+				<input type="text" class="Datepick" id="ord_conf_sent" title="Date the Order for the materials was sent to the fabricator">
+				
+			</section>
+			<button type="button" class="SaveSect">Save Section</button>
 		</fieldset>
 		
 		<h1>Notes/Estimates</h1><br>
 		<fieldset id="NotesEstimates">
-			<label for="chkRecievedLay">Client has Recieved Layout</label><input class="HiderCheck" type="checkbox" name="chkRecievedLay" id="chkRecievedLay"><input name="datLayoutRecieved" id="datLayoutRecieved" class="Datepick" type="text">
-			
-			<label for="txtBigNotes" class="labelfor-BigText">Notes:</label><textarea class="bigTextBox" type="text" id="txtBigNotes" name="txtBigNotes"></textarea>
-			
-			
+			<section>
+				<h2>Notes/Estimates</h2>
+				<label for="notes" class="labelfor-BigText">Notes:</label><textarea class="bigTextBox Resize" type="text" id="notes" name="txtBigNotes"></textarea>
+				<label for="rvd_layout">Client has Recieved Layout</label><input class="HiderCheck" type="checkbox" name="chkRecievedLay" id="rvd_layout"><input name="datLayoutRecieved" id="datLayoutRecieved" class="Datepick" type="text">
+			</section>		
 			<section>
 				<h2>Follow-up</h2>
 				
-				<div id="ulFollowUp">
-					<ul>
-						<li>
-							<input type="text" class="Datepick"/> - <input type="text" />
-						</li>
-						<li>
-							<input type="text" class="Datepick"/> - <input type="text" />
-						</li>
-					</ul>
+				<div id="follow_up">
+					<!-- Content added when addDate button is clicked -->
 				</div>
+				<input type="button" id="addDate" value="Add Date" name="addDate"></input>
 			</section>
+			<button type="button" type="submit">Save Section</button>
+		</fieldset>
+
+		<h1>Deposit/Balance</h1><br>
+		<fieldset id="Balance">
+			<section>
+				<h2>Advance Received</h2>
+				<label for="txtDeposit">Amount: </label><input type="text" id="txtDeposit" name="txtDeposit" placeholder="$"/>
+				<label for="txtDepositDate">Date: </label><input type="text" id="txtDepositDate" name="txtDepositDate" class="Datepick"/>
+				<label for="cmbPaymentAdvanceReceived">Payment Method: </label>
+				<select id="cmbPaymentAdvancedReceived" name="cmbPaymentAdvancedReceived">
+					<option value="Check">Check</option>
+					<option value="Cash">Cash</option>
+					<option value="CreditCard">Credit Card</option>
+				</select>
+			</section>
+			<section>
+				<h2>Advance Balance</h2>
+				<label for="txtDepositBalance">Amount: </label><input type="text" id="txtDepositBalance" name="txtDepositBalance" placeholder="$"/>
+				<label for="txtDepositBalanceDate">Date: </label><input type="text" id="txtDepositBalanceDate" name="txtDepositBalanceDate" class="Datepick"/>
+			</section>
+			<section>
+				<h2>Balance Due</h2>
+				<label for="txtBalanceDue">Amount: </label><input type="text" id="txtBalanceDue" name="txtBalanceDue" placeholder="$"/>
+				<label for="txtBalanceDueDate">Date: </label><input type="text" id="txtBalanceDueDate" name="txtBalanceDueDate" class="Datepick"/>
+			</section>
+			<section>
+				<h2>Final Balance</h2>
+				<label for="txtFinalBalance">Amount: </label><input type="text" id="txtFinalBalance" name="txtFinalBalance" placeholder="$"/>
+				<label for="txtFinalBalanceDate">Date: </label><input type="text" id="txtFinalBalanceDate" name="txtFinalBalanceDate" class="Datepick"/>
+			</section>
+			<button type="button" type="submit">Save Section</button>
 		</fieldset>
 		
-		<button id="saveAll">Save All</button>
+		<button type="button" class="SaveSect">Save All</button>
 	</form>
 	
 	
 	<script src="Scripts/ShowHide-Cli.js" name="ShowHide-CliEdit"></script>
+	<script src="Scripts/SortDisplayFunctions.js"></script>
+	<script src="Scripts/SendClients.js" ></script>
+	
 	
 	<script name="hiddenOnes">
 	$(document).ready(function(){
@@ -441,8 +491,7 @@
 		});
 		
 		// click checkbox to reveal textbox, hide when checkbox is unclicked
-		let checked = false;
-		
+		let checked = $(".chkShowHideKit").is(":checked");
 		if (checked)
 			$(".ShowHideKit").show();
 		else
@@ -452,14 +501,10 @@
 			$(".ShowHideVan").show();
 		else
 			$(".ShowHideVan").hide();
+			
 		// kitchen section
 		$(".chkShowHideKit").click(function() {            
 			if ($(this).is(":checked"))
-				checked = true;
-			else
-				checked = false;
-
-			if (checked)
 				$(".ShowHideKit").show();
 			else
 				$(".ShowHideKit").hide();
@@ -468,11 +513,6 @@
 		// vanity section
 		$(".chkShowHideVan").click(function() {                
 			if ($(this).is(":checked"))
-				checked = true;
-			else
-				checked = false;
-
-			if (checked)
 				$(".ShowHideVan").show();
 			else
 				$(".ShowHideVan").hide();
@@ -492,11 +532,41 @@
 		$(".Datepick").datepicker({
 			changeMonth: true,
 			changeYear: true,
+			firstDay: 0,
+			showAnim: "blind",
 		});
 		
 		$(".Datepick").attr("placeholder", "Datepicker").attr("readonly", "true");
 	});
 	</script>
+	<script>
+	$(document).ready(function() {
+		// Adds a date and comment to the Notes/Estimates section
+		
+		$("#addDate").on("click" ,function() {
+			var followUpHtml = "<ul class='Comments'><li><input type='text' class='Datepick'/> - <textarea class='Resize bigTextBox'/></li></ul>"
+			$("#follow_up").append(followUpHtml);
+			
+			// Allow datepicker functionality
+			$(".Datepick").datepicker({
+				changeMonth: true,
+				changeYear: true,
+				firstDay: 0,
+				showAnim: "blind",
+			});
+			$(".Datepick").attr("placeholder", "Datepicker").attr("readonly", "true");
+			
+			// Allow textarea to autoresize
+			$(".Resize").on('input', function() {
+				this.style.height = 'auto';
+				this.style.height =  (this.scrollHeight) + 'px';
+			});
+			
+			// Make sure button doesn't refresh the page
+			event.preventDefault();
+		});
+	});
+</script>
 	
 </body>
 </html>
