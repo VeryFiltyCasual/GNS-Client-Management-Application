@@ -219,12 +219,12 @@ function createClientViewer({user, tokens}) {
       //UPDATE
       case 3:
         //[STAGE?]
-        win.main.webContents.send("updatedClients", {cliarr: message.data, stage: 0});
+        win.main.webContents.send("updateOneClient", message.data);
         break;
       
       //ADD_COMMENT
       case 4:
-        win.main.webContents.send("updatedComments", {comarr: message.data});
+        win.main.webContents.send("addComment", message.data);
         break;
       
       //DELETE_COMMENT

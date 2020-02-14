@@ -132,8 +132,21 @@ var testData = [
 		
 		
 		"comments": [
-			"Client is color blind",
-			"Client is only red-green color blind"
+			{
+				"id": 0,
+				"client_id": 0,
+				"author_id": 4,				
+				"message": "Client is color blind",
+				"date": "2012-05-15T10:05:45-06:00"
+				
+			},
+			{
+				"id": 1,
+				"client_id": 0,
+				"author_id": 5,			
+				"message": "Client is only read-green color blind",
+				"date": "2012-05-16T10:05:45-06:00"
+			}
 		]
 	},
 	

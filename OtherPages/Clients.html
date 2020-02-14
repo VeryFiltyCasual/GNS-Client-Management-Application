@@ -427,11 +427,37 @@
 			console.log("new clients recieved from the server");
 		});
 		
-		//gets an updated comment array
-		ipcRenderer.on("updatedComments", (event, data) =>{
-			AllClients = data.cliarr;
-			
-			recievedClients(currentStageForm);
+		//gets a new comment
+		ipcRenderer.on("addComment", (event, comment) =>{
+			for (var i = 0; i < AllClients.length(); i++){
+				if (comment.client_id == AllClients[i].id){
+					AllClients[i].comments.push(comment);
+				}
+			}
+		});
+		//comment is deleted
+		ipcRenderer.on("addComment", (event, data) =>{
+			//find the client
+			for (var i = 0; i < AllClients.length(); i++){
+				if (data.client_id == AllClients[i].id){
+					
+					//find the comment
+					for (var comi = 0; comi < AllClients[i].comments.length(); i++){
+						if (data.comment_id == AllClients[i].comments[comi].id)						
+							AllClients[i].comments.splice(comi, 1); //delete comment
+					}
+					
+				}
+			}
+		});
+		
+		ipcRenderer.on("updateOneClient", (event, newcli)=>{
+			for (var i = 0; i < AllClients.length(); i++){
+				if (newcli.id == AllClients[i].id){
+					AllClients[i] = newcli;
+					return;
+				}
+			}
 		});
 		
 		//get google profile picture
