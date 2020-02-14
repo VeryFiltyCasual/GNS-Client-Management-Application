@@ -270,6 +270,14 @@ client.on('message', async rawMessage => {
 		
 		client.send(JSON.stringify(jsonMessage));
 	})
+	ipcMain.on("UpdateClient", (event, arg) =>{
+		let jsonMessage = {
+			"status": "ok",
+			"event": 3,
+			"data": arg
+		}
+		client.send(JSON.stringify(jsonMessage));
+	})
 	ipcMain.on("NewStage", (event, arg) => {
 		let jsonMessage = {
 			"status": "ok",
@@ -279,6 +287,8 @@ client.on('message', async rawMessage => {
 		
 		client.send(JSON.stringify(jsonMessage));
 	})
+	
+
 }
 
 
