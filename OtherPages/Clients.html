@@ -199,7 +199,7 @@
 			function populateComments(clientCom, thisCliInfo){
 				let clientData = $(thisCliInfo).find(".ClientData");
 			
-				if (clientCom.comments == [] || !aString(clientCom.comments[0]) || !aString(clientCom.comments))
+				if (!clientCom.comments || clientCom.comments == [] || !aString(clientCom.comments[0]) || !aString(clientCom.comments))
 					$("<p class='info'>No comments for this user yet</p>").appendTo(clientData);
 				else {
 					for(var c = 0; c < clientCom.comments.length; c++){
