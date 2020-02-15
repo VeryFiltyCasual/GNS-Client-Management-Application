@@ -128,6 +128,9 @@ function prepareExtraWin(){
     webPreferences: {
       nodeIntegration: true
     },
+	
+	parent: win.main,
+	modal: false
   })
 	
     win.extra.on("closed", function () {
