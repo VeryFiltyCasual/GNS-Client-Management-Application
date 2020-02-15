@@ -311,10 +311,25 @@ function createClientViewer({user, tokens}) {
 			"event": 9,
 			"data": arg
 		}
-		
 		client.send(JSON.stringify(jsonMessage));
-	});
-
+  });
+  //Handles when the user adds a comment
+  ipcMain.on('addComment', (e, {message, client_id}) => {
+    //Create a formatted message
+    const wsMessage = {
+      status: 'ok',
+      event: 4,
+      data: {
+        client_id,
+        message,
+        date: new Date(Date.now()).toISOString(),
+        author_name: user.name,
+        author_picture: user.picture
+      }
+    }
+    console.log(wsMessage);
+    client.send(JSON.stringify(wsMessage));
+  });
 }
 
 

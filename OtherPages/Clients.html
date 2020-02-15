@@ -134,6 +134,10 @@
 				//opens the clicked client info
 				$(thisClient).find(".ListBody").slideToggle(timeDelay);
 				$(thisClient).find(".CHeadTopLinks").toggle(timeDelay);
+
+				$("#comment").remove();
+				$("#AddComment").remove();
+				$("#cancel").remove();
 			});
 			
 		});
@@ -200,14 +204,60 @@
 				let clientData = $(thisCliInfo).find(".ClientData");
 			
 				if (!clientCom.comments || clientCom.comments == [] || !aString(clientCom.comments[0]) || !aString(clientCom.comments))
-					$("<p class='info'>No comments for this user yet</p>").appendTo(clientData);
+					$("<p class='info'>No comments for this user yet</p><br>").appendTo(clientData);
 				else {
 					for(var c = 0; c < clientCom.comments.length; c++){
-						$("<p class='info'>" + clientCom.comments[c] + "</p><br>").appendTo(clientData);
+						const comment = `
+							<div class="comContainer">
+								<div>
+									<img src='${clientCom.comments[c].author_picture}'/><h4>${clientCom.comments[c].author_name}</h4><strong>${new Date(clientCom.comments[c].date).toDateString()}</strong>
+								</div>
+								<p>${clientCom.comments[c].message}</p>
+							</div><br>
+						`;
+						$(comment).appendTo(clientData);
+						//$("<p class='info'>" + clientCom.comments[c] + "</p><br>").appendTo(clientData);
 					}
 				}
+				//Textbox for the comment
+				let commentBox = $("<input type='text' id='comment' placeholder='Comment...'/>");
+				commentBox.hide();
+				clientData.append(commentBox);
+				//Add the add comment button at the end
+				$(`<br><button id="AddComment" class="BlueAdd">+ Add Comment</button>`).appendTo(clientData);
+				$("<button id='cancel' class='BlueAdd'>Cancel</button>").appendTo(clientData).hide();
+
+				//Keeps track of if the user is adding a comment or not
+				let isCommenting = false;
+				$("#AddComment").on('click', () => {
+					//If the user hasn't opened the text box yet
+					if (!isCommenting) {
+						//Open it
+						$("#comment").show();
+						$("#cancel").show();
+						$("#AddComment").text("Submit");
+					} else {
+						//If they have, close it and submit the comment
+						//Get the text
+						const message = $("#comment").val();
+						if (!messsage) return;
+						//Send it to the main process
+						ipcRenderer.send('addComment', {message, client_id: clientCom.id});
+						closeComment();
+					}
+					isCommenting = !isCommenting;
+				});
+				$("#cancel").on('click', () => {
+					isCommenting = false;
+					closeComment();
+					$("#comment").val('');
+				});
 			}
-			
+			function closeComment() {
+				$("#comment").hide();
+				$("#cancel").hide();
+				$("#AddComment").text("+ Add Comment");
+			}
 			//makes single client html
 			function makeAClient(client, stage){
 				let btnMessage ="";				
@@ -381,6 +431,7 @@
 					
 					ipcRenderer.send("NewStage", {client_id: thisID, new_stage: newStage})
 				});
+				
 			});
 		</script>
 		
