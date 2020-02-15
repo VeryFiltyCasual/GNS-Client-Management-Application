@@ -396,13 +396,14 @@
 			ipcRenderer.send("display-client-info", getClient(AllClients, cliID));
 		});
 		
-		$("#ClientList").on("click", ".btnEditInfo", function() {
+		$("#ClientList").on("click", ".btnEditInfo", function(e) {
 			//send the 'display-client-edit' command to the main js (will display new page with client info)
 			//needs id
 			let cliID = $(this).parent().parent().parent().find(".cliID").text();
 			
 			ipcRenderer.send("display-client-edit", getClient(AllClients, cliID));
 			$("body").addClass("ui-widget-overlay");
+			e.stopPropagation();
 		});
 		
 		//Update the profile picture
@@ -430,8 +431,8 @@
 		ipcRenderer.on("addComment", (event, comment) =>{
 			for (var i = 0; i < AllClients.length(); i++){
 				if (comment.client_id == AllClients[i].id){
-					AllClients[i].comments.push(comment
-					return
+					AllClients[i].comments.push(comment);
+					return;
 				}
 			}
 		});
