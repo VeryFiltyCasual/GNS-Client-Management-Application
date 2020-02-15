@@ -402,6 +402,7 @@
 			let cliID = $(this).parent().parent().parent().find(".cliID").text();
 			
 			ipcRenderer.send("display-client-edit", getClient(AllClients, cliID));
+			$("body").addClass("ui-widget-overlay");
 		});
 		
 		//Update the profile picture
@@ -411,6 +412,11 @@
 		
 		
 		/*********Recieve**********/
+		//extra window is closed, remove the gray out overlay
+		ipcRenderer.on("ExtraWinClosed", (event) =>{
+			$("body").removeClass("ui-widget-overlay");
+		});
+		
 		//gets an updated client array
 		ipcRenderer.on("updatedClients", (event, data) =>{			
 			AllClients = data.cliarr;

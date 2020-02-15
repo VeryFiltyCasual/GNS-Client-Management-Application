@@ -131,12 +131,8 @@ function prepareExtraWin(){
   })
 	
     win.extra.on("closed", function () {
-      		
-		//dialog.showMessageBox(null, dialogOptions_ExitEdit, (response, checkboxChecked) => {
-		//	if (response == 1)
-    win.extra = null;
+		win.extra = null;
     			
-		//});
         win.main.webContents.send("ExtraWinClosed");
     })
 }
