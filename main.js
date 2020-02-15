@@ -123,11 +123,14 @@ function promptSignIn() {
 function prepareExtraWin(){
   // Create the browser window.
   win.extra = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1000,
+    height: 800,
     webPreferences: {
       nodeIntegration: true
     },
+	
+	parent: win.main,
+	modal: false
   })
 	
     win.extra.on("closed", function () {
