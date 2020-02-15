@@ -218,7 +218,6 @@ function createClientViewer({user, tokens}) {
       
       //UPDATE
       case 3:
-        //[STAGE?]
         win.main.webContents.send("updateOneClient", message.data);
         break;
       
@@ -229,13 +228,18 @@ function createClientViewer({user, tokens}) {
       
       //DELETE_COMMENT
       case 5:
-        win.main.webContents.send("updatedComments", {comarr: message.data});
+        win.main.webContents.send("delComment", {comarr: message.data});
         break;
         
       //ADD_CLIENT
       case 7:
-        win.main.webContents.send("updatedClients", {comarr: message.data});
+        win.main.webContents.send("newClient", message.data);
         break;
+	
+	  //CLIENT_NEXTSTAGE
+	  case 8:
+		win.main.webContents.send("changedStage", message.data);
+		break;
         
       default:
         console.log('Unrecognized message');
@@ -302,7 +306,15 @@ function createClientViewer({user, tokens}) {
 		
 		client.send(JSON.stringify(jsonMessage));
 	})
-	
+	ipcMain.on("addUser", (event, arg)=>{
+		let jsonMessage = {
+			"status": "ok",
+			"event": 9,
+			"data": arg
+		}
+		
+		client.send(JSON.stringify(jsonMessage));
+	});
 
 }
 

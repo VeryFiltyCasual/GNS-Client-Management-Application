@@ -185,7 +185,7 @@ aside{
 	color: #dfdfdf;
 }
 /* "add client" button */
-form{
+#ClientCategories form{
 	line-height: 1.5em;
 	width: 100%;
 	display: flex;

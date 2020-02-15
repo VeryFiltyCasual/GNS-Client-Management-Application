@@ -37,6 +37,14 @@
 			});
 		</script>
 		
+		<div id="newAcctForm">
+			<form>
+				<h2>Create a new user</h2><br>
+				<label for="email">Google account</label>
+				<input type="email" name="email" id="email" />
+			</form>
+		</div>
+		
 		<!-- holds the navs right under the header -->
 		<article>
 			<nav class="AddRemove">
@@ -72,7 +80,9 @@
 			</ul>
 		</main>
 		
-		<script name="SortBy">
+		<script>
+		let newEmail = "";
+		
 		$(document).ready(function(){
 			$("#SortBy").selectmenu({
 				width: 200,
@@ -83,9 +93,52 @@
 				  },
 			
 				change: function(event, data){
-
+					
 				}
 			});
+			
+			$("#newAcctForm").dialog({
+				autoOpen: false,
+				modal: true,
+				height: 270,
+				width: 350,
+				
+				buttons:[
+					{
+						text: "Create user",
+						click: function(){
+							var email = $("#email").val();
+							var emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+							
+							if (email === '' || !(email).match(emailRegex)) {
+								alert("Invalid Email");
+							} else {
+								newEmail = email;
+								$("#newAcctForm").dialog("close");
+							}
+						}
+					},
+					{
+						text: "Cancel",
+						click: function(){
+							$("#newAcctForm").dialog("close");
+						}
+					}
+				],
+				
+				close: function(){
+					if (newEmail != ""){
+						jsonMsg = { email: newEmail };					
+						ipcRenderer.send("addUser", jsonMsg); //[DEV]
+						
+						newEmail = "";
+					}
+				}
+			});
+			
+			$(".GreenAdd").click(function(){
+				$("#newAcctForm").dialog("open");
+			})
 		});
 		</script>
 	</body>

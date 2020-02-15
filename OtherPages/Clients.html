@@ -233,7 +233,6 @@
 					.append(html_ButtonsNav)
 					.append('<div class="ClientData"></div>')
 					.append("<button class='ClientNextPhase'>" + btnMessage + "</button>"); 
-				console.log(btnMessage);
 				
 				//make the head
 				let htmlLiHead = $("<section class='ListHead'></section>")
@@ -262,11 +261,6 @@
 				
 			}	
 			
-			//doesnt allow site to be interactable while awaiting clients
-			function requestingClients(event, data = "none"){
-				$("body").addClass("ui-widget-overlay");
-				ipcRenderer.send(event, data)
-			}
 			function recievedClients(stage){
 				$("body").removeClass("ui-widget-overlay");
 				
@@ -293,7 +287,7 @@
 					
 					//populateMain(currentStageForm); //[DEV, GET RID LATER]
 					ipcRenderer.send("RequestStage" + currentStageForm);
-					console.log('Clients recieved from stage ' + currentStageForm);
+					console.log('Sent stage ' + currentStageForm + ' client request');
 
 					//styling
 					$("aside .SmallCatButtons").removeClass("view-selected");
@@ -385,8 +379,7 @@
 					let thisID = parseInt($(this).parent().parent().find(".cliID").text());
 					let newStage = currentStageForm >= 3 ? 2 : currentStageForm++;
 					
-					
-					requestingClients("NewStage", {client_id: thisID, new_stage: newStage});
+					ipcRenderer.send("NewStage", {client_id: thisID, new_stage: newStage})
 				});
 			});
 		</script>
@@ -427,16 +420,17 @@
 			console.log("new clients recieved from the server");
 		});
 		
-		//gets a new comment
+		//received a new comment
 		ipcRenderer.on("addComment", (event, comment) =>{
 			for (var i = 0; i < AllClients.length(); i++){
 				if (comment.client_id == AllClients[i].id){
-					AllClients[i].comments.push(comment);
+					AllClients[i].comments.push(comment
+					return
 				}
 			}
 		});
-		//comment is deleted
-		ipcRenderer.on("addComment", (event, data) =>{
+		//a comment has been deleted
+		ipcRenderer.on("delComment", (event, data) =>{
 			//find the client
 			for (var i = 0; i < AllClients.length(); i++){
 				if (data.client_id == AllClients[i].id){
@@ -445,18 +439,38 @@
 					for (var comi = 0; comi < AllClients[i].comments.length(); i++){
 						if (data.comment_id == AllClients[i].comments[comi].id)						
 							AllClients[i].comments.splice(comi, 1); //delete comment
+							
 					}
 					
+					return
 				}
 			}
 		});
 		
+		//one client is updated
 		ipcRenderer.on("updateOneClient", (event, newcli)=>{
-			for (var i = 0; i < AllClients.length(); i++){
+			for (var i = 0; i < AllClients.length() && currentStageForm == newcli.stage; i++){
 				if (newcli.id == AllClients[i].id){
 					AllClients[i] = newcli;
 					return;
 				}
+			}
+		});
+		
+		//a new client has been added to the database
+		ipcRenderer.on("newClient", (event, newcli)=> {
+			if (newcli.stage == currentStageForm){
+				AllClients.push(newcli);
+				sortByFirstName(AllClients);
+				populateMain(currentStageForm);
+			}
+		});
+		
+		//a client has been moved to a different stage
+		ipcRenderer.on("changedStage", (event, data)=>{
+			for (var i = 0; i < AllClients.length() && currentStageForm == data.new_stage; i++){
+				if (AllClients[i].id = data.client_id)
+					AllClients.splice(i, 1); //delete client
 			}
 		});
 		
