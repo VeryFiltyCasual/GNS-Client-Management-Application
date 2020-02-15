@@ -406,6 +406,11 @@
 			e.stopPropagation();
 		});
 		
+		$("#AddClient").click(function(){
+			ipcRenderer.send("display-newclient");
+			$("body").addClass("ui-widget-overlay");
+		})
+		
 		//Update the profile picture
 		window.onload = () => {
 			ipcRenderer.send("user");

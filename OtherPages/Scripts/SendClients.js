@@ -11,7 +11,7 @@ let cli = {
 		"email" : "MichiganFan@email",
 		"street_address" : "123 Ooster Bouevarde",
 		"city" : "Dayton",
-		"state" : "Ohio",
+		"state" : "OH",
 		"zip" : "12345",
 
 		"contractor": "Turtle Man",
@@ -210,6 +210,47 @@ function findValue(inputObj){
 	}
 	
 	return null;
+}
+
+function fillValue(val, inputObj){
+	if ($(inputObj).is("textarea")){
+		$(inputObj).html(x(val));
+		return;
+	}
+	else if ($(inputObj).is("select")){
+		if (typeof val == "boolean"){
+			let yn =  val ? "Y" : "N";
+			$(inputObj).find("option[value='" + yn + "']").attr("selected", true);
+		}
+		else{
+			$(inputObj).find("option").each(function(){
+				$(this).attr("selected", false);
+			});
+			$(inputObj).find("option[value='" + val + "']").attr("selected", true);
+		}
+		
+		return
+	}
+	else if ($(inputObj).is("input")){
+		if ($(inputObj).hasClass("DatePick")){
+			$(inputObj).val(x(val));
+		}
+		else if($(inputObj).attr("type") == "text" || $(inputObj).attr("type") == "number")
+			$(inputObj).val(x(val));
+		else if($(inputObj).attr("type") == "radio" || $(inputObj).attr("type") == "checkbox")
+			$(inputObj).prop("checked", val);
+		
+	}
+	
+}
+
+function fillInputs(){
+	$("input").each(function(){
+		let field = $(this).attr('id');
+		
+		console.log(field + ":");
+		fillValue(cli[field], $(this));
+	});
 }
 
 $(document).ready(function(){

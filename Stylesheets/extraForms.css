@@ -3,18 +3,22 @@ body{
 	font-size: 16px;
 	padding: 15px;
 }
-
+form {
+	width: 90%;
+}
 .bigTextBox{
 	resize: both;
 	overflow: auto;
+	min-height: 30px;
+	min-width: 160px;
+	/*
 	height: 100px;
 	width: 300px;
+	*/
 }
-
 .labelfor-BigText, #Estimate section label,  #Estimate section input{
 	vertical-align: top;
 }
-
 .Datepick{
 	background-color: #d9d9d9;
 	width: 80px;
@@ -33,12 +37,16 @@ fieldset{
 	background-color: #fff;
 	border-left: 5px solid rgb(180,180,180);
 	padding: 5px;
+	width: 110%;
 }
 
 fieldset section:first-of-type{
 	border-top: none;
 }
 
+.Comments {
+	margin-top: 10px;
+}
 fieldset section{
 	/*border-top: 2px solid rgb(180,180,180);*/
 	width: auto;
@@ -49,14 +57,72 @@ fieldset section{
 #Dates section{
 	float: left;
 }
-
 #saveAll{
 	margin-top: 15px;
 }
-
+#addDate{
+	margin-top: 10px;
+}
 h2{
 	font-size: 1.3em;
 	text-decoration: underline;
 	margin-bottom: .6em;
 }
-
+.sideNav {
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	right: 0;
+	overflow-x: hidden;
+	transition: 0.5s;
+	padding-top: 40px;
+	background-color: #dfe4e8;
+  }
+.sideNav #closeSideNav {
+	position: absolute;
+	top: 0;
+	right: 5px;
+	font-size: 50px;
+	margin-left: 30px;
+	transition: .5s;
+	color: black;
+	text-decoration: none;
+  }
+.sideNav #openSideNav {
+	  transition: .5s;
+  }
+#theSideNavContent{
+	padding-left: 5px;
+}
+#theSideNavContent label{
+	margin-top: 5px;
+	display: block;
+	margin-left: 0px;
+	width: 90%;
+}
+#theSideNavContent button{
+	display: block;
+	margin-top: 5px;
+}
+#theSideNavContent input[type="text"]{
+	width: 80%;
+}
+#openSideNav{
+	z-index: 999;
+	top: 50%;
+	right: 0;
+	position: fixed;
+	width: 40px;
+	height: 25px;
+	font-size: 13px;
+	
+}
+button:hover{
+	background-color: #ccc;
+	color: black;
+}
+#quote_sent{
+	height: 40px;
+}

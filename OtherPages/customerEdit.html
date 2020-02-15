@@ -20,7 +20,7 @@
 	</script>
 	<script name="Get CliID">
 		const { ipcRenderer } = require('electron');
-		//let cli;
+		let cli;
 		
 		cli = ipcRenderer.sendSync("getID");
 		
@@ -141,13 +141,13 @@
 				<h2>Project Info</h2>
 				<input type="text" id="project" value="">
 				
-				<label for="cabinet">Cabinet:</label><input type="text" id="cabinet" name="txtCabinet">
-				<label for="appliances">Appliances:</label><input type="text" id="appliances" name="txtAppliances">
-				<label for="floor">Floor:</label><input id="floor" type="text" name="txtFloor">
+				<label for="cabinet">Cabinet:</label><input type="" id="cabinet" name="txtCabinet">
+				<label for="appliances">Appliances:</label><input type="" id="appliances" name="txtAppliances">
+				<label for="floor">Floor:</label><input id="floor" type="" name="txtFloor">
 				<label for="other">Other:</label><input type="" id="other" name="txtOtherProj">
 			</section>
 
-			<button type="button" class="SaveSect">Save Section</button>
+			<button class="SaveSect">Save Section</button>
 		</fieldset>
 		
 		<h1>Materials/Profile</h1><br>
@@ -207,7 +207,7 @@
 			</section>
 			
 			
-			<button type="button" class="SaveSect">Save Section</button>
+			<button class="SaveSect">Save Section</button>
 		</fieldset>
 		
 		<h1>Installation Details</h1><br>
@@ -307,7 +307,7 @@
                 </select>
             </div>
             </section>                
-            <button type="button" class="SaveSect">Save Section</button>                
+            <button class="SaveSect">Save Section</button>                
         </fieldset>
 
 		
@@ -322,13 +322,16 @@
 				<label for="estimate">Estimate $: </label><input type="text" name="txtEstimateTotal" id="estimate"></textarea>
 				<label for="installation_N" id="lblInstallationNotes"class="labelfor-BigText">Important Notes for Installation: </label><textarea name="txtInstallationNotes" id="installation_N" class="Resize bigTextBox"></textarea>
 			</section>
-			<button type="button" class="SaveSect">Save Section</button>
+			<button class="SaveSect">Save Section</button>
 		</fieldset>
 		
 		<h1>Dates</h1><br>
 		<fieldset id="Dates">
-			<label for="availability">Availability:</label><input type="text" id="availability">
-			
+			<section>
+			<section>
+				<h2>Availability:</h2>
+				<input type="text" id="availability">
+			</section>
 			<section>
 				<h2>Schedule</h2>
 				<label for="schedule_template">Template: </label><input type="text" id="schedule_template" class="Datepick"/>
@@ -374,34 +377,36 @@
 				 
 				<label for="picked_counters">Counters: </label><input type="text" id="picked_counters" class="Datepick"/>
 			</section>
-			
-			<section>
-				<label for="fabricating">Fabricating:</label>
-				<input type="text" id="fabricating" title="person/group responsible for fabrication">
-				
-				<label for="install">Installer:</label>
-				<input type="text" id="install" title="person/group responsible for installation">
-				
-				<label for="sink_rvd">Sink Recieved:</label>
-				<input type="text" class="Datepick" id="sink_rvd">
-				
-				<label for="mat_sent">Materials Sent</label>
-				<input type="text" class="Datepick" id="mat_sent" title="date the materials were sent">
-				<label for="mat_sent_qty">Qty:</label>
-				<input id="mat_sent_qty" type="number" title="Number of materials that were sent">
-				
-				<label for="sink_sent">Sink Sent:</label>
-				<input type="text" id="sink_sent" class="Datepick" title="Date the sink was sent">
-				<label for="sink_sent_qty">Qty:</label>
-				<input type="number" id="sink_sent_qty" title="Number of sinks that were sent">
-				
-				<label for="ord_conf_sent">Order sent to fabricator:</label>
-				<input type="text" class="Datepick" id="ord_conf_sent" title="Date the Order for the materials was sent to the fabricator">
-				
 			</section>
-			<button type="button" class="SaveSect">Save Section</button>
+			<button class="SaveSect">Save Section</button>
 		</fieldset>
-		
+		<h1>TBD</h1><br>
+		<fieldset id="TBD">
+				<section>
+						<label for="fabricating">Fabricating:</label>
+						<input type="text" id="fabricating" title="person/group responsible for fabrication">
+						
+						<label for="install">Installer:</label>
+						<input type="text" id="install" title="person/group responsible for installation">
+						
+						<label for="sink_rvd">Sink Recieved:</label>
+						<input type="text" class="Datepick" id="sink_rvd">
+						
+						<label for="mat_sent">Materials Sent</label>
+						<input type="text" class="Datepick" id="mat_sent" title="date the materials were sent">
+						<label for="mat_sent_qty">Qty:</label>
+						<input id="mat_sent_qty" type="number" title="Number of materials that were sent">
+						
+						<label for="sink_sent">Sink Sent:</label>
+						<input type="text" id="sink_sent" class="Datepick" title="Date the sink was sent">
+						<label for="sink_sent_qty">Qty:</label>
+						<input type="number" id="sink_sent_qty" title="Number of sinks that were sent">
+						
+						<label for="ord_conf_sent">Order sent to fabricator:</label>
+						<input type="text" class="Datepick" id="ord_conf_sent" title="Date the Order for the materials was sent to the fabricator">
+				</section>
+				<button class="SaveSect">Save Section</button>
+		</fieldset>
 		<h1>Notes/Estimates</h1><br>
 		<fieldset id="NotesEstimates">
 			<section>
@@ -417,47 +422,93 @@
 				</div>
 				<input type="button" id="addDate" value="Add Date" name="addDate"></input>
 			</section>
-			<button type="button" type="submit">Save Section</button>
+			<button type="submit" class="SaveSect">Save Section</button>
 		</fieldset>
 
 		<h1>Deposit/Balance</h1><br>
 		<fieldset id="Balance">
 			<section>
 				<h2>Advance Received</h2>
-				<label for="txtDeposit">Amount: </label><input type="text" id="txtDeposit" name="txtDeposit" placeholder="$"/>
-				<label for="txtDepositDate">Date: </label><input type="text" id="txtDepositDate" name="txtDepositDate" class="Datepick"/>
+				<label for="txtDeposit">Amount: </label><input type="text" id="adv_rdv" name="txtDeposit" placeholder="$"/>
+				<label for="txtDepositDate">Date: </label><input type="text" id="adv_rvd_D" name="txtDepositDate" class="Datepick"/>
 				<label for="cmbPaymentAdvanceReceived">Payment Method: </label>
-				<select id="cmbPaymentAdvancedReceived" name="cmbPaymentAdvancedReceived">
+				<select id="adv_rvd_meth" name="cmbPaymentAdvancedReceived" class="PaymentMethod">
 					<option value="Check">Check</option>
 					<option value="Cash">Cash</option>
-					<option value="CreditCard">Credit Card</option>
+					<option vlaue="Credit Card">Credit Card</option>
 				</select>
 			</section>
 			<section>
 				<h2>Advance Balance</h2>
-				<label for="txtDepositBalance">Amount: </label><input type="text" id="txtDepositBalance" name="txtDepositBalance" placeholder="$"/>
-				<label for="txtDepositBalanceDate">Date: </label><input type="text" id="txtDepositBalanceDate" name="txtDepositBalanceDate" class="Datepick"/>
+				<label for="txtDepositBalance">Amount: </label><input type="text" id="adv_bal" name="txtDepositBalance" placeholder="$"/>
+				<label for="txtDepositBalanceDate">Date: </label><input type="text" id="adv_bal_D" name="txtDepositBalanceDate" class="Datepick"/>
+				<label for="cmbPaymentAdvanceBalance">Payment Method: </label>
+				<select id="adv_bal_meth" name="cmbPaymentAdvancedReceived" class="PaymentMethod">
+					<option value="Check">Check</option>
+					<option value="Cash">Cash</option>
+					<option vlaue="Credit Card">Credit Card</option>
+				</select>
 			</section>
 			<section>
 				<h2>Balance Due</h2>
-				<label for="txtBalanceDue">Amount: </label><input type="text" id="txtBalanceDue" name="txtBalanceDue" placeholder="$"/>
-				<label for="txtBalanceDueDate">Date: </label><input type="text" id="txtBalanceDueDate" name="txtBalanceDueDate" class="Datepick"/>
+				<label for="txtBalanceDue">Amount: </label><input type="text" id="bal_due" name="txtBalanceDue" placeholder="$"/>
+				<label for="txtBalanceDueDate">Date: </label><input type="text" id="bal_due_D" name="txtBalanceDueDate" class="Datepick"/>
+				<label for="cmbPaymentAdvanceReceived">Payment Method: </label>
+				<select id="bal_due_meth" name="cmbPaymentAdvancedReceived" class="PaymentMethod">
+					<option value="Check">Check</option>
+					<option value="Cash">Cash</option>
+					<option vlaue="Credit Card">Credit Card</option>
+				</select>
 			</section>
 			<section>
 				<h2>Final Balance</h2>
-				<label for="txtFinalBalance">Amount: </label><input type="text" id="txtFinalBalance" name="txtFinalBalance" placeholder="$"/>
-				<label for="txtFinalBalanceDate">Date: </label><input type="text" id="txtFinalBalanceDate" name="txtFinalBalanceDate" class="Datepick"/>
+				<label for="txtFinalBalance">Amount: </label><input type="text" id="final_bal" name="txtFinalBalance" placeholder="$"/>
+				<label for="txtFinalBalanceDate">Date: </label><input type="text" id="final_bal_D" name="txtFinalBalanceDate" class="Datepick"/>
+				<label for="cmbPaymentAdvanceReceived">Payment Method: </label>
+				<select id="final_bal_meth" name="cmbPaymentAdvancedReceived" class="PaymentMethod">
+					<option value="Check">Check</option>
+					<option value="Cash">Cash</option>
+					<option vlaue="Credit Card">Credit Card</option>
+				</select>
 			</section>
-			<button type="button" type="submit">Save Section</button>
+			<button type="submit" class="SaveSect">Save Section</button>
 		</fieldset>
-		
-		<button type="button" class="SaveSect">Save All</button>
+		<!-- Sidenav -->
+		<div id="theSideNav" class="sideNav">
+			<div id="theSideNavContent">
+				<a href="javascript:void(0)" id="closeSideNav">&times;</a>
+				<label for="in_cust">In-Cust.: </label><input type="text" id="in_cust" name="in_cust"/>
+				<label for="quote_sent">Quote Sent (Hold CTRL): </label><select id="quote_sent" name="quote_sent" multiple>
+					<option value="V">Verbal</option>
+					<option value="E">Email</option>
+				</select>
+				<label for="quote_sent_D">Date Quote Sent: </label><input type="text" id="quote_sent_D" name="quote_sent_D" class="Datepick"/>
+				<label for="quote_call">Quote Call:</label><input type="checkbox" id="quote_call" name="quote_call"/>
+				<label for="invoice_num">Invoice #:</label><input type="text" id="invoice_num" name="invoice_num"/>
+				<label for="quote_call">Quote Call:</label><input type="text" id="quote_call" name="quote_call"/>
+				<label for="install_conf">Install Confirmation: </label><input type="checkbox" id="install_conf" name="install_conf" class="HiderCheck"/>
+				<input type="text" id="install_conf_D" name="txtInstallConf" class="Datepick"/>
+				<label for="ask_feedback">Asked for Feedback?:</label><input type="checkbox" id="ask_feedback" name="ask_feedback"/>
+				<label for="location">Location:</label>
+					<input type="radio" id="location" name="location" value="Dayton"/>Dayton
+					<input type="radio" id="location" name="location" value="Cincinnati"/>Cincinnati
+				<label for="acct">Acct.: </label><input type="text" id="acct" name="acct" class="Datepick"/>
+				<button type="submit" class="SaveSect">Save Section</button>
+			</div>
+		</div>
+		<h1>Comments/Other</h1><br>
+		<fieldset id="Comments">
+			<section><h2>Comments: </h2> 
+				<textarea name="txtComments" id="txtComments" class="Resize"></textarea>
+			</section>
+		<button type="submit" class="SaveSect">Save Section</button>
+		</fieldset>
+		<button id="openSideNav">&laquo;</button>
+		<button class="SaveSect">Save All</button>
 	</form>
 	
 	
 	<script src="Scripts/ShowHide-Cli.js" name="ShowHide-CliEdit"></script>
-	<script src="Scripts/SortDisplayFunctions.js"></script>
-	<script src="Scripts/SendClients.js" ></script>
 	
 	
 	<script name="hiddenOnes">
@@ -539,6 +590,7 @@
 		$(".Datepick").attr("placeholder", "Datepicker").attr("readonly", "true");
 	});
 	</script>
+	
 	<script>
 	$(document).ready(function() {
 		// Adds a date and comment to the Notes/Estimates section
@@ -567,6 +619,24 @@
 		});
 	});
 </script>
+<script>
+	// Open the sidenav
+	$(document).ready(function(){
+		$("#openSideNav").on("click", function(event){
+			$("#theSideNav").css({
+				"width":  "10%",
+			});
+			$(this).hide();
+			event.preventDefault();
+		});
+		$("#closeSideNav").on("click", function(){
+			$("#theSideNav").css({
+				"width": "0",
+			});
+			$("#openSideNav").show();
+		});
+	});
 	
+</script>
 </body>
 </html>

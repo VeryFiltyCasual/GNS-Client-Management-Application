@@ -66,7 +66,10 @@ ipcMain.on('getID', (event, arg) => {
   event.returnValue = client_ExtraPage;
 });
 
-
+ipcMain.on("display-newclient", (event) =>{
+	prepareExtraWin();
+	runNewCust();
+})
 
 
 
@@ -141,15 +144,19 @@ function prepareExtraWin(){
 }
 
 
-function runCustEdit(id){
+function runCustEdit(){
 	// and load the index.html of the app.
   win.extra.loadURL(`file://${__dirname}/OtherPages/customerEdit.html`);
 	
 }
 
-function runCustInfo(id){
+function runCustInfo(){
 	// and load the index.html of the app.
   win.extra.loadFile(`file://${__dirname}/OtherPages/customerView.html`);
+}
+
+function runNewCust(){
+	win.extra.loadFild(`file://${__dirname}/OtherPages/addClient.html`);
 }
 
 

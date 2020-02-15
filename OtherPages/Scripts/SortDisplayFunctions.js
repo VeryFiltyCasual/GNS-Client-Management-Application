@@ -10,6 +10,7 @@ function allinone(strArray){
 	return holder;
 }
 
+
 //return the client that maches the passed ID
 function getClient(CliArray, cliID){
 	for (i = 0; i < CliArray.length; i++){
@@ -28,15 +29,19 @@ function aString(stringvar){
 
 //returns "<i>not set</i>" if invalid string
 function p(stringvar){
-	if (aString(stringvar))
-		return stringvar;
-	return "<i>not set</i>";
+	if (!aString(stringvar))
+		return "<i>not set</i>";
+	
+	stringvar = formatDate(stringvar);
+	return stringvar;
 }
 //for currency
 function c(stringvar){
-	if (aString(stringvar))
-		return "$" + stringvar;
-	return "<i>not set</i>";
+	if (!aString(stringvar))
+		return "<i>not set</i>";
+	
+	stringvar = formatDate(stringvar);
+	return "$" + stringvar;
 }
 
 //returns "not set" if invalid
@@ -44,9 +49,18 @@ function pp(stringvar){
 	if (!aString(stringvar))
 		return "not set"
 	
+	stringvar = formatDate(stringvar);
 	return stringvar;
 }
 
+//returns "" if invalid
+function x(stringvar){
+	if (!aString(stringvar))
+		return "";
+	
+	stringvar = formatDate(stringvar);
+	return stringvar;
+}
 
 /*************DATES****************/
 //checks if a date object is valid
@@ -62,7 +76,7 @@ function formatDate(strDate){
 	let dateObj = new Date(strDate);
 	
 	//if date isnt valid, return string
-	if (!isValidD(dateObj) || strDate == null) return p(strDate);
+	if (!isValidD(dateObj) || strDate == null) return strDate;
 	
 	m = dateObj.getMonth() + 1;
 	d = dateObj.getDate();
