@@ -20,7 +20,7 @@
 	</script>
 	<script name="Get CliID">
 		const { ipcRenderer } = require('electron');
-		//let cli;
+		let cli;
 		
 		cli = ipcRenderer.sendSync("getID");
 		
@@ -601,7 +601,7 @@
 			let messageData = createUpdateMessage(thisSection);
 			
 			console.log(messageData);
-			//ipcRenderer.send("UpdateClient", messageData) //[DEV]
+			ipcRenderer.send("UpdateClient", messageData) //[DEV]
 		});	
 		
 		$(".Datepick").datepicker({

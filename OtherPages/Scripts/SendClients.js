@@ -1,5 +1,5 @@
 //test client object
-let cli = {
+/*let cli = {
 		"id" : 0,
 		"first_name" : "Jeremy",
 		"last_name" : "Oosterban",
@@ -145,7 +145,7 @@ let cli = {
 				"date": "2012-05-16T10:05:45-06:00"
 			}
 		]
-	};
+	};*/
 
 
 //creates the message for updating client
