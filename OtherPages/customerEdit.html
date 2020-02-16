@@ -20,7 +20,7 @@
 	</script>
 	<script name="Get CliID">
 		const { ipcRenderer } = require('electron');
-		let cli;
+		//let cli;
 		
 		cli = ipcRenderer.sendSync("getID");
 		
@@ -177,7 +177,7 @@
 				
 				<label for="profile_rad profile_rad_L">Radius</label>
 				<input type="radio" name="radCut" id="profile_rad" class="HiderRadio">
-				<input title="Enter the length in feet" type="number" name="profile_rad_L">
+				<input title="Enter the length in feet" type="number" id="profile_rad_L">
 				
 				<label for="profile_prem profile_prem_L">Premium</label>
 				<input type="radio" name="radCut" id="profile_prem" class="HiderRadio" value="Premium">
@@ -473,6 +473,7 @@
 			</section>
 			<button type="submit" class="SaveSect">Save Section</button>
 		</fieldset>
+		
 		<!-- Sidenav -->
 		<div id="theSideNav" class="sideNav">
 			<div id="theSideNavContent">
@@ -496,6 +497,7 @@
 				<button type="submit" class="SaveSect">Save Section</button>
 			</div>
 		</div>
+		
 		<h1>Comments/Other</h1><br>
 		<fieldset id="Comments">
 			<section><h2>Comments: </h2> 
@@ -509,6 +511,8 @@
 	
 	
 	<script src="Scripts/ShowHide-Cli.js" name="ShowHide-CliEdit"></script>
+	<script src="Scripts/SortDisplayFunctions.js"></script>
+	<script src="Scripts/SendClients.js"></script>
 	
 	
 	<script name="hiddenOnes">
@@ -572,9 +576,11 @@
 	});
 	</script>
 
-	<script name="nowrap">
+	<script name="html">
 		//$("<br>").insertBefore("label");
 		$("<br>").insertBefore("#Dates label");
+		
+		$("select").prepend("<option value='' ></option>");
 	</script>
 	
 	<script name="jqui">
