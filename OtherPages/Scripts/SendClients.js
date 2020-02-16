@@ -42,7 +42,7 @@ let cli = {
 		"profile_bars": true,
 		
 		//kitchen
-		"kitchen_pkg": true,
+		"kitchen_pkg": false,
 		"kitchen_sink_num": "",
 		"kitchen_grids": false,
 		"kitchen_strainer": false,
@@ -129,8 +129,21 @@ let cli = {
 		
 		
 		"comments": [
-			"Client is color blind",
-			"Client is only red-green color blind"
+			{
+				"id": 0,
+				"client_id": 0,
+				"author_id": 4,				
+				"message": "Client is color blind",
+				"date": "2012-05-15T10:05:45-06:00"
+				
+			},
+			{
+				"id": 1,
+				"client_id": 0,
+				"author_id": 5,			
+				"message": "Client is only read-green color blind",
+				"date": "2012-05-16T10:05:45-06:00"
+			}
 		]
 	};
 
@@ -258,21 +271,8 @@ function fillInputs(){
 	$("input, textarea, select").each(function(){
 		let field = $(this).attr('id');
 		
-		console.log(field + ": " + pp(cli[field]));
+		//console.log(field + ": " + pp(cli[field]));
 		fillValue(cli[field], $(this));
 	});
 	
 }
-
-$(document).ready(function(){
-	fillInputs();
-	
-	$(".SaveSect").click(function(e) {
-		e.preventDefault();
-		let thisSection = $(this).parent();		
-		let messageData = createUpdateMessage(thisSection);
-		
-		console.log(messageData);
-		//ipcRenderer.send("UpdateClient", messageData) //[DEV]
-	});	
-});

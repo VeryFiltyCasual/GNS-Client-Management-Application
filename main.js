@@ -312,6 +312,15 @@ function createClientViewer({user, tokens}) {
 		
 		client.send(JSON.stringify(jsonMessage));
 	})
+	ipcMain.on("AddClient", (event, arg) =>{
+		let jsonMessage = {
+			"status": "ok",
+			"event": 7,
+			"data": arg
+		}
+		client.send(JSON.stringify(jsonMessage));
+		win.extra.close();
+	});
 	ipcMain.on("addUser", (event, arg)=>{
 		let jsonMessage = {
 			"status": "ok",

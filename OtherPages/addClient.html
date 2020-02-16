@@ -29,10 +29,8 @@
 	
 	<style>		
 		.ui-button{
-			border: 2px solid rgb(180,180,180);
 			margin: 0;
 			width: 275px;
-			border-bottom: 0px;
 		}
 		
 		label{
@@ -48,23 +46,28 @@
 
 <body>
 
-<form id="formMain" method="get" action="">
-<fieldset>
-	<h1>Basic Information</h1>
+<div id="dialogError">
+	<p>Please fill out all input areas</p>
+</div>
 
-	<label for="first_name">First Name:</label><input required type="text" name="txtName" id="first_name" value="test First">
-	<label for="last_name">Last Name:</label><input required type="text" name="txtLastName" id="last_name" title="Edit the client's last name" value="test Last">
+<form id="formMain" method="get" action="">
+<h1>Basic Information</h1>
+<fieldset>
+	
+
+	<label for="first_name">First Name:</label><input required type="text" name="txtName" id="first_name" value="">
+	<label for="last_name">Last Name:</label><input required type="text" name="txtLastName" id="last_name" title="Edit the client's last name" value="">
 
 	
 	<section>
 		<h2>Contact</h2>
-		<label for="phone">Phone Number:</label><input required type="number" name="numPhoneNum" id="phone" value="420">
-		<label for="email">Email:</label><input required type="text" name="txtEmail" id="email"  value="TheBoi@google.com">
+		<label for="phone">Phone Number:</label><input required type="number" name="numPhoneNum" id="phone" value="">
+		<label for="email">Email:</label><input required type="text" name="txtEmail" id="email"  value="">
 	</section>
 	
 	<section>
 		<h2>Address</h2>
-		<label for="street_address">Street:</label><input required type="text" name="txtAddressStreet" id="street_address" title="enter street name and house number" value="test Addr">
+		<label for="street_address">Street:</label><input required type="text" name="txtAddressStreet" id="street_address" title="enter street name and house number" value="">
 		<label for="zip">Zip code:</label><input required type="text" id="zip">
 		
 		<label for="city">City:</label>
@@ -131,9 +134,9 @@
 	
 	<section>
 		<h2>Contractor/Ref Info</h2>
-		<label for="contractor">Name:</label> <input required type="text" name="txtConName" id="contractor" value="Freddie Mercury">
-		<label for="contractor_phone">Phone Number:</label> <input required type="number" name="numConPhoneNum" id="contractor_phone" value="420">
-		<label for="contractor_email">Email:</label> <input required type="text" name="txtConEmail" id="contractor_email" value="TheBoi@google.com">
+		<label for="contractor">Name:</label> <input required type="text" name="txtConName" id="contractor" value="">
+		<label for="contractor_phone">Phone Number:</label> <input required type="number" name="numConPhoneNum" id="contractor_phone" value="">
+		<label for="contractor_email">Email:</label> <input required type="text" name="txtConEmail" id="contractor_email" value="">
 	</section>
 	
 	<section>
@@ -143,117 +146,96 @@
 		<label for="cabinet">Cabinet:</label><input required type="text" id="cabinet" name="txtCabinet">
 		<label for="appliances">Appliances:</label><input required type="text" id="appliances" name="txtAppliances">
 		<label for="floor">Floor:</label><input required id="floor" type="text" name="txtFloor">
-		<label for="other">Other:</label><input required type="" id="other" name="txtOtherProj">
+		<label for="other">Other:</label><input required type="text" id="other" name="txtOtherProj">
 	</section>
 
 	<button type="button" class="Save">Save</button>
 </fieldset>
 </form>
 
+	<script src="Scripts/SortDisplayFunctions.js"></script>
+	<script src="Scripts/SendClients.js"></script>
+		
 	<script>
-		//finds the value of an input html
-function findValue(inputObj){
-	if ($(inputObj).is("textarea"))
-		return inputObj.val();
+	const { ipcRenderer } = require('electron');
 	
-	if ($(inputObj).is("select")){
-		let val = $(inputObj).val();
-		
-		if (val.toUpperCase() == "YES" || val.toUpperCase() == "Y")
-			return true;
-		else if (val.toUpperCase() == "NO" || val.toUpperCase() == "N")
-			return false;
-		else
-			return val;	
-	}
-	
-	if ($(inputObj).hasClass("Datepick")){
-		let d = new Date($(inputObj).val());
-		
-		if (isValidD(d))return d.toISOString();
-		else return "no val";
-	}
-	
-	switch ($(inputObj).attr("type")){
-		
-		//if the input is a text box
-		case "text":
-			return $(inputObj).val();			
-			break;
-		
-		case "number":
-			return $(inputObj).val();
-			
-		case "checkbox":
-			return ($(inputObj).is(":checked"));
-			break;
-			
-		case "radio":
-			return ($(inputObj).is(":checked"));
-			break;
-			
-		default:
-			return "no val";
-			break;
-	}
-	
-	return null;
-}
-
 	//creates the message for updating client
-	function createUpdateMessage(parentE = $("body")){
-		let changeMessage = {
-			"first_name" : "",
-			"last_name" : "",
-			"stage" : "",	
-			"date_added": "",
+	function createAddMessage(parentE = $("body")){
+		let newCli = {
+			"first_name" : null,
+			"last_name" : null,	
+			"date_added": null,
 			
 			//basic
-			"phone" : "",
-			"email" : "",
-			"street_address" : "",
-			"city" : "",
-			"state" : "",
-			"zip" : "",
+			"phone" : null,
+			"email" : null,
+			"street_address" : null,
+			"city" : null,
+			"state" : null,
+			"zip" : null,
 
-			"contractor": "",
-			"contractor_phone": "",
-			"contractor_email": "",
+			"contractor": null,
+			"contractor_phone": null,
+			"contractor_email": null,
 			
 			
-			"project" : "",
-			"cabinet": "",
-			"appliances": "",
-			"floor": "",
-			"other": "",		
+			"project" : null,
+			"cabinet": null,
+			"appliances": null,
+			"floor": null,
+			"other": null,		
 		};
 		
-		let ok = true;
-		
-		$("input").each(function(){
+		$(parentE).find("input, select").each(function(){
 			//find the value of each input box
-			let content = p(findValue(this))
-			if (content == "<i>not set</i>" || content == "no val"){
-				ok = false;
+			let content = x(findValue(this));
+			let field = $(this).attr("id");
+			
+			if (content == "")
+				content = null;
+			
+			if(newCli[field] == null ){
+				newCli[field] = content;
+			}
+			
+			newCli.date_added = new Date(Date.now()).toISOString();
+		});
+		
+		return newCli;
+	}
+
+	$(document).ready(function(){
+		$("#dialogError").dialog({
+			autoOpen: false,
+			modal: true,
+			title: "Error",
+			  buttons: [
+				{
+				  text: "Ok",
+				  click: function() {
+					$( this ).dialog( "close" );
+				  }
+				}
+			  ]
+		});
+		
+		$(".Save").click(function(){
+			let error = false;
+			
+			$("input").each(function(){
+				if (!aString($(this).val()))
+					error = true;
+			});
+			if (error){
+				$("#dialogError").dialog("open");
 				return;
 			}
 			
-			//if value is different than whats in the database, change it
-			if(content != cli[$(this).attr("id")]){
-				//add one change
-				changeMessage.changes.push(
-					{
-						"key": $(this).attr("id"),
-						"data": content
-					}
-				);
-			}
+			//console.log(createAddMessage());
+			ipcRenderer.send("AddClient", createAddMessage());
 		});
-		
-		if (!ok)
-			return {};
-			
-		return changeMessage;
-	}
+	})
+
+
 	</script>
 </body>

@@ -200,6 +200,7 @@
 				$("<label class='info'>Notes for Installation: <textarea readonly>" + pp(clientEst.estimate) + "</textarea></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 			}
 			
+			/*
 			function populateComments(clientCom, thisCliInfo){
 				let clientData = $(thisCliInfo).find(".ClientData");
 			
@@ -252,7 +253,7 @@
 					closeComment();
 					$("#comment").val('');
 				});
-			}
+			}*/
 			function closeComment() {
 				$("#comment").hide();
 				$("#cancel").hide();
@@ -457,7 +458,8 @@
 			e.stopPropagation();
 		});
 		
-		$("#AddClient").click(function(){
+		$("#AddClient").click(function(e){
+			e.preventDefault();
 			ipcRenderer.send("display-newclient");
 			$("body").addClass("ui-widget-overlay");
 		})
