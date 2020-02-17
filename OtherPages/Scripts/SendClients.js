@@ -1,5 +1,5 @@
 //test client object
-let cli = {
+/*let cli = {
 		"id" : 0,
 		"first_name" : "Jeremy",
 		"last_name" : "Oosterban",
@@ -42,7 +42,7 @@ let cli = {
 		"profile_bars": true,
 		
 		//kitchen
-		"kitchen_pkg": true,
+		"kitchen_pkg": false,
 		"kitchen_sink_num": "",
 		"kitchen_grids": false,
 		"kitchen_strainer": false,
@@ -129,10 +129,23 @@ let cli = {
 		
 		
 		"comments": [
-			"Client is color blind",
-			"Client is only red-green color blind"
+			{
+				"id": 0,
+				"client_id": 0,
+				"author_id": 4,				
+				"message": "Client is color blind",
+				"date": "2012-05-15T10:05:45-06:00"
+				
+			},
+			{
+				"id": 1,
+				"client_id": 0,
+				"author_id": 5,			
+				"message": "Client is only read-green color blind",
+				"date": "2012-05-16T10:05:45-06:00"
+			}
 		]
-	};
+	};*/
 
 
 //creates the message for updating client
@@ -142,14 +155,19 @@ function createUpdateMessage(parentE = $("body")){
 		"changes": []
 	}
 	
-	$(parentE).find("input").each(function(){
+	$(parentE).find("input, select, textarea").each(function(){
 		//find the value of each input box
-		let content = p(findValue(this))
-		if (content == "<i>not set</i>" || content == "no val")
+		let content = x(findValue(this));
+		let field = $(this).attr("id");
+		
+		if (content == "")
 			content = null;
 		
+		if ($(this).attr("id") == undefined) //DEV
+				console.log("undef key: " + $(this).attr("id") + ", " + $(this).attr("name"));
+		
 		//if value is different than whats in the database, change it
-		if(content != cli[$(this).attr("id")]){
+		if(content != cli[field] && !(!aString(content) && !aString(cli[field])) && cli[field] != undefined ){
 			//add one change
 			changeMessage.changes.push(
 				{
@@ -165,11 +183,16 @@ function createUpdateMessage(parentE = $("body")){
 
 //finds the value of an input html
 function findValue(inputObj){
-	if ($(inputObj).is("textarea"))
-		return inputObj.val();
+	let inputVal = $(inputObj).val();
+	if (!aString(inputVal)) return null;
 	
-	if ($(inputObj).is("select")){
-		let val = $(inputObj).val();
+	//input is text area
+	if ($(inputObj).is("textarea"))
+		return inputVal;
+	
+	//input is a combo box
+	else if ($(inputObj).is("select")){
+		let val = inputVal;
 		
 		if (val.toUpperCase() == "YES" || val.toUpperCase() == "Y")
 			return true;
@@ -179,34 +202,37 @@ function findValue(inputObj){
 			return val;	
 	}
 	
-	if ($(inputObj).hasClass("Datepick")){
-		let d = new Date($(inputObj).val());
+	//input is a datepicker
+	else if ($(inputObj).hasClass("Datepick")){
+		let d = new Date(inputVal);
 		
 		if (isValidD(d))return d.toISOString();
 		else return "no val";
 	}
-	
-	switch ($(inputObj).attr("type")){
-		
-		//if the input is a text box
-		case "text":
-			return $(inputObj).val();			
-			break;
-		
-		case "number":
-			return $(inputObj).val();
+	//input is a regular text box
+	else {
+		switch ($(inputObj).attr("type")){
 			
-		case "checkbox":
-			return ($(inputObj).is(":checked"));
-			break;
+			//if the input is a text box
+			case "text":
+				return inputVal;			
+				break;
 			
-		case "radio":
-			return ($(inputObj).is(":checked"));
-			break;
-			
-		default:
-			return "no val";
-			break;
+			case "number":
+				return inputVal;
+				
+			case "checkbox":
+				return ($(inputObj).is(":checked"));
+				break;
+				
+			case "radio":
+				return ($(inputObj).is(":checked"));
+				break;
+				
+			default:
+				return "no val";
+				break;
+		}
 	}
 	
 	return null;
@@ -223,17 +249,14 @@ function fillValue(val, inputObj){
 			$(inputObj).find("option[value='" + yn + "']").attr("selected", true);
 		}
 		else{
-			$(inputObj).find("option").each(function(){
-				$(this).attr("selected", false);
-			});
 			$(inputObj).find("option[value='" + val + "']").attr("selected", true);
 		}
 		
 		return
 	}
 	else if ($(inputObj).is("input")){
-		if ($(inputObj).hasClass("DatePick")){
-			$(inputObj).val(x(val));
+		if ($(inputObj).hasClass("Datepick")){
+			$(inputObj).val(formatDate(val));
 		}
 		else if($(inputObj).attr("type") == "text" || $(inputObj).attr("type") == "number")
 			$(inputObj).val(x(val));
@@ -245,20 +268,11 @@ function fillValue(val, inputObj){
 }
 
 function fillInputs(){
-	$("input").each(function(){
+	$("input, textarea, select").each(function(){
 		let field = $(this).attr('id');
 		
-		console.log(field + ":");
+		//console.log(field + ": " + pp(cli[field]));
 		fillValue(cli[field], $(this));
 	});
+	
 }
-
-$(document).ready(function(){
-	$(".SaveSect").click(function() {
-		let thisSection = $(this).parent();		
-		let messageData = createUpdateMessage(thisSection);
-		
-		console.log(messageData);
-		//ipcRenderer.send("UpdateClient", messageData) //[DEV]
-	});	
-});

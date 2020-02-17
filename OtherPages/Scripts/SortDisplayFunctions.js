@@ -32,7 +32,6 @@ function p(stringvar){
 	if (!aString(stringvar))
 		return "<i>not set</i>";
 	
-	stringvar = formatDate(stringvar);
 	return stringvar;
 }
 //for currency
@@ -40,7 +39,6 @@ function c(stringvar){
 	if (!aString(stringvar))
 		return "<i>not set</i>";
 	
-	stringvar = formatDate(stringvar);
 	return "$" + stringvar;
 }
 
@@ -49,7 +47,6 @@ function pp(stringvar){
 	if (!aString(stringvar))
 		return "not set"
 	
-	stringvar = formatDate(stringvar);
 	return stringvar;
 }
 
@@ -58,7 +55,6 @@ function x(stringvar){
 	if (!aString(stringvar))
 		return "";
 	
-	stringvar = formatDate(stringvar);
 	return stringvar;
 }
 
@@ -76,7 +72,7 @@ function formatDate(strDate){
 	let dateObj = new Date(strDate);
 	
 	//if date isnt valid, return string
-	if (!isValidD(dateObj) || strDate == null) return strDate;
+	if (!isValidD(dateObj) || strDate == null) return x(strDate);
 	
 	m = dateObj.getMonth() + 1;
 	d = dateObj.getDate();
@@ -85,6 +81,12 @@ function formatDate(strDate){
 	return m + "/" + d + "/" + yyyy;
 }
 
+//returns "not set" if variable isnt a string
+function formatDateNS(strDate){
+	let strAns = formatDate(strDate);
+	
+	return strAns == "" ? "not set" : strAns;
+}
 
 /*************SORTS****************/
 function sortByFirstName(CliArray){

@@ -29,10 +29,8 @@
 	
 	<style>		
 		.ui-button{
-			border: 2px solid rgb(180,180,180);
 			margin: 0;
 			width: 275px;
-			border-bottom: 0px;
 		}
 		
 		label{
@@ -177,7 +175,7 @@
 				
 				<label for="profile_rad profile_rad_L">Radius</label>
 				<input type="radio" name="radCut" id="profile_rad" class="HiderRadio">
-				<input title="Enter the length in feet" type="number" name="profile_rad_L">
+				<input title="Enter the length in feet" type="number" id="profile_rad_L">
 				
 				<label for="profile_prem profile_prem_L">Premium</label>
 				<input type="radio" name="radCut" id="profile_prem" class="HiderRadio" value="Premium">
@@ -473,6 +471,20 @@
 			</section>
 			<button type="submit" class="SaveSect">Save Section</button>
 		</fieldset>
+		
+		<h1>Comments/Other</h1><br>
+		<fieldset id="Comments">
+			<section id="oldComments">
+				
+			</section>
+			
+			<section>
+				<h2>Comments: </h2> 
+				<textarea name="txtComments" id="txtComments" class="Resize"></textarea>
+			</section>
+		<button type="submit" class="SaveSect">Save Section</button>
+		</fieldset>
+		
 		<!-- Sidenav -->
 		<div id="theSideNav" class="sideNav">
 			<div id="theSideNavContent">
@@ -496,25 +508,29 @@
 				<button type="submit" class="SaveSect">Save Section</button>
 			</div>
 		</div>
-		<h1>Comments/Other</h1><br>
-		<fieldset id="Comments">
-			<section><h2>Comments: </h2> 
-				<textarea name="txtComments" id="txtComments" class="Resize"></textarea>
-			</section>
-		<button type="submit" class="SaveSect">Save Section</button>
-		</fieldset>
+			
 		<button id="openSideNav">&laquo;</button>
 		<button class="SaveSect">Save All</button>
 	</form>
 	
 	
 	<script src="Scripts/ShowHide-Cli.js" name="ShowHide-CliEdit"></script>
+	<script src="Scripts/SortDisplayFunctions.js"></script>
+	<script src="Scripts/SendClients.js"></script>
 	
 	
 	<script name="hiddenOnes">
 	$(document).ready(function(){
-		$(".HiderCheck").next().hide();
-		$(".HiderRadio").next().hide();
+		$(".HiderCheck").each(function(){
+			if(!$(this).is(":checked"))
+				$(this).next().hide();
+			
+		});
+		$(".HiderRadio").each(function(){
+			if(!$(this).is(":checked"))
+				$(this).next().hide();
+			
+		});
 
 		$(".HiderCheck").change(function(){
 			if(this.checked)
@@ -542,15 +558,10 @@
 		});
 		
 		// click checkbox to reveal textbox, hide when checkbox is unclicked
-		let checked = $(".chkShowHideKit").is(":checked");
-		if (checked)
-			$(".ShowHideKit").show();
-		else
+		if (!$(".chkShowHideKit").is(":checked"))
 			$(".ShowHideKit").hide();
 				
-		if (checked)
-			$(".ShowHideVan").show();
-		else
+		if (!$(".chkShowHideVan").is(":checked"))
 			$(".ShowHideVan").hide();
 			
 		// kitchen section
@@ -572,13 +583,26 @@
 	});
 	</script>
 
-	<script name="nowrap">
+	<script name="html">
 		//$("<br>").insertBefore("label");
 		$("<br>").insertBefore("#Dates label");
+		
+		$("select").prepend("<option value='' ></option>");
 	</script>
 	
-	<script name="jqui">
+	<script name="jquery">
 	$(document).ready(function(){
+	
+		fillInputs();
+	
+		$(".SaveSect").click(function(e) {
+			e.preventDefault();
+			let thisSection = $(this).parent();		
+			let messageData = createUpdateMessage(thisSection);
+			
+			console.log(messageData);
+			ipcRenderer.send("UpdateClient", messageData) //[DEV]
+		});	
 		
 		$(".Datepick").datepicker({
 			changeMonth: true,
