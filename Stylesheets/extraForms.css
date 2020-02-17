@@ -1,7 +1,8 @@
 body{
-	background-color: #dfe4e8;
+	background-color: rgb(243,243,243);
 	font-size: 16px;
 	padding: 15px;
+	font-family: "Open Sans", sans-serif;
 }
 form {
 	width: 90%;
@@ -28,14 +29,14 @@ form {
 	vertical-align: top;
 }
 
-label{
-	margin-right: 4px;
+input,select, textarea {
+	margin: 10px;
 }
 
 fieldset{
-	margin-bottom: 24px;
 	background-color: #fff;
-	border-left: 5px solid rgb(180,180,180);
+	border: 1px solid rgb(160,160,160);
+	border-left: 5px solid #8f2831;
 	padding: 5px;
 	width: 110%;
 }
@@ -48,14 +49,15 @@ fieldset section:first-of-type{
 	margin-top: 10px;
 }
 fieldset section{
-	/*border-top: 2px solid rgb(180,180,180);*/
 	width: auto;
-	padding: 2em;
-	/*float: left;*/
+	padding: 1em;
 }
-
-#Dates section{
-	float: left;
+#Dates {
+	display: flex;
+	flex-direction: column;
+}
+#Dates > section {
+	display: flex;
 }
 #saveAll{
 	margin-top: 15px;
@@ -65,7 +67,7 @@ fieldset section{
 }
 h2{
 	font-size: 1.3em;
-	text-decoration: underline;
+	text-transform: uppercase;
 	margin-bottom: .6em;
 }
 .sideNav {
@@ -79,6 +81,7 @@ h2{
 	transition: 0.5s;
 	padding-top: 40px;
 	background-color: #dfe4e8;
+	border: 1px solid rgb(160,160,160);
   }
 .sideNav #closeSideNav {
 	position: absolute;
@@ -89,11 +92,12 @@ h2{
 	transition: .5s;
 	color: black;
 	text-decoration: none;
-  }
+}
 .sideNav #openSideNav {
-	  transition: .5s;
-  }
+  transition: .5s;
+}
 #theSideNavContent{
+	font-size: 12px;
 	padding-left: 5px;
 }
 #theSideNavContent label{
@@ -107,6 +111,7 @@ h2{
 	margin-top: 5px;
 }
 #theSideNavContent input[type="text"]{
+	float: left;
 	width: 80%;
 }
 #openSideNav{
@@ -117,12 +122,30 @@ h2{
 	width: 40px;
 	height: 25px;
 	font-size: 13px;
-	
+	background-color: #2c3e50;
+	color: #ffffff;
+	border: none;
+	border-radius: 2px;
 }
 button:hover{
 	background-color: #ccc;
 	color: black;
+	cursor: pointer;
 }
 #quote_sent{
-	height: 40px;
+	width: 90%;
+}
+.SaveSect {
+	background-color: #2c3e50;
+	margin: 10px;
+    padding: 10px;
+    border: none;
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 2px;
+}
+.SaveSect:hover {
+	color: #ffffff;
+	cursor: pointer;
+    background: linear-gradient(180deg, #2c3e50, #263849 90%);
 }

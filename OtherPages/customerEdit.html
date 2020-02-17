@@ -7,7 +7,8 @@
 	
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-	
+	<link rel="stylesheet" id="redux-google-fonts-wpc_options-css" href="http://fonts.googleapis.com/css?family=Open+Sans%3A300%2C400%2C600%2C700%2C800%2C300italic%2C400italic%2C600italic%2C700italic%2C800italic%7CLato%3A100%2C300%2C400%2C700%2C900%2C100italic%2C300italic%2C400italic%2C700italic%2C900italic%7CAguafina+Script%3A400&amp;ver=5.3.2" type="text/css" media="all">
+
 	<link rel="stylesheet" href="../Stylesheets/Reset.css" type="text/css"/>
 	<link rel="stylesheet" href="../Stylesheets/extraForms.css" type="text/css"/>
 	<link rel="stylesheet" href="../JQUI/jquery-ui.css"/>
@@ -33,10 +34,6 @@
 			width: 275px;
 		}
 		
-		label{
-			margin-left: 30px;
-		}
-		
 		input[type=checkbox] {
             transform: scale(1.3);
         }    
@@ -50,13 +47,11 @@
 	<form id="formMain" method="get" action="">
 		<h1>Customer Basic Information</h1><br>
 		<fieldset class="BasicInfo">
-			
-			<label for="first_name">First Name:</label><input type="text" name="txtName" id="first_name" value="test First">
-			<label for="last_name">Last Name:</label><input type="text" name="txtLastName" id="last_name" title="Edit the client's last name" value="test Last">
-
-			
+					
 			<section>
 				<h2>Contact</h2>
+				<label for="first_name">First Name:</label><input type="text" name="txtName" id="first_name" value="test First">
+				<label for="last_name">Last Name:</label><input type="text" name="txtLastName" id="last_name" title="Edit the client's last name" value="test Last">
 				<label for="phone">Phone Number:</label><input type="number" name="numPhoneNum" id="phone" value="420">
 				<label for="email">Email:</label><input type="text" name="txtEmail" id="email"  value="TheBoi@google.com">
 			</section>
@@ -171,11 +166,11 @@
 			<section id="sectProfileOther">
 				<h2>Profile & Other Selections</h2>
 				
-				<label for="profile_std">Standard</label><input type="radio" name="radCut" id="profile_std" value="Standard">
+				<label for="profile_std">Standard</label><input type="radio" name="radCut" id="profile_std" value="Standard"><br>
 				
 				<label for="profile_rad profile_rad_L">Radius</label>
 				<input type="radio" name="radCut" id="profile_rad" class="HiderRadio">
-				<input title="Enter the length in feet" type="number" id="profile_rad_L">
+				<input title="Enter the length in feet" type="number" id="profile_rad_L"><br>
 				
 				<label for="profile_prem profile_prem_L">Premium</label>
 				<input type="radio" name="radCut" id="profile_prem" class="HiderRadio" value="Premium">
@@ -326,55 +321,55 @@
 		<h1>Dates</h1><br>
 		<fieldset id="Dates">
 			<section>
-			<section>
-				<h2>Availability:</h2>
-				<input type="text" id="availability">
-			</section>
-			<section>
-				<h2>Schedule</h2>
-				<label for="schedule_template">Template: </label><input type="text" id="schedule_template" class="Datepick"/>
-				 
-				<label for="schedule_tear">Tear: </label><input type="text" id="schedule_tear" class="Datepick"/>
-				<label for="Con1">Contractor: </label><input type="checkbox" name="Con1" value="Contractor" id="schedule_tear_con"/>
-				 
-				<label for="schedule_brackets">Brackets: </label><input type="text" id="schedule_brackets" class="Datepick"/>
-				<label for="schedule_brackets_con">Contractor: </label><input type="checkbox" id="schedule_brackets_con" value="Contractor" class="Contractor"/>
-				 
-				<label for="schedule_install_drop">Install/Drop: </label><input type="text" id="schedule_install_drop" class="Datepick"/>
-				 
-				<label for="schedule_plumb">Plumb: </label><input type="text" id="schedule_plumb" class="Datepick"/>
-				<label for="schedule_plumb_con">Contractor: </label><input type="checkbox" id="schedule_plumb_con" value="Contractor" class="Contractor"/>
-				 
-			</section>
-			<section>
-				<h2>Customer/Title Info</h2>
-				<label for="customer_inv_sent">Order Invoice Sent: </label><input type="text" id="customer_inv_sent" class="Datepick"/>
-				
-				<label for="customer_conf_rvd">Order Confirmation Received: </label><input type="text" id="customer_conf_rvd" class="Datepick"/>
-				
-				<label for="customer_srv_call">Service Call: </label><input type="text" id="customer_srv_call" class="Datepick"/>
-				<label for="customer_srv_call_res">Pic:</label><input type="checkbox" id="customer_srv_call_res"/>
-				
-				<label for="customer_srv_sch">Service Schedule: </label><input type="text" id="customer_srv_sch" class="Datepick"/>
-				
-				<!--
-				Only show if checked, use ShowHide class for what is being toggled, chkShowHide class for the checkbox
-				-->
-				<label for="customer_srv_comp">Service Completed: </label><input type="checkbox" name="chkCompleted" id="customer_srv_comp" class="HiderCheck"/>
-				<input type="text" name="txtServiceCompleted" class="Datepick" id="customer_srv_comp_D" title="Date the service was completed"/>
-			</section>
-			<section>
-				<h2>Customer Picked Up</h2>
-				<label for="picked_faucet">Faucet: </label><input type="text" id="picked_faucet" class="Datepick"/>
-				 
-				<label for="picked_grid">Grid Set: </label><input type="text" id="picked_grid" class="Datepick"/>
-				 
-				<label for="picked_strainer">Strainer: </label><input type="text" id="picked_strainer" class="Datepick"/>
-				 
-				<label for="picked_brackets">Brackets: </label><input type="text" id="picked_brackets" class="Datepick"/>
-				 
-				<label for="picked_counters">Counters: </label><input type="text" id="picked_counters" class="Datepick"/>
-			</section>
+				<section>
+					<h2>Availability:</h2>
+					<input type="text" id="availability">
+				</section>
+				<section>
+					<h2>Schedule</h2>
+					<label for="schedule_template">Template: </label><input type="text" id="schedule_template" class="Datepick"/>
+					
+					<label for="schedule_tear">Tear: </label><input type="text" id="schedule_tear" class="Datepick"/>
+					<label for="Con1">Contractor: </label><input type="checkbox" name="Con1" value="Contractor" id="schedule_tear_con"/>
+					
+					<label for="schedule_brackets">Brackets: </label><input type="text" id="schedule_brackets" class="Datepick"/>
+					<label for="schedule_brackets_con">Contractor: </label><input type="checkbox" id="schedule_brackets_con" value="Contractor" class="Contractor"/>
+					
+					<label for="schedule_install_drop">Install/Drop: </label><input type="text" id="schedule_install_drop" class="Datepick"/>
+					
+					<label for="schedule_plumb">Plumb: </label><input type="text" id="schedule_plumb" class="Datepick"/>
+					<label for="schedule_plumb_con">Contractor: </label><input type="checkbox" id="schedule_plumb_con" value="Contractor" class="Contractor"/>
+					
+				</section>
+				<section>
+					<h2>Customer/Title Info</h2>
+					<label for="customer_inv_sent">Order Invoice Sent: </label><input type="text" id="customer_inv_sent" class="Datepick"/>
+					
+					<label for="customer_conf_rvd">Order Confirmation Received: </label><input type="text" id="customer_conf_rvd" class="Datepick"/>
+					
+					<label for="customer_srv_call">Service Call: </label><input type="text" id="customer_srv_call" class="Datepick"/>
+					<label for="customer_srv_call_res">Pic:</label><input type="checkbox" id="customer_srv_call_res"/>
+					
+					<label for="customer_srv_sch">Service Schedule: </label><input type="text" id="customer_srv_sch" class="Datepick"/>
+					
+					<!--
+					Only show if checked, use ShowHide class for what is being toggled, chkShowHide class for the checkbox
+					-->
+					<label for="customer_srv_comp">Service Completed: </label><input type="checkbox" name="chkCompleted" id="customer_srv_comp" class="HiderCheck"/>
+					<input type="text" name="txtServiceCompleted" class="Datepick" id="customer_srv_comp_D" title="Date the service was completed"/>
+				</section>
+				<section>
+					<h2>Customer Picked Up</h2>
+					<label for="picked_faucet">Faucet: </label><input type="text" id="picked_faucet" class="Datepick"/>
+					
+					<label for="picked_grid">Grid Set: </label><input type="text" id="picked_grid" class="Datepick"/>
+					
+					<label for="picked_strainer">Strainer: </label><input type="text" id="picked_strainer" class="Datepick"/>
+					
+					<label for="picked_brackets">Brackets: </label><input type="text" id="picked_brackets" class="Datepick"/>
+					
+					<label for="picked_counters">Counters: </label><input type="text" id="picked_counters" class="Datepick"/>
+				</section>
 			</section>
 			<button class="SaveSect">Save Section</button>
 		</fieldset>
@@ -648,7 +643,7 @@
 	$(document).ready(function(){
 		$("#openSideNav").on("click", function(event){
 			$("#theSideNav").css({
-				"width":  "10%",
+				"width":  "11em",
 			});
 			$(this).hide();
 			event.preventDefault();

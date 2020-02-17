@@ -2,7 +2,7 @@ html, body {
 	height: 100%;
 }
 body{
-	font-family: open-sans, sans-serif;
+	font-family: "Open Sans", sans-serif;
 	font-size: 18px;
 	clear: both;
 	background-color: rgb(243,243,243);
@@ -33,7 +33,9 @@ button:focus {
 	padding-top: 11px !important;
 	font-weight: bold;
 }
-
+.smallcat-selected:hover {
+	background: #ffffff !important;
+}
 a{
 	color: blue;
 }
