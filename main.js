@@ -234,7 +234,7 @@ function createClientViewer({user, tokens}) {
       
       //DELETE_COMMENT
       case 5:
-        win.main.webContents.send("delComment", {comarr: message.data});
+        win.main.webContents.send("delComment", message.data);
         break;
         
       //ADD_CLIENT
@@ -343,7 +343,16 @@ function createClientViewer({user, tokens}) {
         author_picture: user.picture
       }
     }
-    console.log(wsMessage);
+    client.send(JSON.stringify(wsMessage));
+  });
+  ipcMain.on('deleteComment',(event, id) => {
+    const wsMessage = {
+      status: 'ok',
+      event: 5,
+      data: {
+        id
+      }
+    };
     client.send(JSON.stringify(wsMessage));
   });
 }

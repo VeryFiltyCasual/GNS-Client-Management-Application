@@ -401,7 +401,9 @@ main ul li{
 	padding: 1em 1em 3em 1em;
 	display: flex;
 }
-
+.column {
+	flex-direction: column;
+}
 
 .ClientData p{
 	margin-right: 2em;
@@ -431,6 +433,38 @@ main ul li{
 .BlueAdd:hover{
 	cursor: pointer;
 	background: linear-gradient(180deg, #2c3e50, #263849 90%);
+}
+.comContainer {
+	border: 1px solid #8a7676;
+	padding: 0.2em;
+	position: relative;
+	border-radius: 2px;
+}
+.comContainer button {
+	position: absolute;
+	top: .2em;
+	right: .2em;
+	color: #888888;
+	background: none;
+	border: 1px solid #dddddd;
+	border-radius: 100%;
+	transition: 0.2s;;
+}
+.comContainer button:hover {
+	cursor: pointer;
+	color: rgb(204, 27, 33);
+	border-color: rgb(204, 27, 33);
+	/* rgb(204, 27, 33) #EA2027*/
+}
+.comContainer button i {
+	margin: .1em 0em;
+	font-size: 1.2em;
+}
+.comContainer p {
+	border: none;
+}
+.comContainer strong {
+	font-weight: 600;
 }
 .comContainer img {
 	width: 30px;

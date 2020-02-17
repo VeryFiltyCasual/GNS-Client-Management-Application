@@ -15,7 +15,8 @@
 		<!-- Icons -->
 		<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-			
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 		<script name="ConstVars">
 			const CDATA_FADESPEED = 200;
 			let AllClients = [];
@@ -135,9 +136,6 @@
 				$(thisClient).find(".ListBody").slideToggle(timeDelay);
 				$(thisClient).find(".CHeadTopLinks").toggle(timeDelay);
 
-				$("#comment").remove();
-				$("#AddComment").remove();
-				$("#cancel").remove();
 			});
 			
 		});
@@ -154,7 +152,7 @@
 			/**************FUNCTIONS****************/
 			//populate client body functions
 			function populateBasic(clientBas, thisCliInfo){
-				let clientData = $(thisCliInfo).find(".ClientData");
+				let clientData = $(thisCliInfo).find(".ClientData").removeClass("column");
 			
 				$("<label class='info'>Phone: <p>" + p(clientBas.phone) + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 				
@@ -170,7 +168,7 @@
 			}
 			
 			function populateAvailability(clientAv, thisCliInfo){
-				let clientData = $(thisCliInfo).find(".ClientData");
+				let clientData = $(thisCliInfo).find(".ClientData").removeClass("column");
 				let div1 = $(html_DivSec);
 				let div2 = $(html_DivSec);
 				
@@ -192,7 +190,7 @@
 			}
 			
 			function populateEstimate(clientEst, thisCliInfo){
-				let clientData = $(thisCliInfo).find(".ClientData");
+				let clientData = $(thisCliInfo).find(".ClientData").removeClass("column");
 			
 				$("<label class='info'>Estimated Q: <p>" + c(clientEst.actual_qty) + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 				$("<label class='info'>Actual Q: <p>" + c(clientEst.actual_qty) + "</p></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
@@ -200,20 +198,22 @@
 				$("<label class='info'>Notes for Installation: <textarea readonly>" + pp(clientEst.estimate) + "</textarea></label>").appendTo(clientData).fadeIn(CDATA_FADESPEED);
 			}
 			
-			/*
+			
 			function populateComments(clientCom, thisCliInfo){
-				let clientData = $(thisCliInfo).find(".ClientData");
+				let clientData = $(thisCliInfo).find(".ClientData").addClass("column");
 			
 				if (!clientCom.comments || clientCom.comments == [] || !aString(clientCom.comments[0]) || !aString(clientCom.comments))
 					$("<p class='info'>No comments for this user yet</p><br>").appendTo(clientData);
 				else {
 					for(var c = 0; c < clientCom.comments.length; c++){
+						const date = new Date(clientCom.comments[c].date);
 						const comment = `
-							<div class="comContainer">
+							<div class="comContainer" id="comment${clientCom.comments[c].id}">
 								<div>
-									<img src='${clientCom.comments[c].author_picture}'/><h4>${clientCom.comments[c].author_name}</h4><strong>${new Date(clientCom.comments[c].date).toDateString()}</strong>
+									<img src='${clientCom.comments[c].author_picture}'/><p><strong>${clientCom.comments[c].author_name}</strong><br>${date.toDateString()}, ${date.toLocaleTimeString()}</p>
 								</div>
 								<p>${clientCom.comments[c].message}</p>
+								<button onclick='deleteComment(${clientCom.comments[c].id})'><i class="fa fa-close"></i></button>
 							</div><br>
 						`;
 						$(comment).appendTo(clientData);
@@ -221,43 +221,41 @@
 					}
 				}
 				//Textbox for the comment
-				let commentBox = $("<input type='text' id='comment' placeholder='Comment...'/>");
+				let commentBox = $(`<input type='text' id='commenter${clientCom.id}' placeholder='Comment...'/>`);
 				commentBox.hide();
 				clientData.append(commentBox);
 				//Add the add comment button at the end
-				$(`<br><button id="AddComment" class="BlueAdd">+ Add Comment</button>`).appendTo(clientData);
-				$("<button id='cancel' class='BlueAdd'>Cancel</button>").appendTo(clientData).hide();
+				$(`<br><div><button id="AddComment${clientCom.id}" onclick="toggleComment(${clientCom.id});" class="BlueAdd">+ Add Comment</button></div>`).appendTo(clientData);
+				$(`<div><button id='cancel${clientCom.id}' onclick="closeComment(${clientCom.id})"class='BlueAdd'>Cancel</button></div>`).appendTo(clientData).hide();
 
-				//Keeps track of if the user is adding a comment or not
-				let isCommenting = false;
-				$("#AddComment").on('click', () => {
-					//If the user hasn't opened the text box yet
-					if (!isCommenting) {
-						//Open it
-						$("#comment").show();
-						$("#cancel").show();
-						$("#AddComment").text("Submit");
-					} else {
-						//If they have, close it and submit the comment
-						//Get the text
-						const message = $("#comment").val();
-						if (!messsage) return;
-						//Send it to the main process
-						ipcRenderer.send('addComment', {message, client_id: clientCom.id});
-						closeComment();
-					}
-					isCommenting = !isCommenting;
-				});
-				$("#cancel").on('click', () => {
-					isCommenting = false;
-					closeComment();
-					$("#comment").val('');
-				});
-			}*/
-			function closeComment() {
-				$("#comment").hide();
-				$("#cancel").hide();
-				$("#AddComment").text("+ Add Comment");
+			}
+			function toggleComment(id) {
+				let isCommenting = $(`#AddComment${id}`).text() == "Submit";
+				//If the user hasn't opened the text box yet
+				if (!isCommenting) {
+					//Open it
+					$(`#commenter${id}`).show();
+					$(`#cancel${id}`).parent().show();
+					$(`#AddComment${id}`).text("Submit");
+				} else {
+					//If they have, close it and submit the comment
+					//Get the text
+					const message = $(`#commenter${id}`).val();
+					if (!message) return;
+					//Send it to the main process
+					ipcRenderer.send('addComment', {message, client_id: id});
+					closeComment(id);
+				}
+			}
+			function closeComment(id) {
+				$(`#commenter${id}`).hide();
+				$(`#cancel${id}`).parent().hide();
+				$(`#AddComment${id}`).text("+ Add Comment");
+				$(`#commenter${id}`).val('');
+			}
+			//Sends a delete comment event to the main process
+			function deleteComment(comment_id) {
+				ipcRenderer.send("deleteComment", comment_id);
 			}
 			//makes single client html
 			function makeAClient(client, stage){
@@ -281,7 +279,7 @@
 				
 				//make ListBody
 				let htmlLiBody = $("<section class='ListBody'></section>")
-					.append('<div class="ClientData"></div>')
+					.append(`<div class="ClientData" id="cliID${client.id}"></div>`)
 					.append("<button class='ClientNextPhase'>" + btnMessage + "</button>").append(html_ButtonsNav); 
 				
 				//make the head
@@ -485,28 +483,51 @@
 		});
 		
 		//received a new comment
-		ipcRenderer.on("addComment", (event, comment) =>{
-			for (var i = 0; i < AllClients.length(); i++){
-				if (comment.client_id == AllClients[i].id){
-					AllClients[i].comments.push(comment);
-					return;
+		ipcRenderer.on("addComment", (event, data) =>{
+			$(".info").remove();
+			for (var i = 0; i < AllClients.length; i++){
+				if (data.client_id == AllClients[i].id){
+					AllClients[i].comments.push(data);
+					break;
 				}
+			}
+			//Add the comment to the comment list if it's displayed
+			let clientData = $(`#cliID${data.client_id}`);
+			//If the clientData is displaying comments
+			if (clientData.hasClass("column")) {
+				//Add the comment before the input box
+				console.log(data);
+				const date = new Date(data.date);
+				const comment = `
+					<div class="comContainer" id="comment${data.id}">
+						<div>
+							<img src='${data.author_picture}'/><p><strong>${data.author_name}</strong><br>${date.toDateString()}, ${date.toLocaleTimeString()}</p>
+						</div>
+						<p>${data.message}</p>
+						<button onclick='deleteComment(${data.id})'><i class="fa fa-close"></i></button>
+					</div><br>
+				`;
+				$(comment).insertBefore(`#commenter${data.client_id}`);
 			}
 		});
 		//a comment has been deleted
 		ipcRenderer.on("delComment", (event, data) =>{
 			//find the client
-			for (var i = 0; i < AllClients.length(); i++){
+			for (var i = 0; i < AllClients.length; i++){
 				if (data.client_id == AllClients[i].id){
 					
 					//find the comment
-					for (var comi = 0; comi < AllClients[i].comments.length(); i++){
-						if (data.comment_id == AllClients[i].comments[comi].id)						
-							AllClients[i].comments.splice(comi, 1); //delete comment
-							
+					for (var comi = 0; comi < AllClients[i].comments.length; comi++){
+						if (data.id == AllClients[i].comments[comi].id) {				
+							//Delete comment from array
+							AllClients[i].comments.splice(comi, 1);
+							//Delete the element if it's on the page
+							$(`#comment${data.id}`).next().remove();
+							$(`#comment${data.id}`).remove();
+							return;
+						}	
 					}
-					
-					return
+					return;
 				}
 			}
 		});
@@ -542,7 +563,6 @@
 		ipcRenderer.on("getUser", (event, user) => {
 			document.getElementById('profilePic').setAttribute('src',user.picture);
 		});
-
 
 		
 		</script>
