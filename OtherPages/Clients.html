@@ -39,7 +39,7 @@
 					
 					<div class="SmallCategories">
 						<h2>View clients by...</h2>											
-						<button class="SmallCatButtons neat-button">Stage 1</button>
+						<button class="SmallCatButtons neat-button view-selected">Stage 1</button>
 						<button class="SmallCatButtons  neat-button">Stage 2</button>
 						<button class="SmallCatButtons  neat-button">Archived</button>
 						
@@ -147,8 +147,8 @@
 			let currentStageForm = 1;
 			
 			//define htmls
-			let html_ButtonsNav = '<nav class="SmallCategories"><button class="SmallCatButtons Basic">Basic</button><button class="SmallCatButtons Estimate">Estimate/Balance</button><button class="SmallCatButtons Availability">Availability</button><button class="SmallCatButtons Comments">Comments</button></nav>';			
-			let html_TopNav = '<div class="CHeadTopLinks"><div><button class="btnShowInfo">Show All</button><button class="btnEditInfo">Edit</a></div></div>';
+			let html_ButtonsNav = '<nav class="SmallCategories"><button class="SmallCatButtons Basic smallcat-selected">Basic</button><button class="SmallCatButtons Estimate">Estimate/Balance</button><button class="SmallCatButtons Availability">Availability</button><button class="SmallCatButtons Comments">Comments</button><div style="width: 100%; border: 0.5px solid rgb(180,180,180);"></div></nav>';			
+			let html_TopNav = '<div class="CHeadTopLinks"><div><button class="btnShowInfo"><i class="fa fa-list"></i>Show All</button><button class="btnEditInfo"><i class="fa fa-edit"></i>Edit</div></div>';
 			let html_DivSec = "<div class='body-section'></div>";
 			
 			/**************FUNCTIONS****************/
@@ -263,7 +263,7 @@
 				let btnMessage ="";				
 				switch (stage){
 					case 1:
-						btnMessage = "Move to stage 2";
+						btnMessage = "Move to stage 2<i class='fa fa-arrow-right'></i>";
 						break;
 					case 2:
 						btnMessage = "Archive client";
@@ -280,9 +280,8 @@
 				
 				//make ListBody
 				let htmlLiBody = $("<section class='ListBody'></section>")
-					.append(html_ButtonsNav)
 					.append('<div class="ClientData"></div>')
-					.append("<button class='ClientNextPhase'>" + btnMessage + "</button>"); 
+					.append("<button class='ClientNextPhase'>" + btnMessage + "</button>").append(html_ButtonsNav); 
 				
 				//make the head
 				let htmlLiHead = $("<section class='ListHead'></section>")
@@ -456,11 +455,6 @@
 			$("body").addClass("ui-widget-overlay");
 			e.stopPropagation();
 		});
-		
-		$("#AddClient").click(function(){
-			ipcRenderer.send("display-newclient");
-			$("body").addClass("ui-widget-overlay");
-		})
 		
 		//Update the profile picture
 		window.onload = () => {
