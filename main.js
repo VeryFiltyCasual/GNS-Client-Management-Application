@@ -50,12 +50,6 @@ ipcMain.on('display-client-edit', (event, id) => {
   runCustEdit(id); //run custEdit (display a webpage)
   client_ExtraPage = id;
 })
-//runs clientInfo.html page
-ipcMain.on('display-client-info', (event, id) => {
-  prepareExtraWin();
-  runCustInfo(); //run custEdit (display a webpage)
-  client_ExtraPage = id;
-})
 
 //recieves 'user' message, sends 'getUser' message
 ipcMain.on('user', async () => {
@@ -151,11 +145,6 @@ function runCustEdit(){
 	//load the form html of the app.
   win.extra.loadURL(`file://${__dirname}/OtherPages/customerEdit.html`);
 	
-}
-
-function runCustInfo(){
-	//load the index.html of the app.
-  win.extra.loadFile(`file://${__dirname}/OtherPages/customerView.html`);
 }
 
 function runNewCust(){
