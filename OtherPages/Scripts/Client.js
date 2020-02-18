@@ -9,11 +9,7 @@ $(document).ready(function(){
 *****************IPC********************
 ****************************************/
 
-	/*********SEND*********/	
-	//Sign out
-	function signOut() {
-		ipcRenderer.send('signout');
-	}
+	/*********SEND*********/
 	
 	$("#ClientList").on("click", ".btnEditInfo", function(e) {
 		//send the 'display-client-edit' command to the main js (will display new page with client info)
@@ -35,12 +31,6 @@ $(document).ready(function(){
 	window.onload = () => {
 		ipcRenderer.send("user");
 	}
-	
-	//Sends a delete comment event to the main process
-	function deleteComment(comment_id) {
-		ipcRenderer.send("deleteComment", comment_id);
-	}
-
 
 	/*********Recieve**********/
 	//extra window is closed, remove the gray out overlay
@@ -235,42 +225,6 @@ $(document).ready(function(){
 		$(`<div><button id='cancel${clientCom.id}' onclick="closeComment(${clientCom.id})"class='BlueAdd'>Cancel</button></div>`).appendTo(clientData).hide();
 
 	}
-	
-	/**
-	 * Opens the comment menu/submits the comment
-	 * @param {number} id The id of the client that the user is commenting on
-	*/
-	function toggleComment(id) {
-		//Determine if the menu is open or not
-		let isCommenting = $(`#AddComment${id}`).text() == "Submit";
-		//If the user hasn't opened the text box yet
-		if (!isCommenting) {
-			//Open it
-			$(`#commenter${id}`).show();
-			$(`#cancel${id}`).parent().show();
-			$(`#AddComment${id}`).text("Submit");
-		} else {
-			//If they have, close it and submit the comment
-			//Get the text
-			const message = $(`#commenter${id}`).val();
-			if (!message) return;
-			//Send it to the main process
-			ipcRenderer.send('addComment', {message, client_id: id});
-			closeComment(id);
-		}
-	}
-	
-	/**
-	 * Closes the comment add menu associated with a specific client
-	 * @param {number} id The id of the client
-	*/
-	function closeComment(id) {
-		$(`#commenter${id}`).hide();
-		$(`#cancel${id}`).parent().hide();
-		$(`#AddComment${id}`).text("+ Add Comment");
-		$(`#commenter${id}`).val('');
-	}
-	
 
 	//makes single client html
 	function makeAClient(client, stage){
@@ -450,3 +404,44 @@ $(document).ready(function(){
 	});	
 			
 });
+/**
+	* Opens the comment menu/submits the comment
+	* @param {number} id The id of the client that the user is commenting on
+*/
+function toggleComment(id) {
+	//Determine if the menu is open or not
+	let isCommenting = $(`#AddComment${id}`).text() == "Submit";
+	//If the user hasn't opened the text box yet
+	if (!isCommenting) {
+		//Open it
+		$(`#commenter${id}`).show();
+		$(`#cancel${id}`).parent().show();
+		$(`#AddComment${id}`).text("Submit");
+	} else {
+		//If they have, close it and submit the comment
+		//Get the text
+		const message = $(`#commenter${id}`).val();
+		if (!message) return;
+		//Send it to the main process
+		ipcRenderer.send('addComment', {message, client_id: id});
+		closeComment(id);
+	}
+}
+/**
+* Closes the comment add menu associated with a specific client
+ * @param {number} id The id of the client
+*/
+function closeComment(id) {
+	$(`#commenter${id}`).hide();
+	$(`#cancel${id}`).parent().hide();
+	$(`#AddComment${id}`).text("+ Add Comment");
+	$(`#commenter${id}`).val('');
+}
+//Sends a delete comment event to the main process
+function deleteComment(comment_id) {
+	ipcRenderer.send("deleteComment", comment_id);
+}
+//Sign out
+function signOut() {
+	ipcRenderer.send('signout');
+}
