@@ -111,7 +111,7 @@ function promptSignIn() {
     
     //builds the menu and sets it in the window
     const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
-    Menu.setApplicationMenu(mainMenu);
+    //Menu.setApplicationMenu(mainMenu);
     try {
       ipcMain.on('google', async (event, code) => {
           //After getting the code, get the access tokens
@@ -146,13 +146,13 @@ function prepareExtraWin(){
 
 
 function runCustEdit(){
-	// and load the index.html of the app.
+	//load the form html of the app.
   win.extra.loadURL(`file://${__dirname}/OtherPages/customerEdit.html`);
 	
 }
 
 function runCustInfo(){
-	// and load the index.html of the app.
+	//load the index.html of the app.
   win.extra.loadFile(`file://${__dirname}/OtherPages/customerView.html`);
 }
 
