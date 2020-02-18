@@ -31,9 +31,26 @@
 			//Update the profile picture
 			window.onload = () => {
 				ipcRenderer.send("user");
+				ipcRenderer.send("users");
 			}
 			ipcRenderer.on("getUser", (event, user) => {
 				document.getElementById('profilePic').setAttribute('src',user.picture);
+			});
+			ipcRenderer.on("users", (event, users) => {
+				console.log(users);
+				let list = $("#accMain > ul");
+				for (let user of users) {
+					const item = `
+					<li>
+						<section class="ListHead">
+							<h4>${user.email}</h4>
+							${(user.online) ? "Online" : "Offline"}
+						</section>
+					</li>
+					`;
+					list.append(item);
+				}
+
 			});
 		</script>
 		
@@ -50,33 +67,13 @@
 			<nav class="AddRemove">
 				<button class="GreenAdd">+ Add</button>
 				<button class="RedRemove">- Remove</button>
-			</nav>
-			
-			<nav class="SortBy">
-				<h2>Sort By:</h2>
-				
-				<select id="SortBy">
-					<option value="Name">Name</option>
-					<option value="Type">Type</option>
-				</select>
-			</nav>			
+			</nav>	
 		</article>
 		
 		<!-- the list of employees registered on the site-->
 		<main id="accMain">
 			<ul>
-				<li>
-					<section class="ListHead">
-						<h4>Joe</h4>
-						<h4>Johnson</h4>
-						
-						<div class="CHeadTopLinks">
-							<div class="CHeadTopHidden">
-								<button>More</button>
-							</div>
-						</div>
-					</section>
-				</li>
+				
 			</ul>
 		</main>
 		

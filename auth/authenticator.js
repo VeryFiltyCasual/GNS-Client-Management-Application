@@ -86,6 +86,7 @@ class Authenticator {
      * @returns {Credentials} The access tokens
      */
     getAccessTokens() {
+        this.calendar = google.calendar({version: 'v3', auth: this.authClient});
         return this.tokens;
     }
     /**
@@ -115,7 +116,7 @@ class Authenticator {
     async listEvents() {
         this.calendar.events.list({
             calendarId: 'primary',
-            timeMax: (new Date()).toISOString(),
+            timeMax: (new Date()).toISOString()
         }, (err, response) => {
             if (err) return console.log('Error logging in with calendar: ' + err);
             const events = response.data.items;
@@ -128,30 +129,44 @@ class Authenticator {
                 console.log('No events found');
         });
     }
-    async createEvent() {
+    async createEvent(client, field, date) {
         //Create the event object
         const customEvent = {
-            summary: 'Tech Prep showcase',
-            location: '500 E Franklin St, Dayton, OH 45459',
-            description: 'Global Natural Softare will win.',
+            summary: `${client.first_name} ${client.last_name}'s ${field}`,
             start: {
-                dateTime: new Date(2020, 1, 14, 17).toJSON(),
+                dateTime: date.toJSON(),
                 timeZone: 'America/New_York',
             },
             end: {
-                dateTime: new Date(2020, 1, 14, 17).toJSON(),
+                dateTime: date.toJSON(),
                 timeZone: 'America/New_York',
-            }
+            },
+            id: date.getTime().toString()
         }
-        //Insert the event
-        this.calendar.events.insert({
-            auth: this.authClient,
-            calendarId: 'primary',
-            resource: customEvent,
-        }, (err, event) => {
-            if (err) return console.log('Error adding event to calendar: ' + err.message);
-            console.log('Event created: ' + event);
-        });
+        //See if the event exists first
+        try {
+            await this.calendar.events.get({calendarId: 'primary', eventId: date.getTime().toString()});
+            customEvent.status = 'confirmed';
+            await this.calendar.events.update({calendarId: 'primary', eventId: date.getTime().toString(), resource: customEvent});
+        } catch (e) {
+            //Insert the event
+            await this.calendar.events.insert({
+                auth: this.authClient,
+                calendarId: 'primary',
+                resource: customEvent,
+            }, async (err, event) => {
+                if (err) {
+                    return console.log('Error adding event to calendar: ' + err.code);
+                }
+            });
+        }
+    }
+    async removeEvent(date) {
+        try {
+        await this.calendar.events.delete({calendarId: 'primary', eventId: date.getTime().toString()});
+        } catch (e) {
+            console.log("Event wasn't present on " + date.getTime().toString());
+        }
     }
 }
 module.exports = Authenticator;

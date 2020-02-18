@@ -159,15 +159,15 @@ function createUpdateMessage(parentE = $("body")){
 		//find the value of each input box
 		let content = x(findValue(this));
 		let field = $(this).attr("id");
-		
+
 		if (content == "")
 			content = null;
 		
 		if ($(this).attr("id") == undefined) //DEV
-				console.log("undef key: " + $(this).attr("id") + ", " + $(this).attr("name"));
+			console.log("undef key: " + $(this).attr("id") + ", " + $(this).attr("name"));
 		
 		//if value is different than whats in the database, change it
-		if(content != cli[field] && !(!aString(content) && !aString(cli[field])) && cli[field] != undefined ){
+		if(content != cli[field]){
 			//add one change
 			changeMessage.changes.push(
 				{
@@ -205,7 +205,7 @@ function findValue(inputObj){
 	//input is a datepicker
 	else if ($(inputObj).hasClass("Datepick")){
 		let d = new Date(inputVal);
-		
+		updateCalendar(cli, $(inputObj).attr("id"), new Date(cli[$(inputObj).attr("id")]), d);
 		if (isValidD(d))return d.toISOString();
 		else return "no val";
 	}
@@ -215,23 +215,19 @@ function findValue(inputObj){
 			
 			//if the input is a text box
 			case "text":
-				return inputVal;			
-				break;
+				return inputVal;
 			
 			case "number":
 				return inputVal;
 				
 			case "checkbox":
 				return ($(inputObj).is(":checked"));
-				break;
 				
 			case "radio":
 				return ($(inputObj).is(":checked"));
-				break;
 				
 			default:
 				return "no val";
-				break;
 		}
 	}
 	
@@ -275,4 +271,14 @@ function fillInputs(){
 		fillValue(cli[field], $(this));
 	});
 	
+}
+/**
+ * Sends a message to the main process to update the calendar with the new date
+ * @param {Client} client The client to whom the date concerns
+ * @param {string} field The field that the date corresponds to on the form
+ * @param {Date} oldDate The previous value of the date
+ * @param {Date} newDate The new value of the date
+ */
+function updateCalendar(client, field, oldDate, newDate) {
+	ipcRenderer.send("updateCalendar", client, field, oldDate.getTime(), newDate.getTime());
 }

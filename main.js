@@ -69,7 +69,11 @@ ipcMain.on('getID', (event, arg) => {
 ipcMain.on("display-newclient", (event) =>{
 	prepareExtraWin();
 	runNewCust();
-})
+});
+ipcMain.on("updateCalendar", async (event, client, field, oldDate, newDate) => {
+  await userAuth.removeEvent(new Date(oldDate));
+  await userAuth.createEvent(client, field, new Date(newDate));
+});
 
 
 
@@ -131,16 +135,13 @@ function prepareExtraWin(){
     webPreferences: {
       nodeIntegration: true
     },
-	
-	parent: win.main,
-	modal: false
-  })
-	
-    win.extra.on("closed", function () {
-		win.extra = null;
-    			
-        win.main.webContents.send("ExtraWinClosed");
-    })
+	  parent: win.main,
+	  modal: false
+  });
+  win.extra.on("closed", function () {
+	  win.extra = null;	
+    win.main.webContents.send("ExtraWinClosed");
+  });
 }
 
 
@@ -236,7 +237,10 @@ function createClientViewer({user, tokens}) {
       case 5:
         win.main.webContents.send("delComment", message.data);
         break;
-        
+      //USERS
+      case 6:
+        win.main.webContents.send("users", message.data);
+        break;
       //ADD_CLIENT
       case 7:
         win.main.webContents.send("newClient", message.data);
@@ -352,6 +356,14 @@ function createClientViewer({user, tokens}) {
       data: {
         id
       }
+    };
+    client.send(JSON.stringify(wsMessage));
+  });
+  ipcMain.on('users', event => {
+    const wsMessage = {
+      status: 'ok',
+      event: 6,
+      data: {}
     };
     client.send(JSON.stringify(wsMessage));
   });

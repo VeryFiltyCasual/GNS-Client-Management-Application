@@ -437,7 +437,7 @@
 				
 				$("#ClientList").on("click", ".ClientNextPhase", function(){
 					let thisID = parseInt($(this).parent().parent().find(".cliID").text());
-					let newStage = currentStageForm >= 3 ? 2 : currentStageForm++;
+					let newStage = currentStageForm >= 3 ? 2 : ++currentStageForm;
 					
 					ipcRenderer.send("NewStage", {client_id: thisID, new_stage: newStage})
 				});
@@ -546,7 +546,7 @@
 		
 		//one client is updated
 		ipcRenderer.on("updateOneClient", (event, newcli)=>{
-			for (var i = 0; i < AllClients.length() && currentStageForm == newcli.stage; i++){
+			for (var i = 0; i < AllClients.length && currentStageForm == newcli.stage; i++){
 				if (newcli.id == AllClients[i].id){
 					AllClients[i] = newcli;
 					return;
@@ -565,10 +565,13 @@
 		
 		//a client has been moved to a different stage
 		ipcRenderer.on("changedStage", (event, data)=>{
-			for (var i = 0; i < AllClients.length() && currentStageForm == data.new_stage; i++){
-				if (AllClients[i].id = data.client_id)
+			for (var i = 0; i < AllClients.length; i++){
+				if (AllClients[i].id == data.client_id)
 					AllClients.splice(i, 1); //delete client
 			}
+			console.log(data);
+			//Redisplay all clients at the previous stage
+			populateMain(data.new_stage - 1);
 		});
 		
 		//get google profile picture
