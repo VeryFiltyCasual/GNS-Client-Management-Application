@@ -148,13 +148,13 @@ function prepareExtraWin(){
 
 
 function runCustEdit(){
-	// and load the index.html of the app.
+	//load the form html of the app.
   win.extra.loadURL(`file://${__dirname}/OtherPages/customerEdit.html`);
 	
 }
 
 function runCustInfo(){
-	// and load the index.html of the app.
+	//load the index.html of the app.
   win.extra.loadFile(`file://${__dirname}/OtherPages/customerView.html`);
 }
 
