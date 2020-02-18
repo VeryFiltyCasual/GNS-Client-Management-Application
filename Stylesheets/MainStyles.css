@@ -358,6 +358,7 @@ main ul li{
 }
 .ListHead button:hover, .ClientNextPhase:hover {
 	cursor: pointer;
+	background-color: #efefef;
 }
 .Client i {
 	margin: 0 .3em;
