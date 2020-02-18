@@ -141,13 +141,13 @@ class Authenticator {
                 dateTime: date.toJSON(),
                 timeZone: 'America/New_York',
             },
-            id: date.getTime().toString()
+            id: date.getTime().toString() + client.id
         }
         //See if the event exists first
         try {
-            await this.calendar.events.get({calendarId: 'primary', eventId: date.getTime().toString()});
+            await this.calendar.events.get({calendarId: 'primary', eventId: date.getTime().toString() + client.id});
             customEvent.status = 'confirmed';
-            await this.calendar.events.update({calendarId: 'primary', eventId: date.getTime().toString(), resource: customEvent});
+            await this.calendar.events.update({calendarId: 'primary', eventId: date.getTime().toString() + client.id, resource: customEvent});
         } catch (e) {
             //Insert the event
             await this.calendar.events.insert({

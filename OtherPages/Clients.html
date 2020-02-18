@@ -297,7 +297,7 @@
 				//make the head
 				let htmlLiHead = $("<section class='ListHead'></section>")
 					.append("<h4>" + client.first_name + " " + client.last_name + "</h4>")
-					.append("<p class='cliID'>" + client.id + "</p>")
+					.append("<p class='cliID' style='display: none'>" + client.id + "</p>")
 					.append("<p>Joined " + formatDate(client.date_added) + "</p>")
 					.append(html_TopNav);
 				
@@ -469,7 +469,7 @@
 		
 		$("#AddClient").click(function(e){
 			e.preventDefault();
-			//ipcRenderer.send("display-newclient");
+			ipcRenderer.send("display-newclient");
 			$("body").addClass("ui-widget-overlay");
 		})
 		

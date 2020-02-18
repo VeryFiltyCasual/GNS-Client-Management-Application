@@ -110,8 +110,10 @@ function promptSignIn() {
     });
     
     //builds the menu and sets it in the window
+    /*
     const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
     Menu.setApplicationMenu(mainMenu);
+    */
     try {
       ipcMain.on('google', async (event, code) => {
           //After getting the code, get the access tokens
@@ -157,7 +159,7 @@ function runCustInfo(){
 }
 
 function runNewCust(){
-	win.extra.loadFild(`file://${__dirname}/OtherPages/addClient.html`);
+	win.extra.loadFile(`file://${__dirname}/OtherPages/addClient.html`);
 }
 
 
