@@ -13,9 +13,6 @@ let client_ExtraPage = 0;
 /****************
 *****Windows*****
 *****************/
-
-//******loading*******
-
 app.on('ready', start);
 async function start() {
   let data;
@@ -236,95 +233,52 @@ function createClientViewer({user, tokens}) {
       case 7:
         win.main.webContents.send("newClient", message.data);
         break;
-	
-	  //CLIENT_NEXTSTAGE
-	  case 8:
-		win.main.webContents.send("changedStage", message.data);
-		break;
-        
+      //CLIENT_NEXTSTAGE
+      case 8:
+        win.main.webContents.send("changedStage", message.data);
+        break;
+      //Not a defined message code
       default:
         console.log('Unrecognized message');
         break;
-  }
-  /**
-   * Sends a message once the win.main content has loaded
-   * @param {string} event The event name
-   * @param {any} message the parameters to send
-   */
-  function sendOnceLoaded(event, message) {
-    win.main.webContents.on('did-finish-load', () => {
-      win.main.webContents.send(event, message);
-    });
-  }
-});
-
-  ipcMain.on('calendar', () => {
-      userAuth.createEvent();
-  });
+    }
+    /**
+     * Sends a message once the win.main content has loaded
+     * @param {string} event The event name
+     * @param {any} message the parameters to send
+     */
+    function sendOnceLoaded(event, message) {
+      win.main.webContents.on('did-finish-load', () => {
+        win.main.webContents.send(event, message);
+      });
+    } //end sendOnceLoaded
+  }); //end client.on
   
-	/****sending to server*****/
+  /*
+    ipc messsages that require the websocket connection
+  */
+  //Get Stage 1
 	ipcMain.on("RequestStage1", (event, arg) => {
-		let jsonMessage = {
-			"status": "ok",
-			"event": 0,
-			"data": {}
-		}
-		
-		client.send(JSON.stringify(jsonMessage));
-	})
-	ipcMain.on("RequestStage2", (event, arg) => {
-		let jsonMessage = {
-			"status": "ok",
-			"event": 1,
-			"data": {}
-		}
-		
-		client.send(JSON.stringify(jsonMessage));
-	})
+		send(blankEvent(0));
+  });
+  //Get Stage 2
+	ipcMain.on("RequestStage2", (event, arg) => {		
+		send(blankEvent(1));
+  });
+  //Get Archive
 	ipcMain.on("RequestStage3", (event, arg) => {
-		let jsonMessage = {
-			"status": "ok",
-			"event": 2,
-			"data": {}
-		}
-		
-		client.send(JSON.stringify(jsonMessage));
-	})
+		send(blankEvent(2));
+  });
+  //Update
 	ipcMain.on("UpdateClient", (event, arg) =>{
 		let jsonMessage = {
-			"status": "ok",
-			"event": 3,
-			"data": arg
-		}
-		client.send(JSON.stringify(jsonMessage));
-	})
-	ipcMain.on("NewStage", (event, arg) => {
-		let jsonMessage = {
-			"status": "ok",
-			"event": 8,
-			"data": arg
-		}
-		
-		client.send(JSON.stringify(jsonMessage));
-	})
-	ipcMain.on("AddClient", (event, arg) =>{
-		let jsonMessage = {
-			"status": "ok",
-			"event": 7,
-			"data": arg
-		}
-		client.send(JSON.stringify(jsonMessage));
-		win.extra.close();
-	});
-	ipcMain.on("addUser", (event, arg)=>{
-		let jsonMessage = {
-			"status": "ok",
-			"event": 9,
-			"data": arg
-		}
-		client.send(JSON.stringify(jsonMessage));
+			status: "ok",
+			event: 3,
+			data: arg
+		};
+		send(jsonMessage);
   });
-  //Handles when the user adds a comment
+  //User adds a comment
   ipcMain.on('addComment', (e, {message, client_id}) => {
     //Create a formatted message
     const wsMessage = {
@@ -333,13 +287,13 @@ function createClientViewer({user, tokens}) {
       data: {
         client_id,
         message,
-        date: new Date(Date.now()).toISOString(),
         author_name: user.name,
         author_picture: user.picture
       }
-    }
-    client.send(JSON.stringify(wsMessage));
+    };
+    send(wsMessage);
   });
+  //User deletes a comment
   ipcMain.on('deleteComment',(event, id) => {
     const wsMessage = {
       status: 'ok',
@@ -348,16 +302,59 @@ function createClientViewer({user, tokens}) {
         id
       }
     };
-    client.send(JSON.stringify(wsMessage));
+    send(wsMessage);
   });
+  //Send a list of users and their online status
   ipcMain.on('users', event => {
     const wsMessage = {
       status: 'ok',
       event: 6,
       data: {}
     };
-    client.send(JSON.stringify(wsMessage));
+    send(wsMessage);
   });
+  //Add a client manually
+	ipcMain.on("AddClient", (event, arg) =>{
+		let jsonMessage = {
+			status: "ok",
+			event: 7,
+			data: arg
+		};
+		send(jsonMessage);
+		win.extra.close();
+  });
+  //Move client to a new stage
+	ipcMain.on("NewStage", (event, arg) => {
+		let jsonMessage = {
+			status: "ok",
+			event: 8,
+			data: arg
+		};
+		send(jsonMessage);
+  });
+  //Add a user to the authorized list
+	ipcMain.on("addUser", (event, arg)=>{
+		let jsonMessage = {
+			status: "ok",
+			event: 9,
+			data: arg
+		};
+		send(jsonMessage);
+  });
+  /**
+   * Creates a blank message for a certain event code. Useful for simple request messages
+   * @param {number} event The event code
+   */
+  function blankEvent(event) {
+    return {status: 'ok', event, data:{}};
+  }
+  /**
+   * Sends a json message to the websocket server
+   * @param {object} message The message object
+   */
+  function send(message) {
+    client.send(JSON.stringify(message));
+  }
 }
 
 
