@@ -148,7 +148,7 @@ function runCustEdit(){
 }
 
 function runNewCust(){
-	win.extra.loadFile(`file://${__dirname}/OtherPages/addClient.html`);
+	win.extra.loadURL(`file://${__dirname}/OtherPages/addClient.html`);
 }
 
 
