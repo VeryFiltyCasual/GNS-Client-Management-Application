@@ -464,6 +464,7 @@ main ul li{
 	font-size: 1.2em;
 }
 .comContainer p {
+	max-width: 100%;
 	border: none;
 }
 .comContainer strong {

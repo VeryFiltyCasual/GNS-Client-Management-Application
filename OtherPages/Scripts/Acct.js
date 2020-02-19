@@ -1,12 +1,6 @@
+const {ipcRenderer} = require("electron");
 let newEmail = "";
 
-display("Accounts");
-const {ipcRenderer} = require("electron");
-//Update the profile picture
-window.onload = () => {
-	ipcRenderer.send("user");
-	ipcRenderer.send("users");
-}
 ipcRenderer.on("getUser", (event, user) => {
 	document.getElementById('profilePic').setAttribute('src',user.picture);
 });
@@ -30,9 +24,11 @@ ipcRenderer.on("users", (event, users) => {
 function signOut() {
 	ipcRenderer.send('signout');
 }
-
-
 $(document).ready(function(){
+	//Update the profile picture
+	ipcRenderer.send("user");
+	ipcRenderer.send("users");
+
 	$("#SortBy").selectmenu({
 		width: 200,
 		  classes: {
