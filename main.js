@@ -81,12 +81,16 @@ function promptSignIn() {
       height: 800,
       webPreferences: {
         nodeIntegration: true
-      }
+      },
+	  
+	  icon: "Assets/GNSiconSmall.png",
+	  autoHideMenuBar: false
     });
 
     // and load the index.html of the app.
     win.main.loadFile('index.html');
     
+	
     //Send the authentication url
     const url = userAuth.getAuthURL();
     win.main.webContents.on('did-finish-load', () => {
@@ -99,12 +103,9 @@ function promptSignIn() {
       win.main = null
       win.extra = null
     });
+	
+    Menu.setApplicationMenu(null);
     
-    //builds the menu and sets it in the window
-    /*
-    const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
-    Menu.setApplicationMenu(mainMenu);
-    */
     try {
       ipcMain.on('google', async (event, code) => {
           //After getting the code, get the access tokens
