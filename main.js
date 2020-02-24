@@ -31,8 +31,11 @@ async function start() {
       height: 800,
       webPreferences: {
         nodeIntegration: true
-      }
+      },
+      icon: "Assets/GNSiconSmall.png",
+      autoHideMenuBar: false
     });
+    Menu.setApplicationMenu(null);
   }
   createClientViewer(data);
 }
@@ -82,9 +85,8 @@ function promptSignIn() {
       webPreferences: {
         nodeIntegration: true
       },
-	  
-	  icon: "Assets/GNSiconSmall.png",
-	  autoHideMenuBar: false
+      icon: "Assets/GNSiconSmall.png",
+      autoHideMenuBar: false
     });
 
     // and load the index.html of the app.
