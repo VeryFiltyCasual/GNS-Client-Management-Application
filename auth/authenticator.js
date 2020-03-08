@@ -130,6 +130,7 @@ class Authenticator {
         });
     }
     async createEvent(client, field, date) {
+        const eventId = date.getTime().toString() + client.id;
         //Create the event object
         const customEvent = {
             summary: `${client.first_name} ${client.last_name}'s ${field}`,
@@ -141,31 +142,36 @@ class Authenticator {
                 dateTime: date.toJSON(),
                 timeZone: 'America/New_York',
             },
-            id: date.getTime().toString() + client.id
+            id: eventId
         }
-        //See if the event exists first
+        //See if the event exists first and is currently cancelled
         try {
-            await this.calendar.events.get({calendarId: 'primary', eventId: date.getTime().toString() + client.id});
+            await this.calendar.events.get({calendarId: 'primary', eventId});
+            console.log('Found event ' + eventId);
             customEvent.status = 'confirmed';
-            await this.calendar.events.update({calendarId: 'primary', eventId: date.getTime().toString() + client.id, resource: customEvent});
+            await this.calendar.events.update({calendarId: 'primary', eventId, resource: customEvent});
+            console.log(`Set ${eventId} to confirmed`);
         } catch (e) {
+            console.log(customEvent);
             //Insert the event
             await this.calendar.events.insert({
                 auth: this.authClient,
                 calendarId: 'primary',
                 resource: customEvent,
+                eventId
             }, async (err, event) => {
                 if (err) {
-                    return console.log('Error adding event to calendar: ' + err.code);
+                    return console.log('Error adding event to calendar: ' + err.message + err.code + ". ");
                 }
             });
         }
     }
-    async removeEvent(date) {
+    async removeEvent(date, id) {
+        const eventId = date.getTime().toString() + id;
         try {
-        await this.calendar.events.delete({calendarId: 'primary', eventId: date.getTime().toString()});
+        await this.calendar.events.delete({calendarId: 'primary', eventId});
         } catch (e) {
-            console.log("Event wasn't present on " + date.getTime().toString());
+            console.log("Event wasn't present on " + eventId);
         }
     }
 }

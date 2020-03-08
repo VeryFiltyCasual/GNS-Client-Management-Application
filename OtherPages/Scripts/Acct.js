@@ -9,10 +9,11 @@ ipcRenderer.on("users", (event, users) => {
 	let list = $("#accMain > ul");
 	for (let user of users) {
 		const item = `
-		<li>
+		<li id='${user.id}'>
 			<section class="ListHead">
 				<h4>${user.email}</h4>
-				${(user.online) ? "Online" : "Offline"}
+				<p>${(user.online) ? "Online" : "Offline"}</p>
+				<button class="btnEditInfo" onclick='removeUser(${user.id})' style="float: right">Remove</button>
 			</section>
 		</li>
 		`;
@@ -20,9 +21,28 @@ ipcRenderer.on("users", (event, users) => {
 	}
 
 });
+ipcRenderer.on("addUser", (event, user) => {
+	let list = $("#accMain > ul");
+	const item = `
+	<li id='user${user.id}'>
+		<section class="ListHead">
+			<h4>${user.email}</h4>
+			<p>Offline</p>
+			<button class="btnEditInfo" onclick="removeUser(${user.id})"style="float: right">Remove</button>
+		</section>
+	</li>
+	`;
+	list.append(item);
+});
+ipcRenderer.on('removeUser', (event, id) => {
+	$(`#user${id}`).remove();
+});
 //Sign out
 function signOut() {
 	ipcRenderer.send('signout');
+}
+function removeUser(id) {
+	ipcRenderer.send("removeUser", id);
 }
 $(document).ready(function(){
 	//Update the profile picture

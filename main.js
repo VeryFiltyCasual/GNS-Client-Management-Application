@@ -65,7 +65,7 @@ ipcMain.on("display-newclient", (event) =>{
 	runNewCust();
 });
 ipcMain.on("updateCalendar", async (event, client, field, oldDate, newDate) => {
-  await userAuth.removeEvent(new Date(oldDate));
+  await userAuth.removeEvent(new Date(oldDate), client.id);
   await userAuth.createEvent(client, field, new Date(newDate));
 });
 
@@ -240,6 +240,14 @@ function createClientViewer({user, tokens}) {
       case 8:
         win.main.webContents.send("changedStage", message.data);
         break;
+      //ADD_USER
+      case 9:
+        win.main.webContents.send("addUser", message.data);
+        break;
+      //REMOVE_USER
+      case 10:
+        win.main.webContents.send("removeUser", message.data);
+        break;
       //Not a defined message code
       default:
         console.log('Unrecognized message');
@@ -343,6 +351,15 @@ function createClientViewer({user, tokens}) {
 			data: arg
 		};
 		send(jsonMessage);
+  });
+  ipcMain.on('removeUser', (event, id) => {
+    let message = {
+      status: 'ok',
+      event: 10,
+      data: id
+    };
+    console.log(message);
+    send(message);
   });
   /**
    * Creates a blank message for a certain event code. Useful for simple request messages

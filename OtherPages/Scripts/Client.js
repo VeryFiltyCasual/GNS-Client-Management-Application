@@ -184,7 +184,7 @@ $(document).ready(function(){
 	
 	//define htmls
 	let html_ButtonsNav = '<nav class="SmallCategories"><button class="SmallCatButtons Basic smallcat-selected">Basic</button><button class="SmallCatButtons Estimate">Estimate/Balance</button><button class="SmallCatButtons Availability">Availability</button><button class="SmallCatButtons Comments">Comments</button><div style="width: 100%; border: 0.5px solid rgb(180,180,180);"></div></nav>';			
-	let html_TopNav = '<div class="CHeadTopLinks"><div><button class="btnEditInfo"><i class="fa fa-edit"></i>Edit</div></div>';
+	let html_TopNav = '<div class="CHeadTopLinks"><div><button class="btnEditInfo"><i class="fa fa-edit"></i>Edit</button></div></div>';
 	let html_DivSec = "<div class='body-section'></div>";
 	
 	/**************FUNCTIONS****************/
