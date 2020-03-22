@@ -1,6 +1,7 @@
-/*const { ipcRenderer } = require('electron');
-let cli = ipcRenderer.sendSync("getID");*/
-let cli = {
+const { ipcRenderer } = require('electron');
+let cli = ipcRenderer.sendSync("getID");
+
+let bogus = {
 	"id" : 0,
 	"first_name" : "Jeremy",
 	"last_name" : "Oosterbananas",

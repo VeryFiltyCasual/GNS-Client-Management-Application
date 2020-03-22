@@ -312,7 +312,10 @@ main ul li{
 	font-size: 30px;
 	font-weight: 500;
 }
-
+#search {
+	font-size: 1em;
+	margin-right: 1em;
+}
 .ListHead{
 	white-space: nowrap;
 	background-color: #ffffff;

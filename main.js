@@ -15,12 +15,15 @@ let client_ExtraPage = 0;
 *****************/
 app.on('ready', start);
 async function start() {
+  //The user information and access tokens are stored in the 'data' object
   let data;
   let prompt = await userAuth.needsTokens();
   //Check if the user needs to sign in
   if (prompt) {
+    //If they need to sign in, use the special sign in window
     data = await promptSignIn();
   } else {
+    //If they don't need to sign in, get the tokens from a file on the computer
     const tokens = userAuth.getAccessTokens();
     //Get the user's profile information
     const user = await userAuth.getUser();
@@ -35,8 +38,9 @@ async function start() {
       icon: "Assets/GNSiconSmall.png",
       autoHideMenuBar: false
     });
-    Menu.setApplicationMenu(null);
+    //Menu.setApplicationMenu(null);
   }
+  //Create a client viewer with the information about the user
   createClientViewer(data);
 }
 
@@ -52,20 +56,24 @@ ipcMain.on('display-client-edit', (event, id) => {
 })
 
 //recieves 'user' message, sends 'getUser' message
+//This is used for retrieving the user's profile picture
 ipcMain.on('user', async () => {
   win.main.webContents.send("getUser", await userAuth.getUser());
 });
-
+//This is used to get the id of the client whose edit page is displayed
 ipcMain.on('getID', (event, arg) => {
   event.returnValue = client_ExtraPage;
 });
-
+//This is used to display a form that the user uses to add a new client
 ipcMain.on("display-newclient", (event) =>{
 	prepareExtraWin();
 	runNewCust();
 });
+//This is used to handle when the user wants to update/add an event on the company's google calendar
 ipcMain.on("updateCalendar", async (event, client, field, oldDate, newDate) => {
+  //First, delete the previous date for the event if it exists
   await userAuth.removeEvent(new Date(oldDate), client.id);
+  //Add the event at the new date
   await userAuth.createEvent(client, field, new Date(newDate));
 });
 
@@ -105,10 +113,12 @@ function promptSignIn() {
       win.main = null
       win.extra = null
     });
-	
+
+    //Get rid of the menu
     Menu.setApplicationMenu(null);
     
     try {
+      //Log in the user
       ipcMain.on('google', async (event, code) => {
           //After getting the code, get the access tokens
           const tokens = await userAuth.retAccessTokens(code);
