@@ -111,22 +111,12 @@ class Authenticator {
         //Delete the file
         fs.unlink(this.tokensPath, () => {});
     }
-    async listEvents() {
-        this.calendar.events.list({
-            calendarId: 'primary',
-            timeMax: (new Date()).toISOString()
-        }, (err, response) => {
-            if (err) return console.log('Error logging in with calendar: ' + err);
-            const events = response.data.items;
-            if (events.length) {
-                console.log("Found these events: ");
-                events.map(event => {
-                    console.log(`${event.start.dateTime || event.start.date} - ${event.summary}`);
-                });
-            } else
-                console.log('No events found');
-        });
-    }
+    /**
+     * Creates an event for the client on a specified date
+     * @param {object} client The client object as recieved from the database
+     * @param {string} field The field of the client object that the event is attatched to
+     * @param {Date} date The date that the event is to be scheduled
+     */
     async createEvent(client, field, date) {
         const eventId = date.getTime().toString() + client.id;
         //Create the event object
@@ -164,11 +154,19 @@ class Authenticator {
             });
         }
     }
+    /**
+     * Removes an event from a specified date that is attatched to a client
+     * @param {Date} date The date the event is scheduled
+     * @param {number} id The client's id number
+     */
     async removeEvent(date, id) {
+        //Get the correct format for the event
         const eventId = date.getTime().toString() + id;
         try {
-        await this.calendar.events.delete({calendarId: 'primary', eventId});
+            //Try to delete the event if it exists
+            await this.calendar.events.delete({calendarId: 'primary', eventId});
         } catch (e) {
+            //Notify the server that the event wasn't there
             console.log("Event wasn't present on " + eventId);
         }
     }
