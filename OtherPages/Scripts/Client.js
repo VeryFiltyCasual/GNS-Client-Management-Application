@@ -84,7 +84,6 @@ $(document).ready(function(){
 		let sentStage = data.stage == 0 ? currentStageForm : data.stage;
 		sortByNewest(AllClients);
 		populateMain(sentStage);
-		console.log("new clients recieved from the server");
 	});
 
 	//received a new comment
@@ -162,7 +161,6 @@ $(document).ready(function(){
 			if (AllClients[i].id == data.client_id)
 				AllClients.splice(i, 1); //delete client
 		}
-		console.log(data);
 		//Redisplay all clients at the previous stage
 		populateMain(data.new_stage - 1);
 	});
@@ -304,7 +302,6 @@ $(document).ready(function(){
 	
 	//populates main (all clients)
 	function populateMain(currentStage){
-		console.log("Loading clients from stage " + currentStage);
 		var Client;
 		
 		//remove clients in the form already
@@ -336,7 +333,6 @@ $(document).ready(function(){
 		sortByNewest(AllClients)
 		populateMain(stage);
 		
-		console.log("new clients recieved from the server");
 	}
 
 
@@ -359,7 +355,6 @@ $(document).ready(function(){
 		
 		//populateMain(currentStageForm); //[DEV, GET RID LATER]
 		ipcRenderer.send("RequestStage" + currentStageForm);
-		console.log('Sent stage ' + currentStageForm + ' client request');
 
 		//styling
 		$("aside .SmallCatButtons").removeClass("view-selected");
@@ -380,25 +375,18 @@ $(document).ready(function(){
 		$(this).addClass("smallcat-selected");
 		
 		//fill info 				
-		if ($(this).hasClass("Estimate")){
-			//display Invoice
-			console.log("client invoice is displayed");						
+		if ($(this).hasClass("Estimate"))
+			//display Invoice				
 			populateEstimate(getClient(AllClients, ThisID), ThisListBody);
-		}
-		else if ($(this).hasClass("Availability")){
-			//display install stuff
-			console.log("client install is displayed");				
+		else if ($(this).hasClass("Availability"))
+			//display install stuff			
 			populateAvailability(getClient(AllClients, ThisID), ThisListBody);
-		}
-		else if ($(this).hasClass("Comments")){
-			//display install stuff
-			console.log("client comments are displayed");						
+		else if ($(this).hasClass("Comments"))
+			//display install stuff					
 			populateComments(getClient(AllClients,ThisID), ThisListBody);
-		}
-		else {
+		else
 			//display basic (if none other found)
 			populateBasic(getClient(AllClients,ThisID), ThisListBody);
-		}
 		
 		$(ThisClientData).fadeIn(CDATA_FADESPEED);
 	});
@@ -426,7 +414,6 @@ $(document).ready(function(){
 	//Filters the input
 	$("#search").on("input", function() {
 		const text = $(this).val();
-		console.log(text);
 		filterClients(text);
 	});
 	
