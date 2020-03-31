@@ -110,8 +110,6 @@ class Authenticator {
     async deleteToken() {
         //Delete the file
         fs.unlink(this.tokensPath, () => {});
-        //Delete the current authentication credentials
-        await this.authClient.revokeCredentials();
     }
     async listEvents() {
         this.calendar.events.list({

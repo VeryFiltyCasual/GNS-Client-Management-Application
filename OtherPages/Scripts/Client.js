@@ -88,8 +88,8 @@ $(document).ready(function(){
 	});
 
 	//received a new comment
-	ipcRenderer.on("addComment", (event, data) =>{
-		$(".info").remove();
+	ipcRenderer.on("addComment", (event, data) => {
+		//Add the comment to the client's comment array
 		for (var i = 0; i < AllClients.length; i++){
 			if (data.client_id == AllClients[i].id){
 				AllClients[i].comments.push(data);
@@ -101,7 +101,6 @@ $(document).ready(function(){
 		//If the clientData is displaying comments
 		if (clientData.hasClass("column")) {
 			//Add the comment before the input box
-			console.log(data);
 			const date = new Date(data.date);
 			const comment = `
 				<div class="comContainer" id="comment${data.id}">
@@ -323,15 +322,13 @@ $(document).ready(function(){
 			const fullName = client.first_name + " " + client.last_name;
 			return fullName.includes(filterText);
 		});
-		console.log(filterText);
-		console.log(filteredClients);
 		//remove clients in the form already
 		$(".Client").remove();
 			
 		//makes and appends all clients
 		for (let client of filteredClients){			
 			$(makeAClient(client, client.stage)).appendTo("#ClientList");
-		};
+		}
 	}
 	function recievedClients(stage){
 		$("body").removeClass("ui-widget-overlay");

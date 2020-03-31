@@ -260,51 +260,7 @@ fillInputs();
 		event.preventDefault();
 	});
 
-	$("#SaveSectionDialog").dialog({
-		autoOpen: false,
-		title: "Now saving...",
-
-		buttons: [{
-			text: "Save",
-			icon: "ui-icon-document",
-			click: function(){
-				saveVals = true;
-				$( this ).dialog( "close" );
-			}
-		},
-		{
-			text: "Cancel",
-			icon: "ui-icon-close",
-			click: function(){
-				saveVals = false;
-				$( this ).dialog( "close" );
-			}
-		}
-		],
-		resizeable: false,
-	});
-	$("#SaveAllDialog").dialog({
-		autoOpen: false,
-		title: "Now saving...",
-
-		buttons: [{
-			text: "Save",
-			icon: "ui-icon-document",
-			click: function(){
-				saveVals = true;
-				$( this ).dialog( "close" );
-			}
-		},
-		{
-			text: "Cancel",
-			icon: "ui-icon-close",
-			click: function(){
-				saveVals = false;
-				$( this ).dialog( "close" );
-			}
-		}
-		]
-	});
+	$("#SaveSectionDialog").hide();
 
 	
 	$("#openSideNav").on("click", function(event){
@@ -330,16 +286,41 @@ fillInputs();
 		e.preventDefault();
 		let thisSection = $(this).parent();		
 		let messageData = createUpdateMessage(thisSection);
-		let saveVals = false;
 		
-		$("#SaveSectionDialog").dialog("open");
-
-		if (saveVals){
-			console.log(messageData);
-			ipcRenderer.send("UpdateClient", messageData) //[DEV]
-		}
+		$("#SaveSectionDialog").dialog({
+			autoOpen: true,
+			title: "Now saving...",
+	
+			buttons: [{
+				text: "Save",
+				icon: "ui-icon-document",
+				click: function(){
+					//User wants to save the data
+					console.log(messageData);
+					ipcRenderer.send("UpdateClient", messageData);
+					$( this ).dialog( "close" );
+				}
+			},
+			{
+				text: "Cancel",
+				icon: "ui-icon-close",
+				click: function(){
+					//User does not want to save the data
+					$( this ).dialog( "close" );
+				}
+			}
+			],
+			resizeable: false,
+		});
 	});	
 	
+	$(".SaveAll").click(function(e) {
+		e.preventDefault();
+		let messageData = createUpdateMessage();
+		console.log(messageData);
+		ipcRenderer.send("UpdateClient", messageData);
+	});	
+
 	$(".Datepick").datepicker({
 		changeMonth: true,
 		changeYear: true,

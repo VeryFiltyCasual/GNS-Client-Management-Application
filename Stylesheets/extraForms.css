@@ -135,7 +135,7 @@ button:hover{
 #quote_sent{
 	width: 90%;
 }
-.SaveSect {
+.SaveSect, .SaveAll {
 	background-color: #2c3e50;
 	margin: 10px;
     padding: 10px;
@@ -144,7 +144,7 @@ button:hover{
     font-weight: 600;
     border-radius: 2px;
 }
-.SaveSect:hover {
+.SaveSect:hover, .SaveAll:hover {
 	color: #ffffff;
 	cursor: pointer;
     background: linear-gradient(180deg, #2c3e50, #263849 90%);
