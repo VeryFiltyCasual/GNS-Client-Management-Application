@@ -118,7 +118,7 @@ class Authenticator {
      * @param {Date} date The date that the event is to be scheduled
      */
     async createEvent(client, field, date) {
-        const eventId = date.getTime().toString() + client.id;
+        const eventId = date.getTime().toString() + client.id + field.split('_').join('');
         //Create the event object
         const customEvent = {
             summary: `${client.first_name} ${client.last_name}'s ${field}`,
@@ -156,12 +156,13 @@ class Authenticator {
     }
     /**
      * Removes an event from a specified date that is attatched to a client
-     * @param {Date} date The date the event is scheduled
      * @param {number} id The client's id number
+     * @param {string} field The field of the client object that the event is attatched to
+     * @param {Date} date The date the event is scheduled
      */
-    async removeEvent(date, id) {
+    async removeEvent(id, field, date) {
         //Get the correct format for the event
-        const eventId = date.getTime().toString() + id;
+        const eventId = date.getTime().toString() + id + field.split('_').join('');
         try {
             //Try to delete the event if it exists
             await this.calendar.events.delete({calendarId: 'primary', eventId});

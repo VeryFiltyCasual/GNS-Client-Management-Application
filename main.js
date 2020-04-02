@@ -38,7 +38,7 @@ async function start() {
       icon: "Assets/GNSiconSmall.png",
       autoHideMenuBar: false
     });
-    //Menu.setApplicationMenu(null);
+    Menu.setApplicationMenu(null);
   }
   //Create a client viewer with the information about the user
   createClientViewer(data);
@@ -72,7 +72,7 @@ ipcMain.on("display-newclient", (event) =>{
 //This is used to handle when the user wants to update/add an event on the company's google calendar
 ipcMain.on("updateCalendar", async (event, client, field, oldDate, newDate) => {
   //First, delete the previous date for the event if it exists
-  await userAuth.removeEvent(new Date(oldDate), client.id);
+  await userAuth.removeEvent(client.id, field, new Date(oldDate));
   //Add the event at the new date
   await userAuth.createEvent(client, field, new Date(newDate));
 });
