@@ -288,7 +288,7 @@ article nav.SortBy{
 	main 
 *********/
 main{
-	padding: 40px 26px;
+	padding: 2% 26px;
 	overflow-x: hidden;
 	overflow-y: auto;
 	height: 100%;
@@ -367,6 +367,10 @@ main ul li{
 	margin: 0 .3em;
 }
 /*the body*/
+#ClientList {
+	overflow-x: hidden;
+	overflow-y: auto;
+}
 .ListBody{
 	background-color: #ffffff;
 	font-size: 14px;

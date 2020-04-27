@@ -37,7 +37,9 @@
 		input[type=checkbox] {
             transform: scale(1.3);
         }    
-
+		h1 {
+			font-size: 32px;
+		}
 	</style>
 </head>
 
@@ -48,16 +50,14 @@
 </div>
 
 <form id="formMain" method="get" action="">
-<h1>Basic Information</h1>
+
 <fieldset>
-	
-
-	<label for="first_name">First Name:</label><input required type="text" name="txtName" id="first_name" value="">
-	<label for="last_name">Last Name:</label><input required type="text" name="txtLastName" id="last_name" title="Edit the client's last name" value="">
-
-	
+	<h1>Basic Information</h1>
 	<section>
 		<h2>Contact</h2>
+		<label for="first_name">First Name:</label><input required type="text" name="txtName" id="first_name" value="">
+		<label for="last_name">Last Name:</label><input required type="text" name="txtLastName" id="last_name" title="Edit the client's last name" value="">
+		<br>
 		<label for="phone">Phone Number:</label><input required type="number" name="numPhoneNum" id="phone" value="">
 		<label for="email">Email:</label><input required type="text" name="txtEmail" id="email"  value="">
 	</section>
@@ -146,7 +146,7 @@
 		<label for="other">Other:</label><input required type="text" id="other" name="txtOtherProj">
 	</section>
 
-	<button type="button" class="Save">Save</button>
+	<button type="submit" class="SaveSect">Save</button>
 </fieldset>
 </form>
 

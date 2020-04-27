@@ -317,7 +317,7 @@ $(document).ready(function(){
 	function filterClients(filterText) {
 		const filteredClients = AllClients.filter(client => {
 			const fullName = client.first_name + " " + client.last_name;
-			return fullName.includes(filterText);
+			return fullName.toLowerCase().includes(filterText.toLowerCase().trim());
 		});
 		//remove clients in the form already
 		$(".Client").remove();

@@ -4,6 +4,9 @@ body{
 	padding: 15px;
 	font-family: "Open Sans", sans-serif;
 }
+h2 {
+	text-decoration: underline;
+}
 form {
 	width: 90%;
 }
