@@ -2,7 +2,10 @@
 function display(name){
 	document.write('<header>');
 	document.write('	<div class="head"> ');
-	document.write('		<h1>' + name + '</h1>');
+	document.write('		<div>');
+	document.write('			<img src="../Assets/GNSiconSmall.png" />');
+	document.write('			<h1>' + name + '</h1>');
+	document.write('		</div>');
 
 	document.write('		<nav><ul>');
 	document.write('			<img src="" id="profilePic" style="border-radius: 100%"/>');

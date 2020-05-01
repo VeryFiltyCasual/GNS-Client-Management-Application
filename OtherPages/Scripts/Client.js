@@ -19,7 +19,7 @@ function toggleComment(id) {
 	} else {
 		//If they have, close it and submit the comment
 		//Get the text
-		const message = $(`#commenter${id}`).val();
+		const message = $(`#commenter${id}`).val().trim();
 		if (!message) return;
 		//Send it to the main process
 		ipcRenderer.send('addComment', {message, client_id: id});
@@ -254,7 +254,7 @@ $(document).ready(function(){
 			}
 		}
 		//Textbox for the comment
-		let commentBox = $(`<input type='text' id='commenter${clientCom.id}' placeholder='Comment...'/>`);
+		let commentBox = $(`<input type='text' style="padding: 4px; max-width: 400px;" id='commenter${clientCom.id}' placeholder='Comment...'/>`);
 		commentBox.hide();
 		clientData.append(commentBox);
 		//Add the add comment button at the end

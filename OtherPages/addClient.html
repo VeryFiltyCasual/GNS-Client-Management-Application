@@ -55,17 +55,17 @@
 	<h1>Basic Information</h1>
 	<section>
 		<h2>Contact</h2>
-		<label for="first_name">First Name:</label><input required type="text" name="txtName" id="first_name" value="">
-		<label for="last_name">Last Name:</label><input required type="text" name="txtLastName" id="last_name" title="Edit the client's last name" value="">
+		<label for="first_name">First Name:</label><input required type="text" name="txtName" id="first_name" value="" maxlength="50">
+		<label for="last_name">Last Name:</label><input required type="text" name="txtLastName" id="last_name" value="" maxlength="50">
 		<br>
-		<label for="phone">Phone Number:</label><input required type="number" name="numPhoneNum" id="phone" value="">
-		<label for="email">Email:</label><input required type="text" name="txtEmail" id="email"  value="">
+		<label for="phone">Phone Number:</label><input required type="number" name="numPhoneNum" id="phone" min="0" value="" onKeyPress="return this.value.length < 10;" max="9999999999">
+		<label for="email">Email:</label><input required type="text" name="txtEmail" id="email"  value="" maxlength="255">
 	</section>
 	
 	<section>
 		<h2>Address</h2>
-		<label for="street_address">Street:</label><input required type="text" name="txtAddressStreet" id="street_address" title="enter street name and house number" value="">
-		<label for="zip">Zip code:</label><input required type="text" id="zip">
+		<label for="street_address">Street:</label><input required type="text" name="txtAddressStreet" id="street_address" title="enter street name and house number" value="" maxlength="255">
+		<label for="zip">Zip code:</label><input required type="text" id="zip" onKeyPress="return this.value.length <= 9;">
 		
 		<label for="city">City:</label>
 			<select required name="city" id="city">
@@ -131,19 +131,19 @@
 	
 	<section>
 		<h2>Contractor/Ref Info</h2>
-		<label for="contractor">Name:</label> <input required type="text" name="txtConName" id="contractor" value="">
-		<label for="contractor_phone">Phone Number:</label> <input required type="number" name="numConPhoneNum" id="contractor_phone" value="">
-		<label for="contractor_email">Email:</label> <input required type="text" name="txtConEmail" id="contractor_email" value="">
+		<label for="contractor">Name:</label> <input required type="text" name="txtConName" id="contractor" value="" maxlength="50">
+		<label for="contractor_phone">Phone Number:</label> <input required type="number" name="numConPhoneNum" id="contractor_phone" onKeyPress="return this.value.length < 10;" min="0" max="9999999999">
+		<label for="contractor_email">Email:</label> <input required type="text" name="txtConEmail" id="contractor_email" value="" maxlength="255">
 	</section>
 	
 	<section>
 		<h2>Project Info</h2>
-		<input required type="text" id="project" value="">
+		<input required type="text" id="project" value="" maxlength="50">
 		
-		<label for="cabinet">Cabinet:</label><input required type="text" id="cabinet" name="txtCabinet">
-		<label for="appliances">Appliances:</label><input required type="text" id="appliances" name="txtAppliances">
-		<label for="floor">Floor:</label><input required id="floor" type="text" name="txtFloor">
-		<label for="other">Other:</label><input required type="text" id="other" name="txtOtherProj">
+		<label for="cabinet">Cabinet:</label><input required type="text" id="cabinet" name="txtCabinet" maxlength="50">
+		<label for="appliances">Appliances:</label><input required type="text" id="appliances" name="txtAppliances" maxlength="50">
+		<label for="floor">Floor:</label><input required id="floor" type="text" name="txtFloor" maxlength="50">
+		<label for="other">Other:</label><input required type="text" id="other" name="txtOtherProj" maxlength="50">
 	</section>
 
 	<button type="submit" class="SaveSect">Save</button>

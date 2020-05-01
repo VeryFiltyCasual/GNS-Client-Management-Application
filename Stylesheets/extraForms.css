@@ -20,7 +20,7 @@ form {
 	width: 300px;
 	*/
 }
-.labelfor-BigText, #Estimate section label,  #Estimate section input{
+.labelfor-BigText{
 	vertical-align: top;
 }
 .Datepick{
