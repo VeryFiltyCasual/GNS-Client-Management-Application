@@ -99,6 +99,7 @@ $(document).ready(function(){
 		let clientData = $(`#cliID${data.client_id}`);
 		//If the clientData is displaying comments
 		if (clientData.hasClass("column")) {
+			$("p.info").remove();
 			//Add the comment before the input box
 			const date = new Date(data.date);
 			const comment = `
@@ -258,8 +259,20 @@ $(document).ready(function(){
 		commentBox.hide();
 		clientData.append(commentBox);
 		//Add the add comment button at the end
-		$(`<br><div><button id="AddComment${clientCom.id}" onclick="toggleComment(${clientCom.id});" class="BlueAdd">+ Add Comment</button></div>`).appendTo(clientData);
-		$(`<div><button id='cancel${clientCom.id}' onclick="closeComment(${clientCom.id})"class='BlueAdd'>Cancel</button></div>`).appendTo(clientData).hide();
+		const buttons = `
+			<br>
+			<div style="display: flex; flex-direction: row;">
+				<div><button id="AddComment${clientCom.id}" onclick="toggleComment(${clientCom.id});" class="BlueAdd">+ Add Comment</button></div>
+				<div style="display: none;"><button id='cancel${clientCom.id}' onclick="closeComment(${clientCom.id})"class='BlueAdd'>Cancel</button></div>
+			</div>
+			
+		`;
+		clientData.append(buttons);
+		/*
+		$('').appendTo(clientData);
+		$(``).appendTo(clientData);
+		$(``).appendTo(clientData).hide();
+		$(``).appendTo(clientData);*/
 
 	}
 
